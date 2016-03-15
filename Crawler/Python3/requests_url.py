@@ -3,6 +3,7 @@
 
 """
     Запросы к сайтам
+    
 """
 
 import requests
@@ -41,5 +42,3 @@ class Downloader():
             return 1
         except HTTPError:
             return 0
-
-print(Downloader.download('http://lenta.ru/sitemap.xml'))
