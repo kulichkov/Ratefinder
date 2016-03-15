@@ -5,48 +5,41 @@
     Запросы к сайтам
 """
 
-import urllib.request
-from urllib.error import URLError
+import requests
+from  requests.exceptions import HTTPError
 from os.path import split
 from os import chdir
-import http.cookiejar, urllib.request, urllib.parse
 
 
-# Работа с URL
-class Url():
+class Downloader():
     # Читаем страницу
     def open(url):
         try:
-            temp = urllib.request.urlopen(url).read()
-            return temp.decode('utf-8')
-        except URLError:
+            temp = requests.get(url)
+            if temp.status_code == 200:
+                return temp.text
+            raise HTTPError
+        except HTTPError:
             return 0
 
     # Скачиваем
-    def downloader(url, directory=split(__file__)[0]):
-        # Рабочия деректория
-        chdir(directory + '/temp')
-        # Извлекаем из URL имя файла
+    def download(url, directory=split(__file__)[0] + '/temp'):
+        # Переход в рабочию деректорию
+        chdir(directory)
+        # Получение имени файла из URL
         destination = url.rsplit('/',1)[1]
         # Скачиваем файл
-        urllib.request.urlretrieve(url, destination)
+        temp = requests.get(url, stream = True).text
+        with open(destination, "w") as file:
+            file.write(temp)
 
     # Проверка существование страницы
     def available(url):
         try:
-            # обработка cookies
-            cookie = http.cookiejar.CookieJar()
-            opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie))
-            # прикидываемся браузером, не обязательно
-            opener.addheaders = [('User-agent', 'Opera/9.80 (Windows NT 6.1; WOW64; U; ru) Presto/2.10.229 Version/11.62')]
-            # коннект
-            urllib.request.install_opener(opener)
-
-            # авторизация и подсовывание cookies
-            opener.open(url)
-            #urllib.request.urlopen(url).read()
+            if requests.get(url).status_code != 200:
+                raise HTTPError
             return 1
-        except URLError:
+        except HTTPError:
             return 0
 
-print(Url.available('http://lenta.ru/sitemap.xml'))
+print(Downloader.download('http://lenta.ru/sitemap.xml'))
