@@ -11,8 +11,27 @@
 """
 
 from requests_sql import Mysql
+from requests_url import Url
+
 
 __version__ = 'v1.0'
+
+
+# Парсер файла robots.txt
+class Robots_Parser():
+    # Извлекаем ссылку, сайтМап
+    def site_map(url):
+        temp = Url.open(url)
+        if temp:
+            for line in temp.split('\n'):
+                listLine = line.split(': ')
+                if listLine[0] == 'Sitemap':
+                    print(listLine[1])
+                    return listLine[1]
+
+    # Извлекае хост
+    def host(url):
+        pass
 
 
 # Главная функция
