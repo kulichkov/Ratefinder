@@ -38,6 +38,9 @@ class Xml():
                     file = file.read()
                     element = 'url'
             except OSError:
+                if os.path.isfile(temp):
+                    print(temp)
+                    os.remove(temp)
                 return 0
         else:
             with open(temp) as file:
