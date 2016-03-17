@@ -3,4 +3,4 @@
 *.ini~
 *.ini
 *Sql
-*.py
+/test.py
