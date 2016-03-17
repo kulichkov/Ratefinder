@@ -20,6 +20,7 @@ from datetime import datetime
 from Crawler.Python3.parser_files import *
 
 
+# Словарь для хранения ключевых слов
 dictKeywords = {}
 
 # Запросы
@@ -29,42 +30,43 @@ quest_5 = 'INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s)'
 quest_5_0 = 'UPDATE `Pages` SET `LastScanDate` = %s WHERE `ID` = %s;'
 quest_6 = 'INSERT INTO `PersonPageRank` (`PersonID`,`PageID`, `Rank`) VALUES(%s, %s, %s)'
 
-#
+# Создаем для работы с Mysql
 workMysql = Mysql()
 workMysql.connect()
 
+# Обновляем столбец "LastScanDate" в таблице "Pages"
+def lastScanDate(PageID):
+    timeStamp = datetime.strftime(datetime.now(), "%Y.%m.%d %H:%M:%S")
+    workMysql.execute(quest_5_0, timeStamp, PageID)
 
-def pages(listTemp, SiteID, PigeID):
+# Внесение данных в таблицу "Pages"
+def pages(listTemp, SiteID, PageID):
     for x in listTemp:
-        timeStamp = datetime.strftime(datetime.now(), "%Y.%m.%d %H:%M:%S")
-        workMysql.execute(quest_5_0, timeStamp, PigeID)
+        lastScanDate(PageID)
         workMysql.execute(quest_5, x, int(SiteID))
     workMysql.commit()
 
-
+# Внесение данных в таблицу "PersonPageRank"
 def personPageRank(dictTemp, PageID):
-    print(dictTemp)
-    #print(PageID)
+    lastScanDate(PageID)
     for x in dictTemp.items():
         print(x[0], x[1])
         workMysql.execute(quest_6, int(x[0]), int(PageID), int(x[1]))
     workMysql.commit()
 
-
 # Делаем список Ключ: Имена
 for x in workMysql.execute_select(quest_3):
-    #print(x)
     if dictKeywords.get(x[0]):
         dictKeywords[x[0]].append(x[1])
     else:
         dictKeywords[x[0]] = [x[1],]
 
-
+# Перебераем ссылки у которых "lastScanDate" = "Null"
 for link in workMysql.execute_select(quest_4):
     print(link)
-    #dictTemp = {}
-    #
+    #  Узнаем имя файла
     namePage = link[1][link[1].rfind('/'):]
+    # Узнаем расширение файла
     pageFormat = namePage[namePage.rfind('.'):]
 
     # Определение какое рассширение
@@ -81,5 +83,4 @@ for link in workMysql.execute_select(quest_4):
         pass
     else:
         parserHtml = Html(link[1], dictKeywords)
-        #print(parserHtml.parser())
         personPageRank(parserHtml.parser(), link[2])
