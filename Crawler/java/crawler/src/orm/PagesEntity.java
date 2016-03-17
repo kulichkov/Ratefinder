@@ -1,25 +1,22 @@
 package orm;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * Created by Nikit on 17.03.2016.
  */
 @Entity
-@Table(name = "pages", schema = "ratefinder", catalog = "")
+@Table(name = "pages", schema = "ratefinder")
 public class PagesEntity {
     private int id;
     private String url;
-    private int siteId;
+    private SitesEntity site;
     private Timestamp foundDateTime;
-    private Serializable lastScanDate;
+    private Date lastScanDate;
 
-    @Basic
+    @Id
     @Column(name = "ID")
     public int getId() {
         return id;
@@ -39,14 +36,14 @@ public class PagesEntity {
         this.url = url;
     }
 
-    @Basic
+    @ManyToOne
     @Column(name = "SiteID")
-    public int getSiteId() {
-        return siteId;
+    public SitesEntity getSite() {
+        return site;
     }
 
-    public void setSiteId(int siteId) {
-        this.siteId = siteId;
+    public void setSite(SitesEntity site) {
+        this.site = site;
     }
 
     @Basic
@@ -61,11 +58,11 @@ public class PagesEntity {
 
     @Basic
     @Column(name = "LastScanDate")
-    public Serializable getLastScanDate() {
+    public Date getLastScanDate() {
         return lastScanDate;
     }
 
-    public void setLastScanDate(Serializable lastScanDate) {
+    public void setLastScanDate(Date lastScanDate) {
         this.lastScanDate = lastScanDate;
     }
 
@@ -77,7 +74,7 @@ public class PagesEntity {
         PagesEntity that = (PagesEntity) o;
 
         if (id != that.id) return false;
-        if (siteId != that.siteId) return false;
+        if (!site.equals(that.site)) return false;
         if (url != null ? !url.equals(that.url) : that.url != null) return false;
         if (foundDateTime != null ? !foundDateTime.equals(that.foundDateTime) : that.foundDateTime != null)
             return false;
@@ -90,7 +87,7 @@ public class PagesEntity {
     public int hashCode() {
         int result = id;
         result = 31 * result + (url != null ? url.hashCode() : 0);
-        result = 31 * result + siteId;
+        result = 31 * result + site.hashCode();
         result = 31 * result + (foundDateTime != null ? foundDateTime.hashCode() : 0);
         result = 31 * result + (lastScanDate != null ? lastScanDate.hashCode() : 0);
         return result;

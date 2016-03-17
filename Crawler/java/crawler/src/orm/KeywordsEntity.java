@@ -1,21 +1,18 @@
 package orm;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Nikit on 17.03.2016.
  */
 @Entity
-@Table(name = "keywords", schema = "ratefinder", catalog = "")
+@Table(name = "keywords", schema = "ratefinder")
 public class KeywordsEntity {
     private int id;
     private String name;
-    private int personId;
+    private PersonsEntity person;
 
-    @Basic
+    @Id
     @Column(name = "ID")
     public int getId() {
         return id;
@@ -35,14 +32,14 @@ public class KeywordsEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "PersonID")
-    public int getPersonId() {
-        return personId;
+    @ManyToOne
+    @JoinColumn(name = "PersonID")
+    public PersonsEntity getPerson() {
+        return person;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setPerson(PersonsEntity person) {
+        this.person = person;
     }
 
     @Override
@@ -53,7 +50,7 @@ public class KeywordsEntity {
         KeywordsEntity that = (KeywordsEntity) o;
 
         if (id != that.id) return false;
-        if (personId != that.personId) return false;
+        if (!person.equals(that.person)) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
@@ -63,7 +60,7 @@ public class KeywordsEntity {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + personId;
+        result = 31 * result + person.hashCode();
         return result;
     }
 }
