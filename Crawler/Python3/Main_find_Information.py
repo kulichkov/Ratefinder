@@ -41,9 +41,10 @@ def pages(listTemp, SiteID, PigeID):
         workMysql.execute(quest_5, x, int(SiteID))
     workMysql.commit()
 
+
 def personPageRank(dictTemp, PageID):
     print(dictTemp)
-    print(PageID)
+    #print(PageID)
     for x in dictTemp.items():
         print(x[0], x[1])
         workMysql.execute(quest_6, int(x[0]), int(PageID), int(x[1]))
@@ -60,6 +61,7 @@ for x in workMysql.execute_select(quest_3):
 
 
 for link in workMysql.execute_select(quest_4):
+    print(link)
     #dictTemp = {}
     #
     namePage = link[1][link[1].rfind('/'):]
@@ -70,7 +72,9 @@ for link in workMysql.execute_select(quest_4):
         pages(Xml.satemap(link[1], pageFormat), link[0], link[2])
         pass
     elif pageFormat == '.gz':
-        pages(Xml.satemap(link[1], pageFormat), link[0], link[2])
+        xmlUrl = Xml.satemap(link[1], pageFormat)
+        if xmlUrl:
+            pages(xmlUrl, link[0], link[2])
         pass
     elif pageFormat == '.txt':
         pages(Robots.site_map(link[1]), link[0], link[2])
