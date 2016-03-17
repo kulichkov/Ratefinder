@@ -6,6 +6,9 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:3306/ratefinder</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">1111</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <mapping class="orm.KeywordsEntity"/>
         <mapping class="orm.PagesEntity"/>
         <mapping class="orm.PersonpagerankEntity"/>
