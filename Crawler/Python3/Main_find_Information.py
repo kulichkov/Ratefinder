@@ -16,25 +16,38 @@
 """
 
 from requests_sql import Mysql
-
+from datetime import datetime
 from Crawler.Python3.parser_files import *
+
 
 dictKeywords = {}
 
+# Запросы
 quest_3 = 'SELECT `PersonID`, `Name` FROM `Keywords`;'
-quest_4 = 'SELECT `ID`, `Url` FROM `Pages` WHERE `LastScanDate` is Null;'
+quest_4 = 'SELECT `SiteID`, `Url`, `ID` FROM `Pages` WHERE `LastScanDate` is Null;'
+quest_5 = 'INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s)'
+quest_5_0 = 'UPDATE `Pages` SET `LastScanDate` = %s WHERE `ID` = %s;'
+quest_6 = 'INSERT INTO `PersonPageRank` (`PersonID`,`PageID`, `Rank`) VALUES(%s, %s, %s)'
 
+#
 workMysql = Mysql()
 workMysql.connect()
 
 
-def pages(dict):
-    for x in dict.items():
-        print(x)
-        pass
+def pages(listTemp, SiteID, PigeID):
+    for x in listTemp:
+        timeStamp = datetime.strftime(datetime.now(), "%Y.%m.%d %H:%M:%S")
+        workMysql.execute(quest_5_0, timeStamp, PigeID)
+        workMysql.execute(quest_5, x, int(SiteID))
+    workMysql.commit()
 
-def personPageRank():
-    pass
+def personPageRank(dictTemp, PageID):
+    print(dictTemp)
+    print(PageID)
+    for x in dictTemp.items():
+        print(x[0], x[1])
+        workMysql.execute(quest_6, int(x[0]), int(PageID), int(x[1]))
+    workMysql.commit()
 
 
 # Делаем список Ключ: Имена
@@ -47,22 +60,22 @@ for x in workMysql.execute_select(quest_3):
 
 
 for link in workMysql.execute_select(quest_4):
-    dictTemp = {}
-
+    #dictTemp = {}
     #
     namePage = link[1][link[1].rfind('/'):]
     pageFormat = namePage[namePage.rfind('.'):]
 
     # Определение какое рассширение
     if pageFormat == '.xml':
-        dictTemp[link[0]] = Xml.satemap(link[1], pageFormat)
-        pages(dictTemp)
+        pages(Xml.satemap(link[1], pageFormat), link[0], link[2])
+        pass
     elif pageFormat == '.gz':
-       #dictTemp[link[0]] = Xml.satemap(link[1], pageFormat)
-       #pages(dictTemp)
+        pages(Xml.satemap(link[1], pageFormat), link[0], link[2])
         pass
     elif pageFormat == '.txt':
-        Robots.site_map(link[1])
+        pages(Robots.site_map(link[1]), link[0], link[2])
+        pass
     else:
         parserHtml = Html(link[1], dictKeywords)
-        print(parserHtml.parser())
+        #print(parserHtml.parser())
+        personPageRank(parserHtml.parser(), link[2])
