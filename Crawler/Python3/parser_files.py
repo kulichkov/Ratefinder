@@ -5,12 +5,12 @@
     Парсер
 """
 
-
 from requests_url import Downloader
 from string import punctuation
 import gzip
 import xml.etree.ElementTree as ET
 import os
+from datetime import datetime
 
 
 # Парсер файла robots.txt
@@ -30,46 +30,34 @@ class Robots():
 class Xml():
     def satemap(url, formatFile):
         listUrl = []
-        tesss = 1
         temp = Downloader.download(url)
-        #
+        # Проверяем формат файла
         if formatFile == '.gz':
             try:
                 with gzip.open(temp) as file:
                     file = file.read()
                     element = 'url'
-                    #print(file)
             except OSError:
                 return 0
-            # finally:
-            #     rmdir(temp)
         else:
-            #try:
             with open(temp) as file:
-                #print(type(f))
                 file = file.read()
                 element = 'sitemap'
-            # finally:
-            #     rmdir(temp)
-        #
+
+        # Создаем объекст
         root = ET.fromstring(file)
-        #
+        # Перебераем корневые элементы xml
         for x in root.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}' + element):
             try:
-                #tesss +=1
-                #print(tesss)
                 lastmod = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod').text.split('T')[0]
-                #print(lastmod)
-                if lastmod >= '2016-03-17':
-                    print(lastmod)
-                    #return listUrl
+                if lastmod >= str(datetime.utcnow().date()):
                     listUrl.append(x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text)
-                #print(listUrl)
-                #return listUrl
             except AttributeError:
                 pass
             else:
-                os.remove(temp)
+                if os.path.isfile(temp):
+                    print(temp)
+                    os.remove(temp)
         return listUrl
 
 
@@ -83,23 +71,12 @@ class Html():
 
     #
     def parser(self):
-        #print(self.url)
         rawHtml = Downloader.open(self.url)
         if rawHtml:
             rawHtml = rawHtml[rawHtml.find('<p>') + 3:rawHtml.rfind('</p>')]
-            #print(rawHtml)
-            #print(self.keywords)
             for word in rawHtml.split():
                 word = word.strip(punctuation)
-                #print(word)
                 for keywords in self.keywords.items():
-                    #print(keywords)
-                    #print(type(keywords))
-                    #print(keywords.values())
                     if word in keywords[1]:
-                        #print(word)
-                        #print(keywords)
                         self.dictResult[keywords[0]] = self.dictResult.get(keywords[0], 0) + 1
-
-                    # pass
             return self.dictResult
