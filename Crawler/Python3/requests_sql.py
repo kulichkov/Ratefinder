@@ -5,27 +5,54 @@
     Запросы к базе данных
 """
 
-
 # Подключаем модуль работы с *.ini фаилам
 from parser_conf_ini import confgini
-# ORM
-import sqlalchemy
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine, text
+# Mysql
+import mysql
+from mysql.connector import Error
 
 
+# Работа с Mysql
+class Mysql():
+    # Иницилизация
+    def __init__(self):
+        configniMysql = confgini()
+        self.ipaddr = configniMysql.get('host', '127.0.0.1')
+        self.port = configniMysql.get('port', '3306')
+        self.db = configniMysql.get('database')
+        self.userName = configniMysql.get('user', 'root')
+        self.password = configniMysql.get('password')
 
-dbconnect = create_engine('mysql+mysqlconnector://root:obKRBEa8h45X8sQhtALf@192.168.2.252/database', echo=False)
+    # Подключаемся
+    def connect(self):
+        try:
+            self.dbconnect = mysql.connector.connect(host=self.ipaddr, port=self.port,
+                    database=self.db,user=self.userName,password=self.password)
+            # Проверяем есть ли конект к базе данных
+            if self.dbconnect.is_connected():
+                print('Сonnection OK.')
+            else:
+                print('Сonnection failed.')
+                exit()
+        except Error as error:
+            print(error)
+            exit()
 
-class Table():
-    #print('testt')
-    pass
+    # Выборка
+    def execute_select(self, request, *args):
+        self.cursor = self.dbconnect.cursor()
+        self.cursor.execute(request, args)
+        return self.cursor.fetchall()
 
-# for x in dbconnect.execute('SELECT * FROM `Sites`'):
-#     print(x)
-#
-meta = sqlalchemy.MetaData(bind=dbconnect, reflect=True)
-# table = meta.tables['Sites']
-# print(list(dbconnect.execute(table.select(table.c.ID == 2))))
+     # Внесение данных
+    def execute(self, request, *args):
+        self.cursor = self.dbconnect.cursor()
+        self.cursor.execute(request, args)
 
-sqlalchemy.orm.Mapper(Table, meta.tables['Sites'])
+    # Комитим
+    def commit(self):
+        self.dbconnect.commit()
+
+    # Закрываем
+    def connect_close(self):
+        self.dbconnect.close()
