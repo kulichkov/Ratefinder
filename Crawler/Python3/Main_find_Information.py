@@ -16,7 +16,8 @@
 """
 
 from requests_sql import Mysql
-from parser_files import Html
+
+from Crawler.Python3.parser_files import *
 
 dictKeywords = {}
 
@@ -26,6 +27,16 @@ quest_4 = 'SELECT `ID`, `Url` FROM `Pages` WHERE `LastScanDate` is Null;'
 workMysql = Mysql()
 workMysql.connect()
 
+
+def pages(dict):
+    for x in dict.items():
+        print(x)
+        pass
+
+def personPageRank():
+    pass
+
+
 # Делаем список Ключ: Имена
 for x in workMysql.execute_select(quest_3):
     #print(x)
@@ -33,26 +44,25 @@ for x in workMysql.execute_select(quest_3):
         dictKeywords[x[0]].append(x[1])
     else:
         dictKeywords[x[0]] = [x[1],]
-        #print(dictKeywords)
-
-#print(workMysql.execute_select(quest_4))
-
 
 
 for link in workMysql.execute_select(quest_4):
-    print(link)
-    #
-    namePage = link[1][link[1].rfind('/'):]
-    pageExten = namePage[namePage.rfind('.'):]
+    dictTemp = {}
 
     #
-    if pageExten == '.xml':
-        print(namePage)
+    namePage = link[1][link[1].rfind('/'):]
+    pageFormat = namePage[namePage.rfind('.'):]
+
+    # Определение какое рассширение
+    if pageFormat == '.xml':
+        dictTemp[link[0]] = Xml.satemap(link[1], pageFormat)
+        pages(dictTemp)
+    elif pageFormat == '.gz':
+       #dictTemp[link[0]] = Xml.satemap(link[1], pageFormat)
+       #pages(dictTemp)
         pass
-    elif pageExten == '.xml.gz':
-        print(namePage)
-    elif pageExten == '.txt':
-        print(namePage)
+    elif pageFormat == '.txt':
+        Robots.site_map(link[1])
     else:
         parserHtml = Html(link[1], dictKeywords)
         print(parserHtml.parser())
