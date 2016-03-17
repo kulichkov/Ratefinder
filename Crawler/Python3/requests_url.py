@@ -30,9 +30,10 @@ class Downloader():
         # Получение имени файла из URL
         destination = url.rsplit('/',1)[1]
         # Скачиваем файл
-        temp = requests.get(url, stream = True).text
-        with open(destination, "w") as file:
+        temp = requests.get(url).content
+        with open(destination, "wb") as file:
             file.write(temp)
+        return directory + '/' + destination
 
     # Проверка существование страницы
     def available(url):
