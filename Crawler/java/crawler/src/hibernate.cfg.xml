@@ -11,7 +11,7 @@
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <mapping class="orm.KeywordsEntity"/>
         <mapping class="orm.PagesEntity"/>
-        <mapping class="orm.PersonpagerankEntity"/>
+        <mapping class="orm.PersonPageRankEntity"/>
         <mapping class="orm.PersonsEntity"/>
         <mapping class="orm.SitesEntity"/>
         <!-- DB schema will be updated if needed -->
