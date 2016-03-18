@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--Панель администратора-->
+        <!--Доступные сайты-->
         <scene sceneID="xuh-qr-EBm">
             <objects>
-                <tableViewController title="Панель администратора" id="e3l-IH-1cO" customClass="ECSitesTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Доступные сайты" id="e3l-IH-1cO" customClass="ECSitesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Dc-SW-bab">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,6 +63,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQi-dj-D9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="273" y="909"/>
+        </scene>
+        <!--Список имен-->
+        <scene sceneID="ydP-LB-AOV">
+            <objects>
+                <tableViewController storyboardIdentifier="personsView" title="Список имен" id="ZU7-t0-p1F" customClass="ECPersonsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LXR-cV-zf0">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="QcS-6V-GE0">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QcS-6V-GE0" id="eqB-IZ-gwG">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZU7-t0-p1F" id="gHB-XT-WSY"/>
+                            <outlet property="delegate" destination="ZU7-t0-p1F" id="vMU-HK-lUu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="5gp-eZ-eg1"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o9H-4c-jKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1072.5" y="909"/>
         </scene>
         <!--Добавление сайта-->
         <scene sceneID="0aE-zI-1Sg">
