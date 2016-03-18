@@ -67,8 +67,13 @@
 
 - (IBAction)textFieldDidChange:(UITextField *)textField {
     
-    if ([self.siteNameTextField.text length] > 0 && [self.siteUrlTextField.text length] > 0 ) {
-        self.saveButton.enabled = YES;
+    if ([self.siteNameTextField.text length] > 0 && [self.siteUrlTextField.text length] > 0) {
+        if ([textField.text isEqual:self.nameSite] || [textField.text isEqual:self.urlSite]) {
+
+            self.saveButton.enabled = NO;
+        } else {
+            self.saveButton.enabled = YES;
+        }
         
     } else {
         self.saveButton.enabled = NO;
