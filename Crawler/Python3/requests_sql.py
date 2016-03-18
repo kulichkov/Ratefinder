@@ -56,3 +56,4 @@ class Mysql():
     # Закрываем
     def connect_close(self):
         self.dbconnect.close()
+        print('Сonnection Close.')
