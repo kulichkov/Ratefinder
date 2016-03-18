@@ -21,16 +21,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEditing)];
+    
+    [self.view addGestureRecognizer:handleTap];
+    
     if (self.isDetail) {
         
         self.siteNameTextField.text = self.nameSite;
         self.siteUrlTextField.text = self.urlSite;
-        
-    } else {
-        
-        UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEditing)];
-        
-        [self.view addGestureRecognizer:handleTap];
     }
 }
 
