@@ -14,7 +14,7 @@
 		118B09AE1C9C0B2D00A26FF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118B09AD1C9C0B2D00A26FF7 /* Assets.xcassets */; };
 		118B09B11C9C0B2D00A26FF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 118B09AF1C9C0B2D00A26FF7 /* LaunchScreen.storyboard */; };
 		118B09BA1C9C0ED600A26FF7 /* ECSitesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118B09B91C9C0ED600A26FF7 /* ECSitesTableViewController.m */; };
-		118B09BD1C9C28BB00A26FF7 /* ECAddSiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118B09BC1C9C28BB00A26FF7 /* ECAddSiteTableViewController.m */; };
+		118B09BD1C9C28BB00A26FF7 /* ECDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118B09BC1C9C28BB00A26FF7 /* ECDetailTableViewController.m */; };
 		118B09C01C9C36A000A26FF7 /* ECPersonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118B09BF1C9C36A000A26FF7 /* ECPersonsTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +31,8 @@
 		118B09B21C9C0B2D00A26FF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		118B09B81C9C0ED600A26FF7 /* ECSitesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSitesTableViewController.h; path = ../ECSitesTableViewController.h; sourceTree = "<group>"; };
 		118B09B91C9C0ED600A26FF7 /* ECSitesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSitesTableViewController.m; path = ../ECSitesTableViewController.m; sourceTree = "<group>"; };
-		118B09BB1C9C28BB00A26FF7 /* ECAddSiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAddSiteTableViewController.h; sourceTree = "<group>"; };
-		118B09BC1C9C28BB00A26FF7 /* ECAddSiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAddSiteTableViewController.m; sourceTree = "<group>"; };
+		118B09BB1C9C28BB00A26FF7 /* ECDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECDetailTableViewController.h; sourceTree = "<group>"; };
+		118B09BC1C9C28BB00A26FF7 /* ECDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDetailTableViewController.m; sourceTree = "<group>"; };
 		118B09BE1C9C36A000A26FF7 /* ECPersonsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPersonsTableViewController.h; sourceTree = "<group>"; };
 		118B09BF1C9C36A000A26FF7 /* ECPersonsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPersonsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,8 +78,8 @@
 				118B09B81C9C0ED600A26FF7 /* ECSitesTableViewController.h */,
 				118B09B91C9C0ED600A26FF7 /* ECSitesTableViewController.m */,
 				118B09A11C9C0B2D00A26FF7 /* Supporting Files */,
-				118B09BB1C9C28BB00A26FF7 /* ECAddSiteTableViewController.h */,
-				118B09BC1C9C28BB00A26FF7 /* ECAddSiteTableViewController.m */,
+				118B09BB1C9C28BB00A26FF7 /* ECDetailTableViewController.h */,
+				118B09BC1C9C28BB00A26FF7 /* ECDetailTableViewController.m */,
 				118B09BE1C9C36A000A26FF7 /* ECPersonsTableViewController.h */,
 				118B09BF1C9C36A000A26FF7 /* ECPersonsTableViewController.m */,
 			);
@@ -169,7 +169,7 @@
 				118B09A61C9C0B2D00A26FF7 /* AppDelegate.m in Sources */,
 				118B09C01C9C36A000A26FF7 /* ECPersonsTableViewController.m in Sources */,
 				118B09BA1C9C0ED600A26FF7 /* ECSitesTableViewController.m in Sources */,
-				118B09BD1C9C28BB00A26FF7 /* ECAddSiteTableViewController.m in Sources */,
+				118B09BD1C9C28BB00A26FF7 /* ECDetailTableViewController.m in Sources */,
 				118B09A31C9C0B2D00A26FF7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +317,7 @@
 				118B09B71C9C0B2D00A26FF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

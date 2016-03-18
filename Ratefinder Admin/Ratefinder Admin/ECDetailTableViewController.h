@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECAddSiteTableViewController : UITableViewController
+@interface ECDetailTableViewController : UITableViewController
 
 @end

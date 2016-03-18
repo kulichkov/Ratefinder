@@ -6,9 +6,9 @@
 //  Copyright © 2016 Epic-Creators. All rights reserved.
 //
 
-#import "ECAddSiteTableViewController.h"
+#import "ECDetailTableViewController.h"
 
-@interface ECAddSiteTableViewController () <UITextFieldDelegate>
+@interface ECDetailTableViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *siteNameTextField;
 
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation ECAddSiteTableViewController
+@implementation ECDetailTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
