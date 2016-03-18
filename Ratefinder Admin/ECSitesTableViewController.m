@@ -14,15 +14,16 @@ static NSString *kCellID = @"Cell";
 
 @interface ECSitesTableViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *arraySites;
-@property (nonatomic, strong) NSMutableArray *arraySitesUrl;
-
 @end
 
 @implementation ECSitesTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.arraySites = [NSMutableArray arrayWithObjects: @"Lenta.ru", @"Взгляд", @"Аргументы и факты", nil];
+    self.arraySitesUrl = [NSMutableArray arrayWithObjects:@"http://www.lenta.ru", @"http://www.vz.ru", @"http://www.aif.ru", nil];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -38,8 +39,8 @@ static NSString *kCellID = @"Cell";
 
 - (void) viewWillAppear:(BOOL)animated {
     
-    self.arraySites = [NSMutableArray arrayWithObjects: @"Lenta.ru", @"Взгляд", @"Аргументы и факты", nil];
-    self.arraySitesUrl = [NSMutableArray arrayWithObjects:@"http://www.lenta.ru", @"http://www.vz.ru", @"http://www.aif.ru", nil];
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -75,8 +76,13 @@ static NSString *kCellID = @"Cell";
     detailTableView.nameSite = [self.arraySites objectAtIndex:indexPath.row];
     detailTableView.urlSite = [self.arraySitesUrl objectAtIndex:indexPath.row];
     detailTableView.isDetail = YES;
+    detailTableView.indexPath = indexPath;
     
     [self.navigationController pushViewController:detailTableView animated:YES];
+}
+
+- (void) setSomeLabelText:(ECDetailTableViewController *)controller enteringItem:(NSString *)item {
+    
 }
 
 /*

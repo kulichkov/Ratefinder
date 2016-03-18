@@ -8,7 +8,7 @@
         <!--Доступные сайты-->
         <scene sceneID="xuh-qr-EBm">
             <objects>
-                <tableViewController title="Доступные сайты" id="e3l-IH-1cO" customClass="ECSitesTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="sitesTableView" title="Доступные сайты" id="e3l-IH-1cO" customClass="ECSitesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Dc-SW-bab">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,7 +53,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Доступные сайты" id="LQh-qt-34R">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wPH-I3-lON"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wPH-I3-lON">
+                            <connections>
+                                <segue destination="5vX-A0-bEy" kind="push" id="yOp-yN-7YX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -211,7 +215,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Сохранить" id="vb1-gB-JYI">
                             <connections>
-                                <action selector="add:" destination="5vX-A0-bEy" id="ZY7-XQ-htS"/>
+                                <action selector="save:" destination="5vX-A0-bEy" id="3Ah-7d-E7a"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -223,7 +227,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrf-Ul-qr3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="273" y="1674"/>
+            <point key="canvasLocation" x="273" y="1696"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RbC-i2-NyG">

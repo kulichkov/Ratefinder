@@ -7,6 +7,7 @@
 //
 
 #import "ECDetailTableViewController.h"
+#import "ECSitesTableViewController.h"
 
 @interface ECDetailTableViewController () <UITextFieldDelegate>
 
@@ -20,7 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEditing)];
     
@@ -45,9 +45,11 @@
     
 }
 
-- (IBAction)add:(id)sender {
+- (IBAction)save:(id)sender {
     
-    
+    NSString *item = @"Текст из контроллера В";
+    [self.delegate setSomeLabelText:self enteringItem:item];
+    [self.navigationController popViewControllerAnimated:YES];   
 }
 
 #pragma mark - TextField Delegate
@@ -133,14 +135,5 @@
 }
 */
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

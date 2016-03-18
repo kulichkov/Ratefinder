@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECDetailTableViewController.h"
 
-@interface ECSitesTableViewController : UITableViewController
+@interface ECSitesTableViewController : UITableViewController <ECDetailTableViewControllerDelegate>
+
+@property (nonatomic, strong) NSMutableArray *arraySites;
+@property (nonatomic, strong) NSMutableArray *arraySitesUrl;
 
 @end
