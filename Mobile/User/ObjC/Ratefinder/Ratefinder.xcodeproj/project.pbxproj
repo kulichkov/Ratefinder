@@ -14,6 +14,7 @@
 		6910727B1C9C8032008070B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 691072791C9C8032008070B5 /* LaunchScreen.storyboard */; };
 		691072861C9C8032008070B5 /* RatefinderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072851C9C8032008070B5 /* RatefinderTests.m */; };
 		691072911C9C8032008070B5 /* RatefinderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072901C9C8032008070B5 /* RatefinderUITests.m */; };
+		691072A01C9C851C008070B5 /* RFSitesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6910729F1C9C851C008070B5 /* RFSitesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		6910728C1C9C8032008070B5 /* RatefinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RatefinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		691072901C9C8032008070B5 /* RatefinderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatefinderUITests.m; sourceTree = "<group>"; };
 		691072921C9C8032008070B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6910729E1C9C851C008070B5 /* RFSitesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSitesViewController.h; sourceTree = "<group>"; };
+		6910729F1C9C851C008070B5 /* RFSitesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSitesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,9 +101,8 @@
 		6910726A1C9C8032008070B5 /* Ratefinder */ = {
 			isa = PBXGroup;
 			children = (
-				6910726E1C9C8032008070B5 /* AppDelegate.h */,
-				6910726F1C9C8032008070B5 /* AppDelegate.m */,
 				691072741C9C8032008070B5 /* Main.storyboard */,
+				691072A11C9C856F008070B5 /* RFSitesViewController */,
 				6910726B1C9C8032008070B5 /* Supporting Files */,
 			);
 			path = Ratefinder;
@@ -109,6 +111,8 @@
 		6910726B1C9C8032008070B5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6910726E1C9C8032008070B5 /* AppDelegate.h */,
+				6910726F1C9C8032008070B5 /* AppDelegate.m */,
 				691072771C9C8032008070B5 /* Assets.xcassets */,
 				691072791C9C8032008070B5 /* LaunchScreen.storyboard */,
 				6910727C1C9C8032008070B5 /* Info.plist */,
@@ -133,6 +137,15 @@
 				691072921C9C8032008070B5 /* Info.plist */,
 			);
 			path = RatefinderUITests;
+			sourceTree = "<group>";
+		};
+		691072A11C9C856F008070B5 /* RFSitesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6910729E1C9C851C008070B5 /* RFSitesViewController.h */,
+				6910729F1C9C851C008070B5 /* RFSitesViewController.m */,
+			);
+			name = RFSitesViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				691072A01C9C851C008070B5 /* RFSitesViewController.m in Sources */,
 				691072701C9C8032008070B5 /* AppDelegate.m in Sources */,
 				6910726D1C9C8032008070B5 /* main.m in Sources */,
 			);
