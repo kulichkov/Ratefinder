@@ -28,6 +28,9 @@ def main():
     # Запросы
     quest_3 = 'SELECT `PersonID`, `Name` FROM `Keywords`;'
     quest_4 = 'SELECT `SiteID`, `Url`, `ID` FROM `Pages` WHERE `LastScanDate` is Null;'
+    quest_4_0 = 'SELECT `SiteID`, `Url`, `ID` FROM `Pages` ' \
+                'WHERE ((`Url` LIKE "%/%.xml") OR (`Url` LIKE "%/%.xml.gz")) ' \
+                'ORDER BY `LastScanDate` LIMIT 10;'
     quest_5 = 'INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s)'
     quest_5_0 = 'UPDATE `Pages` SET `LastScanDate` = %s WHERE `ID` = %s;'
     quest_6 = 'INSERT INTO `PersonPageRank` (`PersonID`,`PageID`, `Rank`) VALUES(%s, %s, %s)'
@@ -60,15 +63,8 @@ def main():
             lastScanDate(PageID)
             workMysql.commit()
 
-    # Делаем список Ключ: Имена
-    for x in workMysql.execute_select(quest_3):
-        if dictKeywords.get(x[0]):
-            dictKeywords[x[0]].append(x[1])
-        else:
-            dictKeywords[x[0]] = [x[1],]
-
-    # Перебераем ссылки у которых "lastScanDate" = "Null"
-    for link in workMysql.execute_select(quest_4):
+    # Распределение ссылок по парсерам
+    def parser(link):
         print(link)
         #  Узнаем имя файла
         namePage = link[1][link[1].rfind('/'):]
@@ -93,8 +89,32 @@ def main():
         else:                           # Все остальное обыскиваем=)
             parserHtml = Html(link[1], dictKeywords)
             personPageRank(parserHtml.parser(), link[2])
+
+    # Делаем список Ключ: Имена
+    for x in workMysql.execute_select(quest_3):
+        if dictKeywords.get(x[0]):
+            dictKeywords[x[0]].append(x[1])
+        else:
+            dictKeywords[x[0]] = [x[1],]
+
+    # Выборка новых ссылоко
+    urlNullLast = workMysql.execute_select(quest_4)
+
+    if urlNullLast:
+        # Перебераем ссылки у которых "lastScanDate" = "Null"
+        for link in urlNullLast:
+            parser(link)
+        else:
+            workMysql.connect_close()
     else:
-        workMysql.connect_close()
+        # Выборка старых ссылоко
+        urlOldlast = workMysql.execute_select(quest_4_0)
+        if urlOldlast:
+            # Перебираем последних 10 старые ссылок
+            for link in urlOldlast:
+                parser(link)
+            else:
+                workMysql.connect_close()
 
 # Проверка
 if __name__ == '__main__':
