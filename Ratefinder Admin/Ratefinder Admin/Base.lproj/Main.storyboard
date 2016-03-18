@@ -43,9 +43,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="5vX-A0-bEy" kind="push" trigger="accessoryAction" id="yWL-Js-kCU"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -56,11 +53,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Доступные сайты" id="LQh-qt-34R">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wPH-I3-lON">
-                            <connections>
-                                <segue destination="5vX-A0-bEy" kind="show" id="rR3-F0-rVE"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wPH-I3-lON"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -100,7 +93,7 @@
         <!--Добавление сайта-->
         <scene sceneID="0aE-zI-1Sg">
             <objects>
-                <tableViewController title="Добавление сайта" id="5vX-A0-bEy" customClass="ECDetailTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="detailView" title="Добавление сайта" id="5vX-A0-bEy" customClass="ECDetailTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="twR-xD-Gry">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -249,7 +242,4 @@
             <point key="canvasLocation" x="-549" y="909"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="rR3-F0-rVE"/>
-    </inferredMetricsTieBreakers>
 </document>

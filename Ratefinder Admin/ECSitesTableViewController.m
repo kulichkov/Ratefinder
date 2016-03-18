@@ -8,6 +8,7 @@
 
 #import "ECSitesTableViewController.h"
 #import "ECPersonsTableViewController.h"
+#import "ECDetailTableViewController.h"
 
 static NSString *kCellID = @"Cell";
 
@@ -47,7 +48,6 @@ static NSString *kCellID = @"Cell";
     return [self.arraySites count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID forIndexPath:indexPath];
@@ -66,6 +66,17 @@ static NSString *kCellID = @"Cell";
     
     [self.navigationController pushViewController:personsTableView animated:YES];
     
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    
+    ECDetailTableViewController *detailTableView = [self.storyboard instantiateViewControllerWithIdentifier:@"detailView"];
+    
+    detailTableView.nameSite = [self.arraySites objectAtIndex:indexPath.row];
+    detailTableView.urlSite = [self.arraySitesUrl objectAtIndex:indexPath.row];
+    detailTableView.isDetail = YES;
+    
+    [self.navigationController pushViewController:detailTableView animated:YES];
 }
 
 /*
@@ -102,14 +113,13 @@ static NSString *kCellID = @"Cell";
 }
 */
 
-/*
-#pragma mark - Navigation
+
+//#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//
+//}
+
 
 @end

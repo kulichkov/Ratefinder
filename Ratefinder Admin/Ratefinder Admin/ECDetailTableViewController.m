@@ -11,9 +11,7 @@
 @interface ECDetailTableViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *siteNameTextField;
-
 @property (weak, nonatomic) IBOutlet UITextField *siteUrlTextField;
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 @end
@@ -23,15 +21,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEditing)];
-    
-    [self.view addGestureRecognizer:handleTap];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (self.isDetail) {
+        
+        self.siteNameTextField.text = self.nameSite;
+        self.siteUrlTextField.text = self.urlSite;
+        
+    } else {
+        
+        UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEditing)];
+        
+        [self.view addGestureRecognizer:handleTap];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

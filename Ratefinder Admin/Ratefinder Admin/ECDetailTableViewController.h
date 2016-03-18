@@ -10,4 +10,8 @@
 
 @interface ECDetailTableViewController : UITableViewController
 
+@property (nonatomic, readwrite) NSString *nameSite;
+@property (nonatomic, readwrite) NSString *urlSite;
+@property (nonatomic, readwrite) BOOL isDetail;
+
 @end
