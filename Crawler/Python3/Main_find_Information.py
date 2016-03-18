@@ -79,8 +79,9 @@ for link in workMysql.execute_select(quest_4):
             pages(xmlUrl, link[0], link[2])
         pass
     elif pageFormat == '.txt':
-        pages(Robots.site_map(link[1]), link[0], link[2])
-        pass
+        robotsUrl = Robots.site_map(link[1])
+        if robotsUrl:
+            pages(robotsUrl, link[0], link[2])
     else:
         parserHtml = Html(link[1], dictKeywords)
         personPageRank(parserHtml.parser(), link[2])
