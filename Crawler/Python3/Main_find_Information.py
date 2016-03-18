@@ -22,6 +22,8 @@ from Crawler.Python3.parser_files import *
 
 # Главная функция
 def main():
+    # Переменная если сканирование уже сегодня выполнялось
+    toDay = 0
     # Словарь для хранения ключевых слов
     dictKeywords = {}
 
@@ -100,6 +102,7 @@ def main():
     # Выборка новых ссылоко
     urlNullLast = workMysql.execute_select(quest_4)
 
+    # Если результат пустой выполняем проход по старым ссылкам.
     if urlNullLast:
         # Перебераем ссылки у которых "lastScanDate" = "Null"
         for link in urlNullLast:
@@ -107,14 +110,18 @@ def main():
         else:
             workMysql.connect_close()
     else:
-        # Выборка старых ссылоко
-        urlOldlast = workMysql.execute_select(quest_4_0)
-        if urlOldlast:
-            # Перебираем последних 10 старые ссылок
-            for link in urlOldlast:
-                parser(link)
-            else:
-                workMysql.connect_close()
+        #
+        #   Доделать
+        #
+        if toDay:
+            # Выборка старых ссылоко
+            urlOldlast = workMysql.execute_select(quest_4_0)
+            if urlOldlast:
+                # Перебираем последних 10 старые ссылок
+                for link in urlOldlast:
+                    parser(link)
+                else:
+                    workMysql.connect_close()
 
 # Проверка
 if __name__ == '__main__':
