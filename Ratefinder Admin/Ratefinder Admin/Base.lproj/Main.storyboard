@@ -67,7 +67,7 @@
         <!--Добавление сайта-->
         <scene sceneID="0aE-zI-1Sg">
             <objects>
-                <tableViewController title="Добавление сайта" id="5vX-A0-bEy" sceneMemberID="viewController">
+                <tableViewController title="Добавление сайта" id="5vX-A0-bEy" customClass="ECAddSiteTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="twR-xD-Gry">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -82,7 +82,11 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название сайта" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IcS-nm-Xcr">
                                                     <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="textFieldDidChange:" destination="5vX-A0-bEy" eventType="editingChanged" id="PVg-hs-gIy"/>
+                                                        <outlet property="delegate" destination="5vX-A0-bEy" id="JIw-vr-xXN"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -123,7 +127,11 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yO5-82-AOv">
                                                     <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="textFieldDidChange:" destination="5vX-A0-bEy" eventType="editingChanged" id="f5b-cz-Naf"/>
+                                                        <outlet property="delegate" destination="5vX-A0-bEy" id="1tp-kr-Cu3"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -165,9 +173,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Ml1-rh-dbF">
-                        <barButtonItem key="leftBarButtonItem" title="Отмена" id="2El-oc-taz"/>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Сохранить" id="vb1-gB-JYI"/>
+                        <barButtonItem key="leftBarButtonItem" title="Отмена" id="2El-oc-taz">
+                            <connections>
+                                <action selector="cancel:" destination="5vX-A0-bEy" id="wau-JN-Tja"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Сохранить" id="vb1-gB-JYI">
+                            <connections>
+                                <action selector="add:" destination="5vX-A0-bEy" id="ZY7-XQ-htS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="saveButton" destination="vb1-gB-JYI" id="zrp-Wt-vUa"/>
+                        <outlet property="siteNameTextField" destination="IcS-nm-Xcr" id="MLT-TO-8em"/>
+                        <outlet property="siteUrlTextField" destination="yO5-82-AOv" id="7ea-Zd-USH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrf-Ul-qr3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
