@@ -24,6 +24,11 @@ class Robots():
                 if listLine[0] == 'Sitemap':
                     #print(listLine[1])
                     return [listLine[1],]
+            else:
+                urlSitemap = '/'.join((os.path.split(url)[0], 'sitemap.xml'))
+                if Downloader.available(urlSitemap):
+                    print(urlSitemap)
+                    return [urlSitemap,]
 
 
 # Парсер файла *.xml
@@ -39,7 +44,7 @@ class Xml():
                     element = 'url'
             except OSError:
                 if os.path.isfile(temp):
-                    print(temp)
+                    print('Удаление файла из ../temp/' + os.path.split(temp)[1])
                     os.remove(temp)
                 return 0
         else:
@@ -54,12 +59,15 @@ class Xml():
             try:
                 lastmod = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod').text.split('T')[0]
                 if lastmod >= str(datetime.utcnow().date()):
-                    listUrl.append(x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text)
+                    urlLoc = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text
+                    print('Новая ссылка ' + urlLoc + ' с датой ' + lastmod)
+                    listUrl.append(urlLoc)
+                #print('C датой ' + lastmod)
             except AttributeError:
                 pass
             else:
                 if os.path.isfile(temp):
-                    print(temp)
+                    print('Удаление файла из ../temp/' + os.path.split(temp)[1])
                     os.remove(temp)
         return listUrl
 
