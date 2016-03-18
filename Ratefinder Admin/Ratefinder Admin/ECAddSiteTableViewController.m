@@ -23,7 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    UITapGestureRecognizer *handlerTap = 
+    UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEditing)];
+    
+    [self.view addGestureRecognizer:handleTap];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -77,7 +79,7 @@
 
 - (void) handleEditing {
     
-    [self.siteNameTextField resignFirstResponder];
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Table view data source
