@@ -49,4 +49,17 @@
     return cell;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual: @"ShowPersons"]) {
+        [segue destinationViewController].title = selectedSite;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    selectedSite = [sitesData objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"ShowPersons" sender:self];
+}
+
 @end

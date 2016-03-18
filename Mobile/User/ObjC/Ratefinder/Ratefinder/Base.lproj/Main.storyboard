@@ -19,10 +19,31 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="0lt-kb-73n"/>
+                    <connections>
+                        <segue destination="3AQ-Vu-dxe" kind="show" identifier="ShowPersons" id="dGx-Ic-mSL"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQl-tQ-Wgr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1105" y="332"/>
+        </scene>
+        <!--Persons View Controller-->
+        <scene sceneID="yMO-CU-NlR">
+            <objects>
+                <tableViewController id="3AQ-Vu-dxe" customClass="RFPersonsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="E2j-tw-AGj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="3AQ-Vu-dxe" id="msi-DB-Ud9"/>
+                            <outlet property="delegate" destination="3AQ-Vu-dxe" id="czQ-rT-kv4"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LLd-sj-vmQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1795" y="332"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qwt-Q4-Fct">
