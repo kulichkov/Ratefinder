@@ -10,4 +10,6 @@
 
 @interface ECPersonsTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSString *nameSite;
+
 @end
