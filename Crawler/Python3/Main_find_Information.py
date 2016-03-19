@@ -18,13 +18,12 @@
 from requests_sql import Mysql
 from datetime import datetime
 from parser_files import *
-from logging import *
+from log import logging, benchmark
 
 
 # Главная функция
 @benchmark
-@log
-def main():
+def main_find_info():
     # Переменная если сканирование уже сегодня выполнялось
     toDay = 0
     # Словарь для хранения ключевых слов
@@ -114,8 +113,6 @@ def main():
             workMysql.connect_close()
     else:
         #
-        #   Доделать
-        #
         if toDay:
             # Выборка старых ссылоко
             urlOldlast = workMysql.execute_select(quest_4_0)
@@ -128,4 +125,4 @@ def main():
 
 # Проверка
 if __name__ == '__main__':
-    main()
+    main_find_info()
