@@ -10,6 +10,7 @@ from parser_conf_ini import confgini
 # Mysql
 import mysql
 from mysql.connector import Error
+from log import logging
 
 
 # Работа с Mysql
@@ -32,6 +33,7 @@ class Mysql():
             if self.dbconnect.is_connected():
                 print('Сonnection OK.')
             else:
+                logging('Mysql', 'Сonnection failed.')
                 print('Сonnection failed.')
                 exit()
         except Error as error:
