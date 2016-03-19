@@ -13,6 +13,9 @@
     NSArray *sitesData;
 }
 
+//имя перехода на сцену персон
+static NSString *segueIDToPersons = @"ShowPersons";
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,7 +53,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //при переходе изменяется титул контроллера назначения на имя нажатой ячейки в текущем контроллере
-    if ([segue.identifier isEqual: @"ShowPersons"]) {
+    if ([segue.identifier isEqual: segueIDToPersons]) {
         NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
         [segue destinationViewController].title = [sitesData objectAtIndex:selectedCellIndexPath.row];
     }
@@ -58,7 +61,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"ShowPersons" sender:self];
+    [self performSegueWithIdentifier:segueIDToPersons sender:self];
 }
 
 @end
