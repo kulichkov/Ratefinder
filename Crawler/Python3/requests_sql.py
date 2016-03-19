@@ -5,9 +5,7 @@
     Запросы к базе данных
 """
 
-# Подключаем модуль работы с *.ini фаилам
 from parser_conf_ini import confgini
-# Mysql
 import mysql
 from mysql.connector import Error
 from log import logging
