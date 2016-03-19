@@ -18,6 +18,7 @@
 from requests_sql import Mysql
 from datetime import datetime
 from parser_files import *
+import os.path
 from log import logging, benchmark
 
 
@@ -25,7 +26,7 @@ from log import logging, benchmark
 @benchmark
 def main_find_info():
     # Переменная если сканирование уже сегодня выполнялось
-    toDay = 0
+    toDayTrue = 0
     # Словарь для хранения ключевых слов
     dictKeywords = {}
 
@@ -112,13 +113,36 @@ def main_find_info():
         else:
             workMysql.connect_close()
     else:
-        #
-        if toDay:
+        fileTemp = os.path.split(__file__)[0] + '/temp.ini'
+        toDay = str(datetime.utcnow().date())
+
+        # Запись в файл текущей даты в формтае xxxx-xx-xx
+        def rewrite_today_date():
+            with open(fileTemp, 'w') as file:
+                file.write(str(toDay))
+
+        # Если файл существует
+        if os.path.isfile(fileTemp):
+            with open(fileTemp, 'r') as file:
+                datePrevious = file.read()
+                # Если не пустой
+                if datePrevious:
+                    # Если не равно дате из файла
+                    if datePrevious != toDay:
+                        toDayTrue = 1
+
+                rewrite_today_date()
+        else:
+            rewrite_today_date()
+
+        # Если сегодня не было повторного прохода по ссылкам
+        if toDayTrue:
+            logging('Second pass', 'Second passage links *.xml.')
             # Выборка старых ссылоко
-            urlOldlast = workMysql.execute_select(quest_4_0)
-            if urlOldlast:
+            oldUrlXmllast = workMysql.execute_select(quest_4_0)
+            if oldUrlXmllast:
                 # Перебираем последних 10 старые ссылок
-                for link in urlOldlast:
+                for link in oldUrlXmllast:
                     route_parser(link)
                 else:
                     workMysql.connect_close()
