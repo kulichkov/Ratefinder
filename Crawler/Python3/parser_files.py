@@ -24,23 +24,35 @@ class Robots():
                 if listLine[0] == 'Sitemap':
                     #print(listLine[1])
                     return [listLine[1],]
+            else:
+                urlSitemap = '/'.join((os.path.split(url)[0], 'sitemap.xml'))
+                if Downloader.available(urlSitemap):
+                    #print(urlSitemap)
+                    return [urlSitemap,]
 
 
 # Парсер файла *.xml
 class Xml():
+    # Извлекаем ссылки нужной даты
     def satemap(url, formatFile):
+        # Удаление файлов после обработки
+        def removeFiles(path):
+            if os.path.isfile(path):
+                print('Удаление файла из ../temp/' + os.path.split(path)[1])
+                os.remove(path)
+        # Для хранение результата
         listUrl = []
+        # Получение путь до скачанного файла
         temp = Downloader.download(url)
-        # Проверяем формат файла
+
+        # Проверка формата файла
         if formatFile == '.gz':
             try:
                 with gzip.open(temp) as file:
                     file = file.read()
                     element = 'url'
             except OSError:
-                if os.path.isfile(temp):
-                    print(temp)
-                    os.remove(temp)
+                removeFiles(temp)
                 return 0
         else:
             with open(temp) as file:
@@ -49,30 +61,32 @@ class Xml():
 
         # Создаем объекст
         root = ET.fromstring(file)
-        # Перебераем корневые элементы xml
+        # Перебираем корневые элементы xml
         for x in root.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}' + element):
             try:
                 lastmod = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod').text.split('T')[0]
+                # Если текущая дата берем ссылку
                 if lastmod >= str(datetime.utcnow().date()):
-                    listUrl.append(x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text)
+                    urlLoc = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text
+                    print('Новая ссылка ' + urlLoc + ' с датой ' + lastmod)
+                    listUrl.append(urlLoc)
             except AttributeError:
                 pass
-            else:
-                if os.path.isfile(temp):
-                    print(temp)
-                    os.remove(temp)
+            finally:
+                removeFiles(temp)
+        else:
+            removeFiles(temp)
         return listUrl
 
 
 # Парсер файла *.html
 class Html():
-    #
     def __init__(self, url, keywords):
         self.url = url
         self.keywords = keywords
         self.dictResult = {}
 
-    #
+    # Извлекаем словарь KeyWords: Количество упоминаний
     def parser(self):
         rawHtml = Downloader.open(self.url)
         if rawHtml:
