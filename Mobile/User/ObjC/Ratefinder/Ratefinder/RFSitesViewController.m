@@ -9,9 +9,6 @@
 #import "RFSitesViewController.h"
 
 @implementation RFSitesViewController
-{
-    NSString *selectedSite;
-}
 
 - (void)viewDidLoad
 {
@@ -52,13 +49,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqual: @"ShowPersons"]) {
-        [segue destinationViewController].title = selectedSite;
+        NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
+        [segue destinationViewController].title = [sitesData objectAtIndex:selectedCellIndexPath.row];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectedSite = [sitesData objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"ShowPersons" sender:self];
 }
 
