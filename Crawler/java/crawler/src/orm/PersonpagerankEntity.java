@@ -1,46 +1,38 @@
 package orm;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by Nikit on 17.03.2016.
  */
 @Entity
-@Table(name = "personpagerank", schema = "ratefinder")
-public class PersonPageRankEntity {
-    private int id;
-    private PersonsEntity person;
-    private PagesEntity page;
+@Table(name = "personpagerank", schema = "ratefinder", catalog = "")
+public class PersonpagerankEntity {
+    private int personId;
+    private int pageId;
     private int rank;
 
-    @Id
-    @Column(name = "Id")
-    public int getId() {
-        return id;
+    @Basic
+    @Column(name = "PersonID")
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
-    @ManyToOne
-    @Column(name = "PersonId")
-    public PersonsEntity getPerson() {
-        return person;
+    @Basic
+    @Column(name = "PageID")
+    public int getPageId() {
+        return pageId;
     }
 
-    public void setPerson(PersonsEntity person) {
-        this.person = person;
-    }
-
-    @ManyToOne
-    @Column(name = "PageId")
-    public PagesEntity getPage() {
-        return page;
-    }
-
-    public void setPage(PagesEntity page) {
-        this.page = page;
+    public void setPageId(int pageId) {
+        this.pageId = pageId;
     }
 
     @Basic
@@ -58,10 +50,10 @@ public class PersonPageRankEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PersonPageRankEntity that = (PersonPageRankEntity) o;
+        PersonpagerankEntity that = (PersonpagerankEntity) o;
 
-        if (!person.equals(person)) return false;
-        if (!page.equals(page)) return false;
+        if (personId != that.personId) return false;
+        if (pageId != that.pageId) return false;
         if (rank != that.rank) return false;
 
         return true;
@@ -69,8 +61,8 @@ public class PersonPageRankEntity {
 
     @Override
     public int hashCode() {
-        int result = person.hashCode();
-        result = 31 * result + page.hashCode();
+        int result = personId;
+        result = 31 * result + pageId;
         result = 31 * result + rank;
         return result;
     }

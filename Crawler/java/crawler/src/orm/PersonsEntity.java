@@ -1,17 +1,20 @@
 package orm;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by Nikit on 17.03.2016.
  */
 @Entity
-@Table(name = "persons", schema = "ratefinder")
+@Table(name = "persons", schema = "ratefinder", catalog = "")
 public class PersonsEntity {
     private int id;
     private String name;
 
-    @Id
+    @Basic
     @Column(name = "ID")
     public int getId() {
         return id;
