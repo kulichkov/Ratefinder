@@ -11,12 +11,14 @@
 """
 
 from requests_sql import Mysql
+from log import logging, benchmark
 
 
 __version__ = 'v1.0'
 
 
 # Главная функция
+@benchmark
 def main():
     # Запросы
     quest_1 = '''SELECT `ID`, `Name` FROM `Sites` WHERE `ID` not in (SELECT DISTINCT(`SiteID`) FROM `Pages`);'''
@@ -36,6 +38,9 @@ def main():
         workMysql.execute(quest_2, urlRobotsTxt, site[0])
     # Комитим
     workMysql.commit()
+
+    #
+    workMysql.connect_close()
 
 # Проверка
 if __name__ == '__main__':
