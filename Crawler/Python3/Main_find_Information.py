@@ -17,10 +17,13 @@
 
 from requests_sql import Mysql
 from datetime import datetime
-from Crawler.Python3.parser_files import *
+from parser_files import *
+from logging import *
 
 
 # Главная функция
+@benchmark
+@log
 def main():
     # Переменная если сканирование уже сегодня выполнялось
     toDay = 0
@@ -66,7 +69,7 @@ def main():
             workMysql.commit()
 
     # Распределение ссылок по парсерам
-    def parser(link):
+    def route_parser(link):
         print(link)
         #  Узнаем имя файла
         namePage = link[1][link[1].rfind('/'):]
@@ -106,7 +109,7 @@ def main():
     if urlNullLast:
         # Перебераем ссылки у которых "lastScanDate" = "Null"
         for link in urlNullLast:
-            parser(link)
+            route_parser(link)
         else:
             workMysql.connect_close()
     else:
@@ -119,7 +122,7 @@ def main():
             if urlOldlast:
                 # Перебираем последних 10 старые ссылок
                 for link in urlOldlast:
-                    parser(link)
+                    route_parser(link)
                 else:
                     workMysql.connect_close()
 
