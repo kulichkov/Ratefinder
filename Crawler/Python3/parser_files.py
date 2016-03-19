@@ -27,7 +27,7 @@ class Robots():
             else:
                 urlSitemap = '/'.join((os.path.split(url)[0], 'sitemap.xml'))
                 if Downloader.available(urlSitemap):
-                    print(urlSitemap)
+                    #print(urlSitemap)
                     return [urlSitemap,]
 
 
