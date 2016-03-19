@@ -112,7 +112,7 @@ def main_find_info():
             route_parser(link)
     else:
         fileTemp = os.path.split(__file__)[0] + '/temp.ini'
-        toDay = str(datetime.utcnow().date())
+        toDay = str(datetime.today().date())
 
         # Запись в файл текущей даты в формтае xxxx-xx-xx
         def rewrite_today_date():
