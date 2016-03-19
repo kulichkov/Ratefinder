@@ -9,12 +9,16 @@
 #import "RFSitesViewController.h"
 
 @implementation RFSitesViewController
+{
+    NSArray *sitesData;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.navigationItem.title = @"Сайты";
+    
+    //очень плохой код для заглушки
     sitesData = [NSArray arrayWithObjects:
                  @"lenta.ru",
                  @"gazeta.ru",
@@ -23,7 +27,6 @@
                  nil];
     
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -34,20 +37,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *sitesTableIdentifier = @"SitesTableItem";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sitesTableIdentifier];
-    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sitesTableIdentifier];
     }
-    
+    //строчка плохого кода. Исправить.
     cell.textLabel.text = [sitesData objectAtIndex:indexPath.row];
-    
     return cell;
 }
 
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //при переходе изменяется титул контроллера назначения на имя нажатой ячейки в текущем контроллере
     if ([segue.identifier isEqual: @"ShowPersons"]) {
         NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
         [segue destinationViewController].title = [sitesData objectAtIndex:selectedCellIndexPath.row];

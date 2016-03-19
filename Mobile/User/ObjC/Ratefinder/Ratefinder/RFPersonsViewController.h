@@ -9,9 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RFPersonsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
-{
-    NSArray *personsData;
-    NSArray *ratesData;
-}
 
 @end

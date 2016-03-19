@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				691072741C9C8032008070B5 /* Main.storyboard */,
-				691072A51C9C8EB0008070B5 /* RFPersonsViewController */,
 				691072A11C9C856F008070B5 /* RFSitesViewController */,
+				691072A51C9C8EB0008070B5 /* RFPersonsViewController */,
 				6910726B1C9C8032008070B5 /* Supporting Files */,
 			);
 			path = Ratefinder;
