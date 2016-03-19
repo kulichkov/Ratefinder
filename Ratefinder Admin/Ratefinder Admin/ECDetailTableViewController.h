@@ -8,21 +8,28 @@
 
 #import <UIKit/UIKit.h>
 
-@class ECDetailTableViewController;
+@protocol ECPassDetailSite <NSObject>
 
-@protocol ECDetailTableViewControllerDelegate <NSObject>
-
-- (void)setSomeLabelText:(ECDetailTableViewController *)controller enteringItem:(NSString *)item;
+- (void)setNameSite:(NSString *)name;
+- (void)setUrlSite:(NSString *)url;
 
 @end
 
 @interface ECDetailTableViewController : UITableViewController
 
-@property (nonatomic, readwrite) NSString *nameSite;
-@property (nonatomic, readwrite) NSString *urlSite;
+@property (nonatomic, strong) NSString *nameSite;
+@property (nonatomic, strong) NSString *urlSite;
 @property (nonatomic, readwrite) BOOL isDetail;
-@property (nonatomic, readwrite) NSIndexPath *indexPath;
+@property (nonatomic, strong) NSIndexPath *indexPath;
+@property (nonatomic, strong) NSString *passMessage;
 
-@property (nonatomic, weak) id <ECDetailTableViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <ECPassDetailSite> delegate;
+
+@property (weak, nonatomic) IBOutlet UITextField *siteNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *siteUrlTextField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+
+- (IBAction)cancel:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

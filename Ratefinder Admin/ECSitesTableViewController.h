@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ECDetailTableViewController.h"
 
-@interface ECSitesTableViewController : UITableViewController <ECDetailTableViewControllerDelegate>
+@interface ECSitesTableViewController : UITableViewController <ECPassDetailSite>
+
+@property (nonatomic, strong) NSString *nameSite;
+@property (nonatomic, strong) NSString *urlSite;
 
 @property (nonatomic, strong) NSMutableArray *arraySites;
 @property (nonatomic, strong) NSMutableArray *arraySitesUrl;

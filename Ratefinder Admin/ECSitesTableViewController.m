@@ -8,7 +8,6 @@
 
 #import "ECSitesTableViewController.h"
 #import "ECPersonsTableViewController.h"
-#import "ECDetailTableViewController.h"
 
 static NSString *kCellID = @"Cell";
 
@@ -18,23 +17,33 @@ static NSString *kCellID = @"Cell";
 
 @implementation ECSitesTableViewController
 
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    if ([segue.identifier isEqualToString:@"detailView"]) {
+//        
+//        ECDetailTableViewController *detailViewController = [segue destinationViewController];
+//        
+//        detailViewController.nameSite = self.nameSite;
+//        detailViewController.urlSite = self.urlSite;
+//        detailViewController.isDetail = YES;
+//        
+//        [detailViewController setDelegate:self];
+//    }
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.arraySites = [NSMutableArray arrayWithObjects: @"Lenta.ru", @"Взгляд", @"Аргументы и факты", nil];
     self.arraySitesUrl = [NSMutableArray arrayWithObjects:@"http://www.lenta.ru", @"http://www.vz.ru", @"http://www.aif.ru", nil];
     
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.nameSite = @"test";
+    self.urlSite = @"https://test.ru";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -46,15 +55,19 @@ static NSString *kCellID = @"Cell";
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.arraySites count];
+//    return [self.arraySites count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID forIndexPath:indexPath];
     
-    cell.textLabel.text = [self.arraySites objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [self.arraySitesUrl objectAtIndex:indexPath.row];
+//    cell.textLabel.text = [self.arraySites objectAtIndex:indexPath.row];
+//    cell.detailTextLabel.text = [self.arraySitesUrl objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = self.nameSite;
+    cell.detailTextLabel.text = self.urlSite;
     
     return cell;
 }
@@ -75,57 +88,27 @@ static NSString *kCellID = @"Cell";
     
     detailTableView.nameSite = [self.arraySites objectAtIndex:indexPath.row];
     detailTableView.urlSite = [self.arraySitesUrl objectAtIndex:indexPath.row];
+    
+    detailTableView.nameSite = self.nameSite;
+    detailTableView.urlSite = self.urlSite;
     detailTableView.isDetail = YES;
     detailTableView.indexPath = indexPath;
+    
+    [detailTableView setDelegate:self];
     
     [self.navigationController pushViewController:detailTableView animated:YES];
 }
 
-- (void) setSomeLabelText:(ECDetailTableViewController *)controller enteringItem:(NSString *)item {
-    
-}
+#pragma mark - Protocol Methods
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
-//#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//-(void)setNameSite:(NSString *)nameSite {
+//    self.nameSite = nameSite;
+//}
 //
+//-(void)setUrlSite:(NSString *)urlSite {
+//    self.urlSite = urlSite;
 //}
 
-
 @end
+
+
