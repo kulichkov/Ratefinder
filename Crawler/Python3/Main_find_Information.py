@@ -110,8 +110,6 @@ def main_find_info():
         # Перебераем ссылки у которых "lastScanDate" = "Null"
         for link in urlNullLast:
             route_parser(link)
-        else:
-            workMysql.connect_close()
     else:
         fileTemp = os.path.split(__file__)[0] + '/temp.ini'
         toDay = str(datetime.utcnow().date())
@@ -144,8 +142,9 @@ def main_find_info():
                 # Перебираем последних 10 старые ссылок
                 for link in oldUrlXmllast:
                     route_parser(link)
-                else:
-                    workMysql.connect_close()
+
+    # Закрываем соединение
+    workMysql.connect_close()
 
 # Проверка
 if __name__ == '__main__':
