@@ -18,20 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEditing)];
-    
-    [self.view addGestureRecognizer:handleTap];
-    
     if (self.isDetail) {
         
         self.siteNameTextField.text = self.nameSite;
         self.siteUrlTextField.text = self.urlSite;
     }
+    
+    UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEditing)];
+    
+    [self.view addGestureRecognizer:handleTap];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navagation
@@ -45,8 +44,13 @@
     self.nameSite = self.siteNameTextField.text;
     self.urlSite = self.siteUrlTextField.text;
     
-    [[self delegate] setNameSite:self.nameSite];
-    [[self delegate] setUrlSite:self.urlSite];
+    if (self.isDetail) {
+        [self.delegate editSiteName:self.nameSite url:self.urlSite indexPath:self.indexPath];
+        
+    } else {
+        [self.delegate addSiteName:self.nameSite url:self.urlSite];
+        
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
 }

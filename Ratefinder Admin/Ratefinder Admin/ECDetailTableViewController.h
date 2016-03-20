@@ -10,8 +10,8 @@
 
 @protocol ECPassDetailSite <NSObject>
 
-- (void)setNameSite:(NSString *)name;
-- (void)setUrlSite:(NSString *)url;
+- (void)addSiteName:(NSString *)name url:(NSString *)url;
+- (void)editSiteName:(NSString *)name url:(NSString *)url indexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -21,7 +21,6 @@
 @property (nonatomic, strong) NSString *urlSite;
 @property (nonatomic, readwrite) BOOL isDetail;
 @property (nonatomic, strong) NSIndexPath *indexPath;
-@property (nonatomic, strong) NSString *passMessage;
 
 @property (nonatomic, weak) id <ECPassDetailSite> delegate;
 
