@@ -16,6 +16,10 @@
 		691072911C9C8032008070B5 /* RatefinderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072901C9C8032008070B5 /* RatefinderUITests.m */; };
 		691072A01C9C851C008070B5 /* RFSitesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6910729F1C9C851C008070B5 /* RFSitesViewController.m */; };
 		691072A41C9C8D9A008070B5 /* RFPersonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072A31C9C8D9A008070B5 /* RFPersonsViewController.m */; };
+		691072AC1CA05602008070B5 /* RFRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072AB1CA05602008070B5 /* RFRepository.m */; };
+		691072B11CA12B63008070B5 /* RFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072B01CA12B63008070B5 /* RFPerson.m */; };
+		691072B41CA12C34008070B5 /* RFSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072B31CA12C34008070B5 /* RFSite.m */; };
+		697F4D5F1CA163DB000189D9 /* RFPersonWithRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +58,14 @@
 		6910729F1C9C851C008070B5 /* RFSitesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSitesViewController.m; sourceTree = "<group>"; };
 		691072A21C9C8D9A008070B5 /* RFPersonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPersonsViewController.h; sourceTree = "<group>"; };
 		691072A31C9C8D9A008070B5 /* RFPersonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFPersonsViewController.m; sourceTree = "<group>"; };
+		691072AA1CA05602008070B5 /* RFRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFRepository.h; path = Ratefinder/RFRepository.h; sourceTree = "<group>"; };
+		691072AB1CA05602008070B5 /* RFRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RFRepository.m; path = Ratefinder/RFRepository.m; sourceTree = "<group>"; };
+		691072AF1CA12B63008070B5 /* RFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPerson.h; sourceTree = "<group>"; };
+		691072B01CA12B63008070B5 /* RFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFPerson.m; sourceTree = "<group>"; };
+		691072B21CA12C34008070B5 /* RFSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFSite.h; sourceTree = "<group>"; };
+		691072B31CA12C34008070B5 /* RFSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSite.m; sourceTree = "<group>"; };
+		697F4D5D1CA163DB000189D9 /* RFPersonWithRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPersonWithRate.h; sourceTree = "<group>"; };
+		697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFPersonWithRate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +119,7 @@
 				691072741C9C8032008070B5 /* Main.storyboard */,
 				691072A11C9C856F008070B5 /* RFSitesViewController */,
 				691072A51C9C8EB0008070B5 /* RFPersonsViewController */,
+				691072AD1CA05608008070B5 /* RFRepository */,
 				6910726B1C9C8032008070B5 /* Supporting Files */,
 			);
 			path = Ratefinder;
@@ -159,6 +172,46 @@
 				691072A31C9C8D9A008070B5 /* RFPersonsViewController.m */,
 			);
 			name = RFPersonsViewController;
+			sourceTree = "<group>";
+		};
+		691072AD1CA05608008070B5 /* RFRepository */ = {
+			isa = PBXGroup;
+			children = (
+				697F4D5C1CA16347000189D9 /* RFPersonWithRate */,
+				691072B51CA12C3C008070B5 /* RFSite */,
+				691072AE1CA05A29008070B5 /* RFPerson */,
+				691072AA1CA05602008070B5 /* RFRepository.h */,
+				691072AB1CA05602008070B5 /* RFRepository.m */,
+			);
+			name = RFRepository;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		691072AE1CA05A29008070B5 /* RFPerson */ = {
+			isa = PBXGroup;
+			children = (
+				691072AF1CA12B63008070B5 /* RFPerson.h */,
+				691072B01CA12B63008070B5 /* RFPerson.m */,
+			);
+			name = RFPerson;
+			sourceTree = "<group>";
+		};
+		691072B51CA12C3C008070B5 /* RFSite */ = {
+			isa = PBXGroup;
+			children = (
+				691072B21CA12C34008070B5 /* RFSite.h */,
+				691072B31CA12C34008070B5 /* RFSite.m */,
+			);
+			name = RFSite;
+			sourceTree = "<group>";
+		};
+		697F4D5C1CA16347000189D9 /* RFPersonWithRate */ = {
+			isa = PBXGroup;
+			children = (
+				697F4D5D1CA163DB000189D9 /* RFPersonWithRate.h */,
+				697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */,
+			);
+			name = RFPersonWithRate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,9 +347,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				691072B11CA12B63008070B5 /* RFPerson.m in Sources */,
 				691072A01C9C851C008070B5 /* RFSitesViewController.m in Sources */,
 				691072A41C9C8D9A008070B5 /* RFPersonsViewController.m in Sources */,
+				691072AC1CA05602008070B5 /* RFRepository.m in Sources */,
+				697F4D5F1CA163DB000189D9 /* RFPersonWithRate.m in Sources */,
 				691072701C9C8032008070B5 /* AppDelegate.m in Sources */,
+				691072B41CA12C34008070B5 /* RFSite.m in Sources */,
 				6910726D1C9C8032008070B5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,6 +580,7 @@
 				691072971C9C8032008070B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		691072981C9C8032008070B5 /* Build configuration list for PBXNativeTarget "RatefinderTests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +589,7 @@
 				6910729A1C9C8032008070B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6910729B1C9C8032008070B5 /* Build configuration list for PBXNativeTarget "RatefinderUITests" */ = {
 			isa = XCConfigurationList;
@@ -539,6 +598,7 @@
 				6910729D1C9C8032008070B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
