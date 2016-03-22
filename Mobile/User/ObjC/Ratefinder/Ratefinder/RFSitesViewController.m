@@ -10,7 +10,7 @@
 
 @implementation RFSitesViewController
 {
-    NSArray *sitesData;
+    RFRepository *repository;
 }
 
 //имя перехода на сцену персон
@@ -19,21 +19,16 @@ static NSString *segueIDToPersons = @"ShowPersons";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"Сайты";
+    repository = [[RFRepository alloc] init];
     
-    //очень плохой код для заглушки
-    sitesData = [NSArray arrayWithObjects:
-                 @"lenta.ru",
-                 @"gazeta.ru",
-                 @"vesti.ru",
-                 @"aif.ru",
-                 nil];
+    self.navigationItem.title = @"Сайты";
     
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [sitesData count];
+    return [repository.sites count];
 }
 
 
@@ -44,8 +39,8 @@ static NSString *segueIDToPersons = @"ShowPersons";
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sitesTableIdentifier];
     }
-    //строчка плохого кода. Исправить.
-    cell.textLabel.text = [sitesData objectAtIndex:indexPath.row];
+    RFSite *site = [repository.sites objectAtIndex:indexPath.row];
+    cell.textLabel.text = site.name;
     return cell;
 }
 
@@ -55,7 +50,8 @@ static NSString *segueIDToPersons = @"ShowPersons";
     //при переходе изменяется титул контроллера назначения на имя нажатой ячейки в текущем контроллере
     if ([segue.identifier isEqual: segueIDToPersons]) {
         NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
-        [segue destinationViewController].title = [sitesData objectAtIndex:selectedCellIndexPath.row];
+        RFSite *site = [repository.sites objectAtIndex:selectedCellIndexPath.row];
+        [segue destinationViewController].title = site.name;
     }
 }
 
@@ -63,5 +59,6 @@ static NSString *segueIDToPersons = @"ShowPersons";
 {
     [self performSegueWithIdentifier:segueIDToPersons sender:self];
 }
+ 
 
 @end

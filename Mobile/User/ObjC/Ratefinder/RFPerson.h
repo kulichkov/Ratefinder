@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface RFPerson : NSObject
-@property NSString *personName;
-@property int personID;
+@property NSString *name;
+@property int identificator;
 @end

@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface RFSite : NSObject
-@property NSString *siteName;
-@property int siteID;
+@property NSString *name;
+@property int identificator;
 @end
