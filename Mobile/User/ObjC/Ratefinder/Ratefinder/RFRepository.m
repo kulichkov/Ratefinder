@@ -8,7 +8,19 @@
 
 #import "RFRepository.h"
 
+static RFRepository *singleRepository = nil;
+
 @implementation RFRepository
+
+
++(RFRepository *)sharedRepository {
+    if (!singleRepository) {
+        singleRepository = [[RFRepository alloc] init];
+    }
+    
+    return singleRepository;
+}
+
 
 - (id)init
 {
