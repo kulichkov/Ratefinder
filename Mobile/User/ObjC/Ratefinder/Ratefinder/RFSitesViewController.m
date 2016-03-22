@@ -7,6 +7,7 @@
 //
 
 #import "RFSitesViewController.h"
+#import "RFRepository.h"
 
 @implementation RFSitesViewController
 {

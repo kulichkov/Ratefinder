@@ -7,6 +7,7 @@
 //
 
 #import "RFPersonsViewController.h"
+#import "RFRepository.h"
 
 @implementation RFPersonsViewController
 {
