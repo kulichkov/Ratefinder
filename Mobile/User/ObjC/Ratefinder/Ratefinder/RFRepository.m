@@ -65,4 +65,18 @@ static RFRepository *singleRepository = nil;
     return self;
 }
 
+- (NSArray *)getRatesOnSite: (int)siteID
+{
+    NSMutableArray *ratesOnSite = [NSMutableArray array];
+    
+    for (RFPerson *person in self.persons) {
+        RFPersonWithRate *personWithRate = [[RFPersonWithRate alloc] init];
+        personWithRate.person = person;
+        personWithRate.rate = 100*arc4random();
+        [ratesOnSite addObject:personWithRate];
+    }
+    
+    return ratesOnSite;
+}
+
 @end

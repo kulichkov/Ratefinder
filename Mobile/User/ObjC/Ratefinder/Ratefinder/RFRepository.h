@@ -14,7 +14,7 @@
 @property NSArray *persons;
 @property NSArray *sites;
 
-//- (NSArray *)getRatesOnSite: (int)siteID;
+- (NSArray *)getRatesOnSite: (int)siteID;
 //- (NSArray *)getRatesForPerson: (int)personID;
 
 @end

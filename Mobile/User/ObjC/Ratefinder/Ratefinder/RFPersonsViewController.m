@@ -11,6 +11,7 @@
 
 @implementation RFPersonsViewController
 {
+    RFRepository *repository;
     NSArray *personsData;
     NSArray *ratesData;
 }
