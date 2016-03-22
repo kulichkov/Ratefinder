@@ -25,15 +25,12 @@ from log import logging, benchmark
 # Главная функция
 @benchmark
 def main_find_info():
-    # Переменная если сканирование уже сегодня выполнялось
-    toDayTrue = 0
     # Словарь для хранения ключевых слов
     dictKeywords = {}
-    #
-    dayAll = 0
-    #
+    # Пути до временных файлов
     fileTempToDay = os.path.split(__file__)[0] + '/temp.ini'
     fileTempCountKeyWords = os.path.split(__file__)[0] + '/temp_countKeywords.ini'
+    # Текущая дата в формате ХХХХ-ХХ-ХХ
     toDay = str(datetime.today().date())
 
     # Запросы
@@ -114,7 +111,7 @@ def main_find_info():
                     if info != str(tempInfo):
                         rewrite_temp_ini(fileTemp, tempInfo)
                         return 1
-        rewrite_temp_ini(fileTemp, tempInfo)
+        #rewrite_temp_ini(fileTemp, tempInfo)
         return 0
 
     # Делаем список Ключ: Имена
