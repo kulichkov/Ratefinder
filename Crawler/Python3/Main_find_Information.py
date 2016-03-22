@@ -17,7 +17,7 @@
 
 from requests_sql import Mysql
 from datetime import datetime
-from parser_files import *
+from parser_files import Xml, Html, Robots
 import os.path
 from log import logging, benchmark
 
@@ -51,12 +51,12 @@ def main_find_info():
 
     # Внесение данных в таблицу "Pages"
     def pages(listTemp, SiteID, PageID):
+        #print(listTemp)
         for x in listTemp:
             #lastScanDate(PageID)
             workMysql.execute(quest_5, x, int(SiteID))
-        else:
-            lastScanDate(PageID)
-            workMysql.commit()
+            #print(x, SiteID)
+            pass
 
     # Внесение данных в таблицу "PersonPageRank"
     def personPageRank(dictTemp, PageID):
@@ -65,8 +65,9 @@ def main_find_info():
             print(x[0], x[1])
             workMysql.execute(quest_6, int(x[0]), int(PageID), int(x[1]))
         else:
-            lastScanDate(PageID)
-            workMysql.commit()
+            pass
+            #lastScanDate(PageID)
+            #workMysql.commit()
 
     # Распределение ссылок по парсерам
     def route_parser(link):
@@ -78,22 +79,25 @@ def main_find_info():
 
         # Определение какое рассширение
         if pageFormat == '.xml':        # Если *.xml
-            pages(Xml.satemap(link[1], pageFormat), link[0], link[2])
+            xmlUrl = Xml(link[1])
+            pages(xmlUrl.sitemap(), link[0], link[2])
         elif pageFormat == '.gz':       # Если *.gz
-            xmlUrl = Xml.satemap(link[1], pageFormat)
-            if xmlUrl:
-                pages(xmlUrl, link[0], link[2])
-            else:
-                lastScanDate(link[2])
+            xmlGzUrl = Xml(link[1], 1)
+            for x in xmlGzUrl.gz():
+                pages(x, link[0], link[2])
         elif pageFormat == '.txt':      # Если *.txt
-            robotsUrl = Robots.site_map(link[1])
+            parserUrlRobots = Robots(link[1])
+            robotsUrl = parserUrlRobots.site_map()
             if robotsUrl:
                 pages(robotsUrl, link[0], link[2])
-            else:
-                lastScanDate(link[2])
         else:                           # Все остальное обыскиваем=)
             parserHtml = Html(link[1], dictKeywords)
             personPageRank(parserHtml.parser(), link[2])
+
+        # Вносим датту сканирование
+        lastScanDate(link[2])
+        # Комитим изменения
+        workMysql.commit()
 
     # Делаем список Ключ: Имена
     for x in workMysql.execute_select(quest_3):
