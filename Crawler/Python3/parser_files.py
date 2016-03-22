@@ -86,13 +86,7 @@ class Xml(Gz):
 
     # Извлекаем ссылки нужной даты
     def sitemap(self):
-        # # Удаление файлов после обработки
-        # def removeFiles(path):
-        #     if os.path.isfile(path):
-        #         print('Удаление файла из ../temp/' + os.path.split(path)[1])
-        #         os.remove(path)
-
-        print(self.pathToFile)
+        #print(self.pathToFile)
         with open(self.pathToFile) as file:
             file = file.read()
             element = 'sitemap'
@@ -112,11 +106,8 @@ class Xml(Gz):
                 pass
             finally:
                 self.remove_files()
-                pass
         else:
             self.remove_files()
-            pass
-
         return self.listUrl
 
 
