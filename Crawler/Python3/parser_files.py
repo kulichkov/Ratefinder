@@ -15,49 +15,87 @@ from datetime import datetime
 
 # Парсер файла robots.txt
 class Robots():
+    def __init__(self, url):
+        self.url = url
+        self.robotsText = Downloader.open(self.url)
+
     # Извлекаем ссылку, сайтМап
-    def site_map(url):
-        temp = Downloader.open(url)
-        if temp:
-            for line in temp.split('\n'):
+    def site_map(self):
+        if self.robotsText:
+            for line in self.robotsText.split('\n'):
                 listLine = line.split(': ')
                 if listLine[0] == 'Sitemap':
-                    #print(listLine[1])
+                    print(listLine[1])
                     return [listLine[1],]
             else:
-                urlSitemap = '/'.join((os.path.split(url)[0], 'sitemap.xml'))
+                urlSitemap = '/'.join((os.path.split(self.url)[0], 'sitemap.xml'))
                 if Downloader.available(urlSitemap):
-                    #print(urlSitemap)
                     return [urlSitemap,]
 
 
-# Парсер файла *.xml
-class Xml():
-    # Извлекаем ссылки нужной даты
-    def satemap(url, formatFile):
-        # Удаление файлов после обработки
-        def removeFiles(path):
-            if os.path.isfile(path):
-                print('Удаление файла из ../temp/' + os.path.split(path)[1])
-                os.remove(path)
-        # Для хранение результата
-        listUrl = []
-        # Получение путь до скачанного файла
-        temp = Downloader.download(url)
+# Удаление временных файлов
+class Remove_Files():
+    # Удаление файлов после обработки
+    def remove_files(self):
+        if os.path.isfile(self.pathToFile):
+            print('Удаление файла из ../temp/' + os.path.split(self.pathToFile)[1])
+            os.remove(self.pathToFile)
 
-        # Проверка формата файла
-        if formatFile == '.gz':
-            try:
-                with gzip.open(temp) as file:
-                    file = file.read()
-                    element = 'url'
-            except OSError:
-                removeFiles(temp)
-                return 0
-        else:
-            with open(temp) as file:
+
+# Парсер *.gz
+class Gz(Remove_Files):
+    def gz(self):
+        try:
+            with gzip.open(self.pathToFile) as file:
                 file = file.read()
-                element = 'sitemap'
+                element = 'url'
+        except OSError:
+            pass
+            self.remove_files()
+            return 0
+
+        # Создаем объекст
+        root = ET.fromstring(file)
+        # Перебираем корневые элементы xml
+        for x in root.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}' + element):
+            try:
+                lastmod = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod').text.split('T')[0]
+                # Если текущая дата берем ссылку
+                if self.lastAll or lastmod >= str(datetime.utcnow().date()):
+                    urlLoc = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text
+                    print('Новая ссылка ' + urlLoc + ' с датой ' + lastmod)
+                    yield (urlLoc,)
+                    #self.listUrl.append(urlLoc)
+            except AttributeError:
+                pass
+            finally:
+                pass
+                self.remove_files()
+        else:
+            pass
+            self.remove_files()
+
+
+# Парсер файла *.xml
+class Xml(Gz):
+    def __init__(self, url, lastAll=0):
+        self.url = url
+        self.listUrl = []
+        self.pathToFile = Downloader.download(self.url)
+        self.lastAll = lastAll
+
+    # Извлекаем ссылки нужной даты
+    def sitemap(self):
+        # # Удаление файлов после обработки
+        # def removeFiles(path):
+        #     if os.path.isfile(path):
+        #         print('Удаление файла из ../temp/' + os.path.split(path)[1])
+        #         os.remove(path)
+
+        print(self.pathToFile)
+        with open(self.pathToFile) as file:
+            file = file.read()
+            element = 'sitemap'
 
         # Создаем объекст
         root = ET.fromstring(file)
@@ -69,14 +107,17 @@ class Xml():
                 if lastmod >= str(datetime.utcnow().date()):
                     urlLoc = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text
                     print('Новая ссылка ' + urlLoc + ' с датой ' + lastmod)
-                    listUrl.append(urlLoc)
+                    self.listUrl.append(urlLoc)
             except AttributeError:
                 pass
             finally:
-                removeFiles(temp)
+                self.remove_files()
+                pass
         else:
-            removeFiles(temp)
-        return listUrl
+            self.remove_files()
+            pass
+
+        return self.listUrl
 
 
 # Парсер файла *.html
