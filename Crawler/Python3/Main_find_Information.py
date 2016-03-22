@@ -29,6 +29,12 @@ def main_find_info():
     toDayTrue = 0
     # Словарь для хранения ключевых слов
     dictKeywords = {}
+    #
+    dayAll = 0
+    #
+    fileTempToDay = os.path.split(__file__)[0] + '/temp.ini'
+    fileTempCountKeyWords = os.path.split(__file__)[0] + '/temp_countKeywords.ini'
+    toDay = str(datetime.today().date())
 
     # Запросы
     quest_3 = 'SELECT `PersonID`, `Name` FROM `Keywords`;'
@@ -39,6 +45,7 @@ def main_find_info():
     quest_5 = 'INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s)'
     quest_5_0 = 'UPDATE `Pages` SET `LastScanDate` = %s WHERE `ID` = %s;'
     quest_6 = 'INSERT INTO `PersonPageRank` (`PersonID`,`PageID`, `Rank`) VALUES(%s, %s, %s)'
+    quest_7 = 'SELECT COUNT(`ID`) FROM `Keywords`;'
 
     # Создаем для работы с Mysql
     workMysql = Mysql()
@@ -51,23 +58,14 @@ def main_find_info():
 
     # Внесение данных в таблицу "Pages"
     def pages(listTemp, SiteID, PageID):
-        #print(listTemp)
         for x in listTemp:
-            #lastScanDate(PageID)
             workMysql.execute(quest_5, x, int(SiteID))
-            #print(x, SiteID)
-            pass
 
     # Внесение данных в таблицу "PersonPageRank"
     def personPageRank(dictTemp, PageID):
-        #lastScanDate(PageID)
         for x in dictTemp.items():
             print(x[0], x[1])
             workMysql.execute(quest_6, int(x[0]), int(PageID), int(x[1]))
-        else:
-            pass
-            #lastScanDate(PageID)
-            #workMysql.commit()
 
     # Распределение ссылок по парсерам
     def route_parser(link):
@@ -82,7 +80,7 @@ def main_find_info():
             xmlUrl = Xml(link[1])
             pages(xmlUrl.sitemap(), link[0], link[2])
         elif pageFormat == '.gz':       # Если *.gz
-            xmlGzUrl = Xml(link[1], 1)
+            xmlGzUrl = Xml(link[1], dayAll)
             for x in xmlGzUrl.gz():
                 pages(x, link[0], link[2])
         elif pageFormat == '.txt':      # Если *.txt
@@ -99,6 +97,26 @@ def main_find_info():
         # Комитим изменения
         workMysql.commit()
 
+    # Запись в файл текущей даты в формтае xxxx-xx-xx
+    def rewrite_temp_ini(pathFile, tempInfo):
+        with open(pathFile, 'w') as file:
+            file.write(str(tempInfo))
+
+    # Читаем временные файлы
+    def read_temp_ini(fileTemp, tempInfo):
+        # Если файл существует
+        if os.path.isfile(fileTemp):
+            with open(fileTemp, 'r') as file:
+                info = file.read()
+                # Если не пустой
+                if info:
+                    # Если не равно дате из файла
+                    if info != str(tempInfo):
+                        rewrite_temp_ini(fileTemp, tempInfo)
+                        return 1
+        rewrite_temp_ini(fileTemp, tempInfo)
+        return 0
+
     # Делаем список Ключ: Имена
     for x in workMysql.execute_select(quest_3):
         if dictKeywords.get(x[0]):
@@ -109,33 +127,19 @@ def main_find_info():
     # Выборка новых ссылоко
     urlNullLast = workMysql.execute_select(quest_4)
 
+    # Выборка количество строк в таблице keywords
+    newKeywords = workMysql.execute_select(quest_7)[0]
+    # Были ли изменение в таблице keywords
+    dayAll = read_temp_ini(fileTempCountKeyWords, newKeywords[0])
+
     # Если результат пустой выполняем проход по старым ссылкам.
     if urlNullLast:
         # Перебераем ссылки у которых "lastScanDate" = "Null"
         for link in urlNullLast:
             route_parser(link)
     else:
-        fileTemp = os.path.split(__file__)[0] + '/temp.ini'
-        toDay = str(datetime.today().date())
-
-        # Запись в файл текущей даты в формтае xxxx-xx-xx
-        def rewrite_today_date():
-            with open(fileTemp, 'w') as file:
-                file.write(str(toDay))
-
-        # Если файл существует
-        if os.path.isfile(fileTemp):
-            with open(fileTemp, 'r') as file:
-                datePrevious = file.read()
-                # Если не пустой
-                if datePrevious:
-                    # Если не равно дате из файла
-                    if datePrevious != toDay:
-                        toDayTrue = 1
-
-                rewrite_today_date()
-        else:
-            rewrite_today_date()
+        # Надо ли производить повторное сканирование
+        toDayTrue = read_temp_ini(fileTempToDay, toDay)
 
         # Если сегодня не было повторного прохода по ссылкам
         if toDayTrue:
