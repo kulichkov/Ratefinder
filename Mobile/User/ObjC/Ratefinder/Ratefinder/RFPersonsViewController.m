@@ -12,47 +12,33 @@
 @implementation RFPersonsViewController
 {
     RFRepository *repository;
-    NSArray *personsData;
-    NSArray *ratesData;
+    NSArray *personsWithRates;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //очень плохой код для заглушки
-    personsData = [NSArray arrayWithObjects:
-                  @"Путин",
-                  @"Медведев",
-                  @"Навальный",
-                  @"Жириновский",
-                  nil];
-    ratesData = [NSArray arrayWithObjects:
-                 [NSNumber numberWithInt:100500],
-                 [NSNumber numberWithInt:2334],
-                 [NSNumber numberWithInt:120],
-                 [NSNumber numberWithInt:5],
-                 nil];
+    repository = [RFRepository sharedRepository];
+    personsWithRates = [repository getRatesOnSite: self.site];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section
 {
-    return [personsData count];
+    return [repository.persons count];
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
     NSString *sitesTableIdentifier = @"PersonsTableItem";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sitesTableIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: sitesTableIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:sitesTableIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier: sitesTableIdentifier];
     }
     
-    //тут 2 строки плохого кода. Исправлю.
-    cell.textLabel.text = [personsData objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [[ratesData objectAtIndex:indexPath.row] stringValue];
-    
+    RFPersonWithRate *personWithRate = [personsWithRates objectAtIndex: indexPath.row];
+    cell.textLabel.text = personWithRate.person.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d",personWithRate.rate];
     return cell;
 }
 

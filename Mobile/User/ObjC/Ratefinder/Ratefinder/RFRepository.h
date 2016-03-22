@@ -14,7 +14,10 @@
 @property NSArray *persons;
 @property NSArray *sites;
 
-- (NSArray *)getRatesOnSite: (int)siteID;
+
++(RFRepository *)sharedRepository;
+
+- (NSArray *)getRatesOnSite: (RFSite *)site;
 //- (NSArray *)getRatesForPerson: (int)personID;
 
 @end

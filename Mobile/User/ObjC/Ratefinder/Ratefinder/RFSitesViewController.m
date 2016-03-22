@@ -20,7 +20,7 @@ static NSString *segueIDToPersons = @"ShowPersons";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    repository = [[RFRepository alloc] init];
+    repository = [RFRepository sharedRepository];
     
     self.navigationItem.title = @"Сайты";
     
