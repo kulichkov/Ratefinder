@@ -9,7 +9,7 @@
 #import "ECSitesTableViewController.h"
 #import "ECPersonsTableViewController.h"
 
-static NSString *kCellID = @"Cell";
+static NSString *CellID = @"Cell";
 
 @interface ECSitesTableViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -33,7 +33,7 @@ static NSString *kCellID = @"Cell";
     [super viewWillAppear:animated];
     [self.tableView reloadData];
     
-   }
+}
 
 #pragma mark - Table view data source
 
@@ -43,7 +43,11 @@ static NSString *kCellID = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellID];
+    }
     
     cell.textLabel.text = [self.arraySitesName objectAtIndex:indexPath.row];
     cell.detailTextLabel.text = [self.arraySitesUrl objectAtIndex:indexPath.row];
