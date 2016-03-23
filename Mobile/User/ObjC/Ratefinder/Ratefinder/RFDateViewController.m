@@ -24,9 +24,15 @@
     //установка вместо клавиатуры спиннера выбора даты
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeDate;
-
+    
     [self.finishDateTextField setInputView:datePicker];
     [self.startDateTextField setInputView:datePicker];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    [self.view endEditing:YES];
 }
 
 @end
