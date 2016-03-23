@@ -7,22 +7,18 @@
 //
 
 #import "RFPersonsViewController.h"
+#import "RFDateViewController.h"
 #import "RFRepository.h"
-
-static NSString *segueIDToRatesPerDay = @"ShowRatesPerDay";
 
 @implementation RFPersonsViewController
 {
     RFRepository *repository;
-    NSArray *personsWithRates;
 }
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     repository = [RFRepository sharedRepository];
-    personsWithRates = [repository getRatesOnSite: self.site];
 }
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section
@@ -39,15 +35,15 @@ static NSString *segueIDToRatesPerDay = @"ShowRatesPerDay";
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier: sitesTableIdentifier];
     }
     
-    RFPersonWithRate *personWithRate = [personsWithRates objectAtIndex: indexPath.row];
-    cell.textLabel.text = personWithRate.person.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d",personWithRate.rate];
+    cell.textLabel.text = [[[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] person] name];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] rate]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:segueIDToRatesPerDay sender:self];
+    repository.currentPerson = [[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] person];
+    [self performSegueWithIdentifier:@"ShowRatesPerDay" sender:self];
 }
 
 @end

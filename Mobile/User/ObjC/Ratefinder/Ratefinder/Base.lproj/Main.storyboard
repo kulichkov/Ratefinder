@@ -115,10 +115,7 @@
                     </view>
                     <connections>
                         <outlet property="PersonNameLabel" destination="IvO-S6-FBl" id="OZz-fx-Q1x"/>
-                        <outlet property="beginDate" destination="kEA-bW-RqS" id="Vp3-dR-0Nx"/>
-                        <outlet property="finishDate" destination="V8t-l1-wIj" id="Vq4-v6-A8a"/>
                         <outlet property="finishDateTextField" destination="V8t-l1-wIj" id="nu5-EQ-1HV"/>
-                        <outlet property="startDate" destination="kEA-bW-RqS" id="SR4-se-WHx"/>
                         <outlet property="startDateTextField" destination="kEA-bW-RqS" id="p3e-TB-LXb"/>
                     </connections>
                 </viewController>

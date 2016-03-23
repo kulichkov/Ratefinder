@@ -10,7 +10,33 @@
 
 static RFRepository *singleRepository = nil;
 
+@interface RFRepository()
+@property NSArray *persons;
+@property NSArray *sites;
+@property NSArray *personsWithRatesOnCurrentSite;
+@end
+
 @implementation RFRepository
+
+-(NSArray *)personsWithRatesOnCurrentSite
+{
+    NSMutableArray *ratesOnCurrentSite = [NSMutableArray array];
+    
+    for (RFPerson *person in self.persons) {
+        RFPersonWithRate *personWithRate = [[RFPersonWithRate alloc] init];
+        personWithRate.person = person;
+        personWithRate.rate = arc4random_uniform(100500);
+        [ratesOnCurrentSite addObject:personWithRate];
+    }
+    
+    return ratesOnCurrentSite;
+}
+
+-(void)setPersonsWithRatesOnCurrentSite: (NSArray *)newAllPersonsWithRatesOnCurrentSite
+{
+    self.personsWithRatesOnCurrentSite = nil;
+    self.personsWithRatesOnCurrentSite = newAllPersonsWithRatesOnCurrentSite;
+}
 
 +(RFRepository *)sharedRepository {
     
@@ -56,19 +82,5 @@ static RFRepository *singleRepository = nil;
     return singleRepository;
 }
 
-
-- (NSArray *)getRatesOnSite: (RFSite *)site
-{
-    NSMutableArray *ratesOnSite = [NSMutableArray array];
-    
-    for (RFPerson *person in self.persons) {
-        RFPersonWithRate *personWithRate = [[RFPersonWithRate alloc] init];
-        personWithRate.person = person;
-        personWithRate.rate = arc4random_uniform(100500);
-        [ratesOnSite addObject:personWithRate];
-    }
-    
-    return ratesOnSite;
-}
 
 @end

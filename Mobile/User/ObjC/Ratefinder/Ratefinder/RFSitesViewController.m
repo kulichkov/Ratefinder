@@ -9,9 +9,6 @@
 #import "RFSitesViewController.h"
 #import "RFRepository.h"
 
-//имя перехода на сцену персон
-static NSString *segueIDToPersons = @"ShowPersons";
-
 @implementation RFSitesViewController
 {
     RFRepository *repository;
@@ -40,25 +37,14 @@ static NSString *segueIDToPersons = @"ShowPersons";
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sitesTableIdentifier];
     }
-    RFSite *site = [repository.sites objectAtIndex:indexPath.row];
-    cell.textLabel.text = site.name;
+    cell.textLabel.text = [[repository.sites objectAtIndex:indexPath.row] name];
     return cell;
-}
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    //при переходе изменяется титул контроллера назначения на имя нажатой ячейки в текущем контроллере
-    if ([segue.identifier isEqual: segueIDToPersons]) {
-        NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
-        RFSite *site = [repository.sites objectAtIndex:selectedCellIndexPath.row];
-        [segue destinationViewController].title = site.name;
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:segueIDToPersons sender:self];
+    repository.currentSite = [repository.sites objectAtIndex: indexPath.row];
+    [self performSegueWithIdentifier:@"ShowPersons" sender:self];
 }
  
 

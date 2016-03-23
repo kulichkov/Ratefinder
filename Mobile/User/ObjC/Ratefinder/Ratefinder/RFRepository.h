@@ -11,13 +11,12 @@
 #include "RFSite.h"
 
 @interface RFRepository : NSObject
-@property NSArray *persons;
-@property NSArray *sites;
-
+@property (readonly) NSArray *persons;
+@property (readonly) NSArray *sites;
+@property (readonly) NSArray *personsWithRatesOnCurrentSite;
+@property RFPerson *currentPerson;
+@property RFSite *currentSite;
 
 +(RFRepository *)sharedRepository;
-
-- (NSArray *)getRatesOnSite: (RFSite *)site;
-//- (NSArray *)getRatesForPerson: (int)personID;
 
 @end

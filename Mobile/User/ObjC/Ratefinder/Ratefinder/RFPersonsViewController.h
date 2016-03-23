@@ -10,5 +10,5 @@
 #import "RFRepository.h"
 
 @interface RFPersonsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
-@property RFSite *site;
+
 @end
