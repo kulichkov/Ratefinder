@@ -38,7 +38,6 @@ static RFRepository *singleRepository = nil;
     
     NSMutableArray *ratesOfCurrentPersonOnCurrentSite = [NSMutableArray array];
     NSDate *iDate = self.startDateForRates;
-    NSLog(@"iDate = %@",iDate);
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
     while ([calendar compareDate:iDate toDate:self.finishDateForRates toUnitGranularity:NSCalendarUnitDay] == NSOrderedAscending) {
@@ -47,9 +46,7 @@ static RFRepository *singleRepository = nil;
         rateWithDate.rate = arc4random_uniform(100);
         [ratesOfCurrentPersonOnCurrentSite addObject:rateWithDate];
         iDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:iDate options:0];
-        NSLog(@"iDate = %@",iDate);
     }
-    NSLog(@"iDate = %@",iDate);
     return ratesOfCurrentPersonOnCurrentSite;
 }
 
