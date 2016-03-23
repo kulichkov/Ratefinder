@@ -9,5 +9,9 @@
 #import "RFDateViewController.h"
 
 @implementation RFDateViewController
+{
+    NSDate *startDate;
+    NSDate *finishDate;
+}
 
 @end

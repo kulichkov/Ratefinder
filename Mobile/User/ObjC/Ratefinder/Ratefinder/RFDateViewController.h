@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RFRepository.h"
 
 @interface RFDateViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *PersonNameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *startDateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *finishDateTextField;
-
-
+@property (strong, nonatomic) RFPerson *person;
+@property (strong, nonatomic) RFSite *site;
 @end
