@@ -49,10 +49,10 @@
             </objects>
             <point key="canvasLocation" x="1795" y="332"/>
         </scene>
-        <!--View Controller-->
+        <!--Date View Controller-->
         <scene sceneID="Qwr-NQ-awT">
             <objects>
-                <viewController id="MGk-Z7-hIz" sceneMemberID="viewController">
+                <viewController id="MGk-Z7-hIz" customClass="RFDateViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9D7-Pu-wqj"/>
                         <viewControllerLayoutGuide type="bottom" id="L2Z-Hr-bue"/>
@@ -113,6 +113,14 @@
                             <constraint firstAttribute="trailing" secondItem="V8t-l1-wIj" secondAttribute="trailing" constant="20" id="zVg-EO-O2l"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="PersonNameLabel" destination="IvO-S6-FBl" id="OZz-fx-Q1x"/>
+                        <outlet property="beginDate" destination="kEA-bW-RqS" id="Vp3-dR-0Nx"/>
+                        <outlet property="finishDate" destination="V8t-l1-wIj" id="Vq4-v6-A8a"/>
+                        <outlet property="finishDateTextField" destination="V8t-l1-wIj" id="nu5-EQ-1HV"/>
+                        <outlet property="startDate" destination="kEA-bW-RqS" id="SR4-se-WHx"/>
+                        <outlet property="startDateTextField" destination="kEA-bW-RqS" id="p3e-TB-LXb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ct-Kq-bNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
