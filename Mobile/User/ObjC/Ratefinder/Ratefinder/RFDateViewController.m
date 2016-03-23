@@ -45,7 +45,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-    
     if (self.startDateTextField.editing) {
         self.startDateTextField.text = [dateFormatter stringFromDate:sender.date];
         repository.startDateForRates = sender.date;

@@ -41,8 +41,7 @@ static RFRepository *singleRepository = nil;
     NSLog(@"iDate = %@",iDate);
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
-    
-    while (iDate <= self.finishDateForRates) {
+    while ([calendar compareDate:iDate toDate:self.finishDateForRates toUnitGranularity:NSCalendarUnitDay] == NSOrderedAscending) {
         RFRateWithDate *rateWithDate = [[RFRateWithDate alloc] init];
         rateWithDate.date = iDate;
         rateWithDate.rate = arc4random_uniform(100);
