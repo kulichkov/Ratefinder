@@ -114,7 +114,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="PersonNameLabel" destination="IvO-S6-FBl" id="OZz-fx-Q1x"/>
                         <outlet property="finishDateTextField" destination="V8t-l1-wIj" id="nu5-EQ-1HV"/>
                         <outlet property="startDateTextField" destination="kEA-bW-RqS" id="p3e-TB-LXb"/>
                     </connections>
