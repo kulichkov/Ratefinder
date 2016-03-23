@@ -39,15 +39,15 @@ class Mysql():
             exit()
 
     # Выборка
-    def execute_select(self, request, *args):
-        self.cursor = self.dbconnect.cursor()
-        self.cursor.execute(request, args)
-        return self.cursor.fetchall()
-
-     # Внесение данных
     def execute(self, request, *args):
-        self.cursor = self.dbconnect.cursor()
-        self.cursor.execute(request, args)
+        try:
+            self.cursor = self.dbconnect.cursor()
+            self.cursor.execute(request, args)
+            return self.cursor.fetchall()
+        except AttributeError:
+            return 0
+        except mysql.connector.errors.InterfaceError:
+            return 0
 
     # Комитим
     def commit(self):
