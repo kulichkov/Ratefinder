@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #include "RFPersonWithRate.h"
+#include "RFRateWithDate.h"
 #include "RFSite.h"
 
 @interface RFRepository : NSObject
-@property (readonly) NSArray *persons;
-@property (readonly) NSArray *sites;
-@property (readonly) NSArray *personsWithRatesOnCurrentSite;
-@property (readonly) NSArray *ratesOfCurrentPersonWithDatesOnCurrentSite;
+@property (readonly, nonatomic) NSArray *persons;
+@property (readonly, nonatomic) NSArray *sites;
+@property (readonly, nonatomic) NSArray *personsWithRatesOnCurrentSite;
+@property (readonly, nonatomic) NSArray *ratesOfCurrentPersonWithDatesOnCurrentSite;
 @property RFPerson *currentPerson;
 @property RFSite *currentSite;
 @property NSDate *startDateForRates;

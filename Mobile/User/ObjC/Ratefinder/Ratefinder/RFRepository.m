@@ -33,11 +33,26 @@ static RFRepository *singleRepository = nil;
     return ratesOnCurrentSite;
 }
 
--(void)setPersonsWithRatesOnCurrentSite: (NSArray *)newAllPersonsWithRatesOnCurrentSite
+-(NSArray *)ratesOfCurrentPersonWithDatesOnCurrentSite
 {
-    self.personsWithRatesOnCurrentSite = nil;
-    self.personsWithRatesOnCurrentSite = newAllPersonsWithRatesOnCurrentSite;
+    
+    //Надо забить рандомными рейтингами с датами
+    
+    NSMutableArray *ratesOfCurrentPersonOnCurrentSite = [NSMutableArray array];
+    NSDate *iDate = self.startDateForRates;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    while (iDate <= self.finishDateForRates) {
+        RFRateWithDate *rateWithDate = [[RFRateWithDate alloc] init];
+        rateWithDate.date = iDate;
+        rateWithDate.rate = arc4random_uniform(100);
+        [ratesOfCurrentPersonOnCurrentSite addObject:rateWithDate];
+        iDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:iDate options:0];
+    }
+    
+    return ratesOfCurrentPersonOnCurrentSite;
 }
+
 
 +(RFRepository *)sharedRepository {
     

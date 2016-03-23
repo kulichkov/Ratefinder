@@ -20,6 +20,7 @@
 		691072B11CA12B63008070B5 /* RFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072B01CA12B63008070B5 /* RFPerson.m */; };
 		691072B41CA12C34008070B5 /* RFSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 691072B31CA12C34008070B5 /* RFSite.m */; };
 		6976B5F51CA2D90100EA5BC7 /* RFDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976B5F41CA2D90100EA5BC7 /* RFDateViewController.m */; };
+		6976B5F91CA3185A00EA5BC7 /* RFRateWithDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976B5F81CA3185A00EA5BC7 /* RFRateWithDate.m */; };
 		697F4D5F1CA163DB000189D9 /* RFPersonWithRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,8 @@
 		691072B31CA12C34008070B5 /* RFSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFSite.m; sourceTree = "<group>"; };
 		6976B5F31CA2D90100EA5BC7 /* RFDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFDateViewController.h; sourceTree = "<group>"; };
 		6976B5F41CA2D90100EA5BC7 /* RFDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFDateViewController.m; sourceTree = "<group>"; };
+		6976B5F71CA3185A00EA5BC7 /* RFRateWithDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFRateWithDate.h; sourceTree = "<group>"; };
+		6976B5F81CA3185A00EA5BC7 /* RFRateWithDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFRateWithDate.m; sourceTree = "<group>"; };
 		697F4D5D1CA163DB000189D9 /* RFPersonWithRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPersonWithRate.h; sourceTree = "<group>"; };
 		697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFPersonWithRate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +184,7 @@
 		691072AD1CA05608008070B5 /* RFRepository */ = {
 			isa = PBXGroup;
 			children = (
+				6976B5FA1CA3186000EA5BC7 /* RFRateWithDate */,
 				697F4D5C1CA16347000189D9 /* RFPersonWithRate */,
 				691072B51CA12C3C008070B5 /* RFSite */,
 				691072AE1CA05A29008070B5 /* RFPerson */,
@@ -216,6 +220,15 @@
 				6976B5F41CA2D90100EA5BC7 /* RFDateViewController.m */,
 			);
 			name = RFDateViewController;
+			sourceTree = "<group>";
+		};
+		6976B5FA1CA3186000EA5BC7 /* RFRateWithDate */ = {
+			isa = PBXGroup;
+			children = (
+				6976B5F71CA3185A00EA5BC7 /* RFRateWithDate.h */,
+				6976B5F81CA3185A00EA5BC7 /* RFRateWithDate.m */,
+			);
+			name = RFRateWithDate;
 			sourceTree = "<group>";
 		};
 		697F4D5C1CA16347000189D9 /* RFPersonWithRate */ = {
@@ -365,6 +378,7 @@
 				691072A41C9C8D9A008070B5 /* RFPersonsViewController.m in Sources */,
 				6976B5F51CA2D90100EA5BC7 /* RFDateViewController.m in Sources */,
 				691072AC1CA05602008070B5 /* RFRepository.m in Sources */,
+				6976B5F91CA3185A00EA5BC7 /* RFRateWithDate.m in Sources */,
 				697F4D5F1CA163DB000189D9 /* RFPersonWithRate.m in Sources */,
 				691072701C9C8032008070B5 /* AppDelegate.m in Sources */,
 				691072B41CA12C34008070B5 /* RFSite.m in Sources */,
