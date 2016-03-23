@@ -19,6 +19,7 @@
 {
     [super viewDidLoad];
     repository = [RFRepository sharedRepository];
+    self.navigationItem.title = repository.currentSite.name;
 }
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section

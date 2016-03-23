@@ -65,31 +65,31 @@
                                 <rect key="frame" x="178" y="550" width="244" height="30"/>
                                 <state key="normal" title="Показать ежедневную статистику"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ФИО личности" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvO-S6-FBl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ежедневная статистика" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvO-S6-FBl">
                                 <rect key="frame" x="20" y="72" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Начальная дата:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJH-rC-VH7">
-                                <rect key="frame" x="20" y="101" width="131" height="21"/>
+                                <rect key="frame" x="20" y="129" width="131" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kEA-bW-RqS">
-                                <rect key="frame" x="20" y="130" width="560" height="30"/>
+                                <rect key="frame" x="20" y="158" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Конечная дата:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJj-sj-4c4">
-                                <rect key="frame" x="29" y="168" width="122" height="21"/>
+                                <rect key="frame" x="29" y="196" width="122" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8t-l1-wIj">
-                                <rect key="frame" x="20" y="197" width="560" height="30"/>
+                                <rect key="frame" x="20" y="225" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -106,10 +106,10 @@
                             <constraint firstItem="eJj-sj-4c4" firstAttribute="top" secondItem="kEA-bW-RqS" secondAttribute="bottom" constant="8" id="Y5v-yD-iSG"/>
                             <constraint firstItem="eJj-sj-4c4" firstAttribute="leading" secondItem="EGE-nM-0Fl" secondAttribute="leading" constant="29" id="ciz-cb-vMA"/>
                             <constraint firstItem="kEA-bW-RqS" firstAttribute="top" secondItem="UJH-rC-VH7" secondAttribute="bottom" constant="8" id="e5X-vR-ZpT"/>
-                            <constraint firstItem="UJH-rC-VH7" firstAttribute="top" secondItem="IvO-S6-FBl" secondAttribute="bottom" constant="8" id="g8u-gl-PHQ"/>
                             <constraint firstItem="IvO-S6-FBl" firstAttribute="leading" secondItem="EGE-nM-0Fl" secondAttribute="leading" constant="20" id="irE-W3-gsY"/>
                             <constraint firstItem="IvO-S6-FBl" firstAttribute="top" secondItem="9D7-Pu-wqj" secondAttribute="bottom" constant="8" id="mxn-bo-DLG"/>
                             <constraint firstItem="kEA-bW-RqS" firstAttribute="leading" secondItem="EGE-nM-0Fl" secondAttribute="leading" constant="20" id="qK8-og-vd7"/>
+                            <constraint firstItem="UJH-rC-VH7" firstAttribute="top" secondItem="IvO-S6-FBl" secondAttribute="bottom" constant="36" id="rrF-FT-CDB"/>
                             <constraint firstAttribute="trailing" secondItem="V8t-l1-wIj" secondAttribute="trailing" constant="20" id="zVg-EO-O2l"/>
                         </constraints>
                     </view>

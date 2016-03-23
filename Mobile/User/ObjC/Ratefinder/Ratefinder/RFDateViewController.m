@@ -19,8 +19,7 @@
 - (void)viewDidLoad
 {
     repository = [RFRepository sharedRepository];
-    self.PersonNameLabel.text = repository.currentPerson.name;
-    self.navigationItem.title = repository.currentSite.name;
+    self.navigationItem.title = repository.currentPerson.name;
 }
 
 @end
