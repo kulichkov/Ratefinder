@@ -24,7 +24,7 @@
     //установка вместо клавиатуры спиннера выбора даты
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeDate;
-    
+    [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
     [self.finishDateTextField setInputView:datePicker];
     [self.startDateTextField setInputView:datePicker];
 }
@@ -33,6 +33,20 @@
 {
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];
+}
+
+-(void)updateTextField:(UIDatePicker *)sender
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    
+    if (self.startDateTextField.editing) {
+        self.startDateTextField.text = [dateFormatter stringFromDate:sender.date];
+    } else if (self.finishDateTextField.editing) {
+        self.finishDateTextField.text = [dateFormatter stringFromDate:sender.date];
+    }
+    
 }
 
 @end
