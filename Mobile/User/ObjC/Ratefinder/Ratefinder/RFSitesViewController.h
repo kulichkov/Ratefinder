@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-@interface RFSitesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface RFSitesViewController : UITableViewController 
 
 @end

@@ -16,8 +16,11 @@
     RFRepository *repository;
 }
 
+
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     repository = [RFRepository sharedRepository];
     self.navigationItem.title = repository.currentPerson.name;
     

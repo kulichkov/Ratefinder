@@ -20,7 +20,6 @@
     repository = [RFRepository sharedRepository];
     
     self.navigationItem.title = @"Сайты";
-    
 }
 
 

@@ -64,6 +64,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jK-RA-C8m">
                                 <rect key="frame" x="178" y="550" width="244" height="30"/>
                                 <state key="normal" title="Показать ежедневную статистику"/>
+                                <connections>
+                                    <segue destination="BeE-5Q-DYN" kind="show" id="SZ5-mz-Jui"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ежедневная статистика" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvO-S6-FBl">
                                 <rect key="frame" x="20" y="72" width="560" height="21"/>
@@ -121,6 +124,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ct-Kq-bNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2563" y="332"/>
+        </scene>
+        <!--Rates With Dates View Controller-->
+        <scene sceneID="7sG-4X-00I">
+            <objects>
+                <tableViewController id="BeE-5Q-DYN" customClass="RFRatesWithDatesViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tXx-SP-Lx7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="BeE-5Q-DYN" id="COI-Vh-UqG"/>
+                            <outlet property="delegate" destination="BeE-5Q-DYN" id="yIS-SB-Zuw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tBD-oN-oVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3344" y="332"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qwt-Q4-Fct">
