@@ -28,7 +28,7 @@ def main():
     workMysql = Mysql()
     workMysql.connect()
     # Выполняем запрос
-    listSites = workMysql.execute_select(quest_1)
+    listSites = workMysql.execute(quest_1)
 
     # Добовляем новые ссылки на Robots.txt
     for site in listSites:
