@@ -9,13 +9,13 @@
 #import "RFSitesViewController.h"
 #import "RFRepository.h"
 
+//имя перехода на сцену персон
+static NSString *segueIDToPersons = @"ShowPersons";
+
 @implementation RFSitesViewController
 {
     RFRepository *repository;
 }
-
-//имя перехода на сцену персон
-static NSString *segueIDToPersons = @"ShowPersons";
 
 - (void)viewDidLoad
 {

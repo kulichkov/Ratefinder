@@ -9,11 +9,14 @@
 #import "RFPersonsViewController.h"
 #import "RFRepository.h"
 
+static NSString *segueIDToRatesPerDay = @"ShowRatesPerDay";
+
 @implementation RFPersonsViewController
 {
     RFRepository *repository;
     NSArray *personsWithRates;
 }
+
 
 - (void)viewDidLoad
 {
@@ -42,5 +45,9 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:segueIDToRatesPerDay sender:self];
+}
 
 @end
