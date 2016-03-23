@@ -14,9 +14,11 @@
 @property (readonly) NSArray *persons;
 @property (readonly) NSArray *sites;
 @property (readonly) NSArray *personsWithRatesOnCurrentSite;
+@property (readonly) NSArray *ratesOfCurrentPersonWithDatesOnCurrentSite;
 @property RFPerson *currentPerson;
 @property RFSite *currentSite;
-
+@property NSDate *startDateForRates;
+@property NSDate *finishDateForRates;
 +(RFRepository *)sharedRepository;
 
 @end

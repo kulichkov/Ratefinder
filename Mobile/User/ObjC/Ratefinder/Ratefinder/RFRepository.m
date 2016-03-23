@@ -14,6 +14,7 @@ static RFRepository *singleRepository = nil;
 @property NSArray *persons;
 @property NSArray *sites;
 @property NSArray *personsWithRatesOnCurrentSite;
+@property NSArray *ratesOfCurrentPersonWithDatesOnCurrentSite;
 @end
 
 @implementation RFRepository

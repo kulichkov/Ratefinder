@@ -29,12 +29,14 @@
     [self.startDateTextField setInputView:datePicker];
 }
 
+//скрытие спиннера при тапе вне его
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];
 }
 
+//передаем значение в поля и переменные
 -(void)updateTextField:(UIDatePicker *)sender
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -43,10 +45,11 @@
     
     if (self.startDateTextField.editing) {
         self.startDateTextField.text = [dateFormatter stringFromDate:sender.date];
+        repository.startDateForRates = sender.date;
     } else if (self.finishDateTextField.editing) {
         self.finishDateTextField.text = [dateFormatter stringFromDate:sender.date];
+        repository.finishDateForRates = sender.date;
     }
-    
 }
 
 @end
