@@ -77,6 +77,11 @@ def main_find_info():
             xmlUrl = Xml(link[1])
             pages(xmlUrl.sitemap(), link[0], link[2])
         elif pageFormat == '.gz':       # Если *.gz
+            # Выборка количество строк в таблице keywords
+            newKeywords = workMysql.execute(quest_7)[0]
+            # Были ли изменение в таблице keywords
+            dayAll = read_temp_ini(fileTempCountKeyWords, newKeywords[0])
+
             xmlGzUrl = Xml(link[1], dayAll)
             for x in xmlGzUrl.gz():
                 pages(x, link[0], link[2])
@@ -115,19 +120,19 @@ def main_find_info():
         return 0
 
     # Делаем список Ключ: Имена
-    for x in workMysql.execute_select(quest_3):
+    for x in workMysql.execute(quest_3):
         if dictKeywords.get(x[0]):
             dictKeywords[x[0]].append(x[1])
         else:
             dictKeywords[x[0]] = [x[1],]
 
     # Выборка новых ссылоко
-    urlNullLast = workMysql.execute_select(quest_4)
+    urlNullLast = workMysql.execute(quest_4)
 
-    # Выборка количество строк в таблице keywords
-    newKeywords = workMysql.execute_select(quest_7)[0]
-    # Были ли изменение в таблице keywords
-    dayAll = read_temp_ini(fileTempCountKeyWords, newKeywords[0])
+    # # Выборка количество строк в таблице keywords
+    # newKeywords = workMysql.execute(quest_7)[0]
+    # # Были ли изменение в таблице keywords
+    # dayAll = read_temp_ini(fileTempCountKeyWords, newKeywords[0])
 
     # Если результат пустой выполняем проход по старым ссылкам.
     if urlNullLast:
@@ -142,7 +147,7 @@ def main_find_info():
         if toDayTrue:
             logging('Second pass', 'Second passage links *.xml.')
             # Выборка старых ссылоко
-            oldUrlXmllast = workMysql.execute_select(quest_4_0)
+            oldUrlXmllast = workMysql.execute(quest_4_0)
             if oldUrlXmllast:
                 # Перебираем последних 10 старые ссылок
                 for link in oldUrlXmllast:
