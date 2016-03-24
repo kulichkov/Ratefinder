@@ -25,8 +25,9 @@ class Mysql():
     # Подключаемся
     def connect(self):
         try:
-            self.dbconnect = mysql.connector.connect(host=self.ipaddr, port=self.port,
-                    database=self.db,user=self.userName,password=self.password)
+            self.dbconnect = mysql.connector.connect(host=self.ipaddr,
+                            port=self.port, database=self.db,
+                            user=self.userName,password=self.password)
             # Проверяем есть ли конект к базе данных
             if self.dbconnect.is_connected():
                 print('Сonnection OK.')
@@ -39,15 +40,15 @@ class Mysql():
             exit()
 
     # Выборка
-    def execute_select(self, request, *args):
-        self.cursor = self.dbconnect.cursor()
-        self.cursor.execute(request, args)
-        return self.cursor.fetchall()
-
-     # Внесение данных
     def execute(self, request, *args):
-        self.cursor = self.dbconnect.cursor()
-        self.cursor.execute(request, args)
+        try:
+            self.cursor = self.dbconnect.cursor()
+            self.cursor.execute(request, args)
+            return self.cursor.fetchall()
+        except AttributeError:
+            return 0
+        except mysql.connector.errors.InterfaceError:
+            return 0
 
     # Комитим
     def commit(self):

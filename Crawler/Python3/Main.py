@@ -15,20 +15,22 @@ from log import logging, benchmark
 
 
 __version__ = 'v1.0'
-
+__author__ = 'Developer'
 
 # Главная функция
 @benchmark
 def main():
     # Запросы
-    quest_1 = '''SELECT `ID`, `Name` FROM `Sites` WHERE `ID` not in (SELECT DISTINCT(`SiteID`) FROM `Pages`);'''
+    quest_1 = '''SELECT `ID`, `Name` FROM `Sites`''' \
+                '''WHERE `ID` not in (SELECT DISTINCT(`SiteID`) ''' \
+                '''FROM `Pages`);'''
     quest_2 = '''INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s);'''
 
     # Создаем объект для Mysql
     workMysql = Mysql()
     workMysql.connect()
     # Выполняем запрос
-    listSites = workMysql.execute_select(quest_1)
+    listSites = workMysql.execute(quest_1)
 
     # Добовляем новые ссылки на Robots.txt
     for site in listSites:
