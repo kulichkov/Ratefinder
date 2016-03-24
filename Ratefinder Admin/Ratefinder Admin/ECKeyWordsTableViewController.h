@@ -10,6 +10,4 @@
 
 @interface ECKeyWordsTableViewController : UITableViewController
 
-@property (strong, nonatomic) NSMutableArray *keyWords;
-
 @end
