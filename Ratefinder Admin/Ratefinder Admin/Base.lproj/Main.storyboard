@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Cell" textLabel="wdU-KF-2d8" detailTextLabel="61F-26-WuR" style="IBUITableViewCellStyleSubtitle" id="ZWa-UQ-6Kw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="CellSite" textLabel="wdU-KF-2d8" detailTextLabel="61F-26-WuR" style="IBUITableViewCellStyleSubtitle" id="ZWa-UQ-6Kw">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZWa-UQ-6Kw" id="z0r-tv-JoF">
@@ -43,6 +43,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="lew-zr-Min" kind="push" id="anO-w1-fZf"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -52,7 +55,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Доступные сайты" id="LQh-qt-34R">
+                    <navigationItem key="navigationItem" title="Сайты" id="LQh-qt-34R">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="wPH-I3-lON">
                             <connections>
                                 <action selector="addSite:" destination="e3l-IH-1cO" id="QFb-9t-Aat"/>
@@ -66,33 +69,85 @@
             <point key="canvasLocation" x="273" y="909"/>
         </scene>
         <!--Список имен-->
-        <scene sceneID="ydP-LB-AOV">
+        <scene sceneID="dBR-0I-T8K">
             <objects>
-                <tableViewController storyboardIdentifier="personsView" title="Список имен" id="ZU7-t0-p1F" customClass="ECPersonsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LXR-cV-zf0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <tableViewController title="Список имен" id="lew-zr-Min" customClass="ECNamesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Sai-Ry-Xeb">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="QcS-6V-GE0">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="CellName" textLabel="RDJ-ut-z1a" style="IBUITableViewCellStyleDefault" id="HM8-eI-cvg">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QcS-6V-GE0" id="eqB-IZ-gwG">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HM8-eI-cvg" id="U7M-pa-MhB">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RDJ-ut-z1a">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="3xv-BV-qFe" kind="push" id="wAG-br-oKZ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lew-zr-Min" id="MbO-rC-wah"/>
+                            <outlet property="delegate" destination="lew-zr-Min" id="GrY-Re-J2O"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Имена" id="I6H-SS-K2O">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3Fh-Vo-x5y"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o7w-Ml-zie" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1020" y="909"/>
+        </scene>
+        <!--Ключевые слова-->
+        <scene sceneID="wo3-bv-gv7">
+            <objects>
+                <tableViewController title="Ключевые слова" id="3xv-BV-qFe" customClass="ECKeyWordsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="B8h-K5-EdB">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellKeyWord" textLabel="qL0-rn-OK4" style="IBUITableViewCellStyleDefault" id="cWI-t4-g8W">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cWI-t4-g8W" id="QuZ-KO-c1P">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qL0-rn-OK4">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="ZU7-t0-p1F" id="gHB-XT-WSY"/>
-                            <outlet property="delegate" destination="ZU7-t0-p1F" id="vMU-HK-lUu"/>
+                            <outlet property="dataSource" destination="3xv-BV-qFe" id="AWu-8e-8yU"/>
+                            <outlet property="delegate" destination="3xv-BV-qFe" id="ge4-Jd-hCb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="5gp-eZ-eg1"/>
+                    <navigationItem key="navigationItem" title="Ключевые слова" id="2HU-Kx-6nI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="dK5-mw-ANy"/>
+                    </navigationItem>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o9H-4c-jKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpG-6L-n5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1072.5" y="909"/>
+            <point key="canvasLocation" x="1767" y="909"/>
         </scene>
         <!--Добавление сайта-->
         <scene sceneID="0aE-zI-1Sg">

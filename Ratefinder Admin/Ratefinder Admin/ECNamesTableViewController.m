@@ -1,18 +1,18 @@
 //
-//  ECPersonsTableViewController.m
+//  ECNamesTableViewController.m
 //  Ratefinder Admin
 //
-//  Created by Александр on 18.03.16.
+//  Created by Александр on 24.03.16.
 //  Copyright © 2016 Epic-Creators. All rights reserved.
 //
 
-#import "ECPersonsTableViewController.h"
+#import "ECNamesTableViewController.h"
 
-@interface ECPersonsTableViewController ()
+@interface ECNamesTableViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
-@implementation ECPersonsTableViewController
+@implementation ECNamesTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,25 +31,24 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return 1;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    static NSString *CellID = @"CellName";
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellID];
+    }
+    
+    cell.textLabel.text = @"Путин";
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
