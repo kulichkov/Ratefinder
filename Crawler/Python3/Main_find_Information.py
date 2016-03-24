@@ -15,12 +15,16 @@
     ключевых слов для каждой личности, и сохранить результаты в таблице PersonPageRank.
 """
 
+
 from requests_sql import Mysql
 from datetime import datetime
 from parser_files import Xml, Html, Robots
 import os.path
 from log import logging, benchmark
 
+
+__version__ = 'v1.0'
+__author__ = 'Developer'
 
 # Главная функция
 @benchmark
@@ -113,7 +117,7 @@ def main_find_info():
                 # Если не пустой
                 if info:
                     # Если не равно дате из файла
-                    if info != str(tempInfo):
+                    if info < str(tempInfo):
                         rewrite_temp_ini(fileTemp, tempInfo)
                         return 1
         #rewrite_temp_ini(fileTemp, tempInfo)
