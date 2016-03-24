@@ -99,12 +99,10 @@ class Xml(Gz):
             try:
                 # Рубим строку с датой по букве (T)
                 lastmod = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod').text.split('T')[0]
-                #
+                # Вытаскиваем ссылку
                 urlLoc = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text
-                #print(re.search(u'(news)', urlLoc))
                 # Если текущая дата берем ссылку
                 if lastmod >= str(datetime.utcnow().date()) and (re.search(u'(news)', urlLoc)):
-                    # urlLoc = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text
                     print('Новая ссылка ' + urlLoc + ' с датой ' + lastmod)
                     self.listUrl.append(urlLoc)
             except AttributeError:
