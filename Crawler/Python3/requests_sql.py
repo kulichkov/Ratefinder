@@ -25,8 +25,9 @@ class Mysql():
     # Подключаемся
     def connect(self):
         try:
-            self.dbconnect = mysql.connector.connect(host=self.ipaddr, port=self.port,
-                    database=self.db,user=self.userName,password=self.password)
+            self.dbconnect = mysql.connector.connect(host=self.ipaddr,
+                            port=self.port, database=self.db,
+                            user=self.userName,password=self.password)
             # Проверяем есть ли конект к базе данных
             if self.dbconnect.is_connected():
                 print('Сonnection OK.')
