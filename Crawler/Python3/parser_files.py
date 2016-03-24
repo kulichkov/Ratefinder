@@ -120,13 +120,13 @@ class Html():
         self.url = url
         self.keywords = keywords
         self.dictResult = {}
+        self.rawHtml = Downloader.open(self.url)
 
     # Извлекаем словарь KeyWords: Количество упоминаний
     def parser(self):
-        rawHtml = Downloader.open(self.url)
-        if rawHtml:
-            rawHtml = rawHtml[rawHtml.find('<p>') + 3:rawHtml.rfind('</p>')]
-            for word in rawHtml.split():
+        if self.rawHtml:
+            self.rawHtml = self.rawHtml[self.rawHtml.find('<p>') + 3:self.rawHtml.rfind('</p>')]
+            for word in self.rawHtml.split():
                 word = word.strip(punctuation)
                 for keywords in self.keywords.items():
                     if word in keywords[1]:
