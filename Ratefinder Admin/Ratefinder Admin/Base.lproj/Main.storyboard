@@ -44,7 +44,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="lew-zr-Min" kind="push" id="anO-w1-fZf"/>
+                                    <segue destination="lew-zr-Min" kind="show" id="3pv-l1-N47"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -93,7 +93,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="3xv-BV-qFe" kind="push" id="wAG-br-oKZ"/>
+                                    <segue destination="3xv-BV-qFe" kind="show" id="ipC-fX-KQQ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -103,7 +103,7 @@
 }
 
 
-#pragma mark - Protocol Methods
+#pragma mark - ECPassDetailSite
 
 -(void)addSiteName:(NSString *)name url:(NSString *)url {
     

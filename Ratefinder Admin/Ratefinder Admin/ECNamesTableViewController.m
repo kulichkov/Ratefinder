@@ -24,7 +24,7 @@
     self.persons = [NSMutableArray array];
     
     for (int i = 0; i < 5; i++) {
-        [self.persons addObject:[ECFakeRepository getRandomSite]];
+        [self.persons addObject:[ECFakeRepository getRandomPerson]];
     }
     
     [self.tableView reloadData];
