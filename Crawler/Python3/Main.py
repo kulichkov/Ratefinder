@@ -21,7 +21,9 @@ __author__ = 'Developer'
 @benchmark
 def main():
     # Запросы
-    quest_1 = '''SELECT `ID`, `Name` FROM `Sites` WHERE `ID` not in (SELECT DISTINCT(`SiteID`) FROM `Pages`);'''
+    quest_1 = '''SELECT `ID`, `Name` FROM `Sites`''' \
+                '''WHERE `ID` not in (SELECT DISTINCT(`SiteID`) ''' \
+                '''FROM `Pages`);'''
     quest_2 = '''INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s);'''
 
     # Создаем объект для Mysql
