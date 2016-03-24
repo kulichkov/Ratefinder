@@ -39,7 +39,8 @@ class Remove_Files():
     # Удаление файлов после обработки
     def remove_files(self):
         if os.path.isfile(self.pathToFile):
-            print('Удаление файла из ../temp/' + os.path.split(self.pathToFile)[1])
+            print('Удаление файла из ../temp/' + \
+                  os.path.split(self.pathToFile)[1])
             os.remove(self.pathToFile)
 
 
@@ -58,7 +59,8 @@ class Gz(Remove_Files):
         # Создаем объекст
         root = ET.fromstring(file)
         # Перебираем корневые элементы xml
-        for x in root.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}' + element):
+        for x in root.findall('{http://www.sitemaps.org'\
+                '/schemas/sitemap/0.9}' + element):
             try:
                 lastmod = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod').text.split('T')[0]
                 # Если текущая дата берем ссылку
@@ -66,7 +68,6 @@ class Gz(Remove_Files):
                     urlLoc = x.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text
                     print('Новая ссылка ' + urlLoc + ' с датой ' + lastmod)
                     yield (urlLoc,)
-                    #self.listUrl.append(urlLoc)
             except AttributeError:
                 pass
             finally:
@@ -87,7 +88,6 @@ class Xml(Gz):
 
     # Извлекаем ссылки нужной даты
     def sitemap(self):
-        #print(self.pathToFile)
         with open(self.pathToFile) as file:
             file = file.read()
             element = 'sitemap'
