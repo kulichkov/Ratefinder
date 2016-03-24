@@ -7,8 +7,11 @@
 //
 
 #import "ECSitesTableViewController.h"
+#import "ECSite.h"
 
 @interface ECSitesTableViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray *sites;
 
 @end
 
@@ -17,8 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.arraySitesName = [NSMutableArray arrayWithObjects: @"Lenta.ru", @"Взгляд", @"Аргументы и факты", nil];
-    self.arraySitesUrl = [NSMutableArray arrayWithObjects:@"http://www.lenta.ru", @"http://www.vz.ru", @"http://www.aif.ru", nil];
+    self.sites = [NSMutableArray array];
+    
+    for (int i = 0; i < 5; i++) {
+        [self.sites addObject:[ECSite randomSite]];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,7 +43,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.arraySitesName count];
+    return [self.sites count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -48,8 +56,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellID];
     }
     
-    cell.textLabel.text = [self.arraySitesName objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [self.arraySitesUrl objectAtIndex:indexPath.row];
+     ECSite *site = [self.sites objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = site.name;
+    cell.detailTextLabel.text = site.url;
     
     return cell;
 }
@@ -68,8 +78,10 @@
     
     ECDetailTableViewController *detailTableView = [self.storyboard instantiateViewControllerWithIdentifier:@"detailView"];
     
-    detailTableView.nameSite = [self.arraySitesName objectAtIndex:indexPath.row];
-    detailTableView.urlSite = [self.arraySitesUrl objectAtIndex:indexPath.row];
+    ECSite *site = [self.sites objectAtIndex:indexPath.row];
+    
+    detailTableView.nameSite = site.name;
+    detailTableView.urlSite = site.url;
     
     detailTableView.isDetail = YES;
     detailTableView.indexPath = indexPath;
@@ -93,13 +105,21 @@
 #pragma mark - Protocol Methods
 
 -(void)addSiteName:(NSString *)name url:(NSString *)url {
-    [self.arraySitesName addObject:name];
-    [self.arraySitesUrl addObject:url];
+    
+    ECSite *site = [[ECSite alloc] init];
+    site.name = name;
+    site.url = url;
+    
+    [self.sites addObject:site];
 }
 
 -(void)editSiteName:(NSString *)name url:(NSString *)url indexPath:(NSIndexPath *)indexPath {
-    [self.arraySitesName setObject:name atIndexedSubscript:indexPath.row];
-    [self.arraySitesUrl setObject:url atIndexedSubscript:indexPath.row];
+    
+    ECSite *site = [[ECSite alloc] init];
+    site.name = name;
+    site.url = url;
+    
+    [self.sites setObject:site atIndexedSubscript:indexPath.row];
 }
 @end
 

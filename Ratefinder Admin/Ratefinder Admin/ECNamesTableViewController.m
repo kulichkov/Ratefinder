@@ -22,6 +22,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.names = [NSMutableArray arrayWithObjects: @"Путин", @"Навальный", @"Тинькофф", nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +34,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [self.names count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -45,7 +47,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellID];
     }
     
-    cell.textLabel.text = @"Путин";
+    cell.textLabel.text = [self.names objectAtIndex:indexPath.row];
     return cell;
 }
 

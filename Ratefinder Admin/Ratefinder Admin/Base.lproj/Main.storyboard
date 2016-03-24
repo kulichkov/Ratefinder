@@ -142,7 +142,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Ключевые слова" id="2HU-Kx-6nI">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="dK5-mw-ANy"/>
+                        <barButtonItem key="rightBarButtonItem" title="Изменить" id="dK5-mw-ANy"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpG-6L-n5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -262,7 +262,7 @@
                             <outlet property="delegate" destination="5vX-A0-bEy" id="EjK-zX-PXT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Ml1-rh-dbF">
+                    <navigationItem key="navigationItem" title="Сайт" id="Ml1-rh-dbF">
                         <barButtonItem key="leftBarButtonItem" title="Отмена" id="2El-oc-taz">
                             <connections>
                                 <action selector="cancel:" destination="5vX-A0-bEy" id="wau-JN-Tja"/>

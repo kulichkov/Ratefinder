@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		111BEE901CA3DF0000975D8B /* ECNamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE8F1CA3DF0000975D8B /* ECNamesTableViewController.m */; };
 		111BEE931CA3DF2900975D8B /* ECKeyWordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE921CA3DF2900975D8B /* ECKeyWordsTableViewController.m */; };
+		111BEE971CA3F4E800975D8B /* ECSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE961CA3F4E800975D8B /* ECSite.m */; };
+		111BEE9A1CA3F51900975D8B /* ECPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE991CA3F51900975D8B /* ECPerson.m */; };
+		111BEE9D1CA3F59300975D8B /* ECKeywords.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE9C1CA3F59300975D8B /* ECKeywords.m */; };
 		118B09A31C9C0B2D00A26FF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 118B09A21C9C0B2D00A26FF7 /* main.m */; };
 		118B09A61C9C0B2D00A26FF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 118B09A51C9C0B2D00A26FF7 /* AppDelegate.m */; };
 		118B09A91C9C0B2D00A26FF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118B09A81C9C0B2D00A26FF7 /* ViewController.m */; };
@@ -24,6 +27,12 @@
 		111BEE8F1CA3DF0000975D8B /* ECNamesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNamesTableViewController.m; sourceTree = "<group>"; };
 		111BEE911CA3DF2900975D8B /* ECKeyWordsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECKeyWordsTableViewController.h; sourceTree = "<group>"; };
 		111BEE921CA3DF2900975D8B /* ECKeyWordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECKeyWordsTableViewController.m; sourceTree = "<group>"; };
+		111BEE951CA3F4E800975D8B /* ECSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSite.h; sourceTree = "<group>"; };
+		111BEE961CA3F4E800975D8B /* ECSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSite.m; sourceTree = "<group>"; };
+		111BEE981CA3F51900975D8B /* ECPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPerson.h; sourceTree = "<group>"; };
+		111BEE991CA3F51900975D8B /* ECPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPerson.m; sourceTree = "<group>"; };
+		111BEE9B1CA3F59300975D8B /* ECKeywords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECKeywords.h; sourceTree = "<group>"; };
+		111BEE9C1CA3F59300975D8B /* ECKeywords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECKeywords.m; sourceTree = "<group>"; };
 		118B099E1C9C0B2D00A26FF7 /* Ratefinder Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ratefinder Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		118B09A21C9C0B2D00A26FF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		118B09A41C9C0B2D00A26FF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +60,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		111BEE941CA3F4CE00975D8B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				111BEE951CA3F4E800975D8B /* ECSite.h */,
+				111BEE961CA3F4E800975D8B /* ECSite.m */,
+				111BEE981CA3F51900975D8B /* ECPerson.h */,
+				111BEE991CA3F51900975D8B /* ECPerson.m */,
+				111BEE9B1CA3F59300975D8B /* ECKeywords.h */,
+				111BEE9C1CA3F59300975D8B /* ECKeywords.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		118B09951C9C0B2D00A26FF7 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +92,7 @@
 		118B09A01C9C0B2D00A26FF7 /* Ratefinder Admin */ = {
 			isa = PBXGroup;
 			children = (
+				111BEE941CA3F4CE00975D8B /* Models */,
 				118B09A41C9C0B2D00A26FF7 /* AppDelegate.h */,
 				118B09A51C9C0B2D00A26FF7 /* AppDelegate.m */,
 				118B09A71C9C0B2D00A26FF7 /* ViewController.h */,
@@ -170,11 +193,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				111BEE971CA3F4E800975D8B /* ECSite.m in Sources */,
 				118B09A91C9C0B2D00A26FF7 /* ViewController.m in Sources */,
 				111BEE931CA3DF2900975D8B /* ECKeyWordsTableViewController.m in Sources */,
 				118B09A61C9C0B2D00A26FF7 /* AppDelegate.m in Sources */,
 				111BEE901CA3DF0000975D8B /* ECNamesTableViewController.m in Sources */,
 				118B09BA1C9C0ED600A26FF7 /* ECSitesTableViewController.m in Sources */,
+				111BEE9A1CA3F51900975D8B /* ECPerson.m in Sources */,
+				111BEE9D1CA3F59300975D8B /* ECKeywords.m in Sources */,
 				118B09BD1C9C28BB00A26FF7 /* ECDetailTableViewController.m in Sources */,
 				118B09A31C9C0B2D00A26FF7 /* main.m in Sources */,
 			);

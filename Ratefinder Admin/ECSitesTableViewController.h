@@ -11,7 +11,4 @@
 
 @interface ECSitesTableViewController : UITableViewController <ECPassDetailSite>
 
-@property (nonatomic, strong) NSMutableArray *arraySitesName;
-@property (nonatomic, strong) NSMutableArray *arraySitesUrl;
-
 @end

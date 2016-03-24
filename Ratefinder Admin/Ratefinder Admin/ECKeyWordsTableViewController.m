@@ -22,6 +22,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +33,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [self.keyWords count];
 }
 
 
@@ -46,7 +47,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellID];
     }
     
-    cell.textLabel.text = @"Владимир Владимирович";
+    cell.textLabel.text = [self.keyWords objectAtIndex:indexPath.row];
     return cell;
 }
 

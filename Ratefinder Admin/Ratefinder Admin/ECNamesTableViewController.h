@@ -10,4 +10,6 @@
 
 @interface ECNamesTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSMutableArray *names;
+
 @end
