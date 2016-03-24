@@ -7,8 +7,11 @@
 //
 
 #import "ECNamesTableViewController.h"
+#import "ECPerson.h"
 
 @interface ECNamesTableViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray *persons;
 
 @end
 
@@ -17,13 +20,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.persons = [NSMutableArray array];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    for (int i = 0; i < 5; i++) {
+        [self.persons addObject:[ECPerson randomPerson]];
+    }
     
-    self.names = [NSMutableArray arrayWithObjects: @"Путин", @"Навальный", @"Тинькофф", nil];
+    [self.tableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,7 +38,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.names count];
+    return [self.persons count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -47,7 +51,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellID];
     }
     
-    cell.textLabel.text = [self.names objectAtIndex:indexPath.row];
+    ECPerson *person = [self.persons objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = person.name;
     return cell;
 }
 
