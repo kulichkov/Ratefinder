@@ -15,7 +15,7 @@ from log import logging, benchmark
 
 
 __version__ = 'v1.0'
-
+__author__ = 'Developer'
 
 # Главная функция
 @benchmark
