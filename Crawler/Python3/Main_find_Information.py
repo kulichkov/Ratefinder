@@ -6,13 +6,15 @@
     2. Обход ссылок, которых по которым раньше не производился обход
     Найти в таблице Pages ссылку, у которой LastScanDate равен null.
     Скачать HTML по данной ссылке
-    В зависимости от того, что это была за ссылка, выполняем следующие действия:
+    В зависимости от того, что это была за ссылка,
+    выполняем следующие действия:
     i. Если ссылка ведет на robots.txt, находим в HTML-е ссылку на
     sitemap, и добавляем ее в таблицу Pages
     ii. Если ссылка ведет на sitemap, находим в HTML-е все ссылки с сайта,
     добавляем их в Pages.
     iii. Если ссылка ведет на страницу сайта, найти количество вхождений
-    ключевых слов для каждой личности, и сохранить результаты в таблице PersonPageRank.
+    ключевых слов для каждой личности, и сохранить результаты
+    в таблице PersonPageRank.
 """
 
 
@@ -29,23 +31,31 @@ __author__ = 'Developer'
 # Главная функция
 @benchmark
 def main_find_info():
+    # Нужна для проверки изменение в таблице keywords, только один раз.
+    oneStart = True
+    #
+    dayAll = 0
     # Словарь для хранения ключевых слов
     dictKeywords = {}
     # Пути до временных файлов
     fileTempToDay = os.path.split(__file__)[0] + '/temp.ini'
-    fileTempCountKeyWords = os.path.split(__file__)[0] + '/temp_countKeywords.ini'
+    fileTempCountKeyWords = os.path.split(__file__)[0] + \
+                            '/temp_countKeywords.ini'
     # Текущая дата в формате ХХХХ-ХХ-ХХ
     toDay = str(datetime.today().date())
 
     # Запросы
     quest_3 = 'SELECT `PersonID`, `Name` FROM `Keywords`;'
-    quest_4 = 'SELECT `SiteID`, `Url`, `ID` FROM `Pages` WHERE `LastScanDate` is Null;'
+    quest_4 = 'SELECT `SiteID`, `Url`, `ID` FROM `Pages`' \
+                'WHERE `LastScanDate` is Null;'
     quest_4_0 = 'SELECT `SiteID`, `Url`, `ID` FROM `Pages` ' \
-                'WHERE ((`Url` LIKE "%/%.xml") OR (`Url` LIKE "%/%.xml.gz")) ' \
+                'WHERE ((`Url` LIKE "%/%.xml") ' \
+                'OR (`Url` LIKE "%/%.xml.gz")) ' \
                 'ORDER BY `LastScanDate` LIMIT 10;'
     quest_5 = 'INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s)'
     quest_5_0 = 'UPDATE `Pages` SET `LastScanDate` = %s WHERE `ID` = %s;'
-    quest_6 = 'INSERT INTO `PersonPageRank` (`PersonID`,`PageID`, `Rank`) VALUES(%s, %s, %s)'
+    quest_6 = 'INSERT INTO `PersonPageRank` (`PersonID`,`PageID`, `Rank`)' \
+                'VALUES(%s, %s, %s)'
     quest_7 = 'SELECT COUNT(`ID`) FROM `Keywords`;'
 
     # Создаем для работы с Mysql
@@ -70,6 +80,9 @@ def main_find_info():
 
     # Распределение ссылок по парсерам
     def route_parser(link):
+        #global oneStart
+        nonlocal dayAll
+        nonlocal oneStart
         print(link)
         #  Узнаем имя файла
         namePage = link[1][link[1].rfind('/'):]
@@ -81,10 +94,13 @@ def main_find_info():
             xmlUrl = Xml(link[1])
             pages(xmlUrl.sitemap(), link[0], link[2])
         elif pageFormat == '.gz':       # Если *.gz
-            # Выборка количество строк в таблице keywords
-            newKeywords = workMysql.execute(quest_7)[0]
-            # Были ли изменение в таблице keywords
-            dayAll = read_temp_ini(fileTempCountKeyWords, newKeywords[0])
+            # Выполняем один раз
+            if oneStart:
+                oneStart = False
+                # Выборка количество строк в таблице keywords
+                newKeywords = workMysql.execute(quest_7)[0]
+                # Были ли изменение в таблице keywords
+                dayAll = read_temp_ini(fileTempCountKeyWords, newKeywords[0])
 
             xmlGzUrl = Xml(link[1], dayAll)
             for x in xmlGzUrl.gz():
@@ -120,7 +136,12 @@ def main_find_info():
                     if info < str(tempInfo):
                         rewrite_temp_ini(fileTemp, tempInfo)
                         return 1
-        #rewrite_temp_ini(fileTemp, tempInfo)
+                else:
+                    rewrite_temp_ini(fileTemp, tempInfo)
+                    return 1
+        else:
+            rewrite_temp_ini(fileTemp, tempInfo)
+            return 1
         return 0
 
     # Делаем список Ключ: Имена
@@ -132,11 +153,6 @@ def main_find_info():
 
     # Выборка новых ссылоко
     urlNullLast = workMysql.execute(quest_4)
-
-    # # Выборка количество строк в таблице keywords
-    # newKeywords = workMysql.execute(quest_7)[0]
-    # # Были ли изменение в таблице keywords
-    # dayAll = read_temp_ini(fileTempCountKeyWords, newKeywords[0])
 
     # Если результат пустой выполняем проход по старым ссылкам.
     if urlNullLast:
