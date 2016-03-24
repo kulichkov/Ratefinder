@@ -10,26 +10,4 @@
 
 @implementation ECSite
 
-static NSString* names[] = {
-    @"Lenta.ru", @"Взгляд", @"Аргументы и факты"
-};
-
-static NSString* url[] = {
-    @"http://www.lenta.ru", @"http://www.vz.ru", @"http://www.aif.ru"
-};
-
-static int siteCount = 3;
-static int ids = 100;
-
-+(instancetype)randomSite {
-    
-    ECSite *site = [[ECSite alloc] init];
-    
-    site.siteID = arc4random() % ids;
-    site.name = names[arc4random() % siteCount];
-    site.url = url[arc4random() % siteCount];
-    
-    return site;    
-}
-
 @end

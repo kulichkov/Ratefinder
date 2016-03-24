@@ -8,6 +8,7 @@
 
 #import "ECSitesTableViewController.h"
 #import "ECSite.h"
+#import "ECFakeRepository.h"
 
 @interface ECSitesTableViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -23,7 +24,7 @@
     self.sites = [NSMutableArray array];
     
     for (int i = 0; i < 5; i++) {
-        [self.sites addObject:[ECSite randomSite]];
+        [self.sites addObject:[ECFakeRepository getRandomSite]];
     }
     
     [self.tableView reloadData];

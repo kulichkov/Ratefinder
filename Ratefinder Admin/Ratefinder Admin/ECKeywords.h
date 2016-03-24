@@ -13,6 +13,4 @@
 @property (assign, nonatomic) NSInteger keywordsID;
 @property (strong, nonatomic) NSString *name;
 
-+(instancetype)randomKeyword;
-
 @end

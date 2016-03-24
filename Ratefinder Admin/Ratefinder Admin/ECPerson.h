@@ -13,6 +13,4 @@
 @property (assign, nonatomic) NSInteger personID;
 @property (strong, nonatomic) NSString *name;
 
-+(instancetype)randomPerson;
-
 @end

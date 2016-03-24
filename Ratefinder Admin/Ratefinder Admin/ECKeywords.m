@@ -10,21 +10,4 @@
 
 @implementation ECKeywords
 
-static NSString* keywords[] = {
-    @"Владимир Владимирович", @"Путину", @"Путина"
-};
-
-static int keywordsCount = 3;
-static int ids = 100;
-
-+(instancetype)randomKeyword {
-    
-    ECKeywords *keyword = [[ECKeywords alloc] init];
-    
-    keyword.keywordsID = arc4random() % ids;
-    keyword.name = keywords[arc4random() % keywordsCount];
-    
-    return keyword;
-}
-
 @end

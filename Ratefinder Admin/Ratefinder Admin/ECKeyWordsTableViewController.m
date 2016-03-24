@@ -8,6 +8,7 @@
 
 #import "ECKeyWordsTableViewController.h"
 #import "ECKeywords.h"
+#import "ECFakeRepository.h"
 
 @interface ECKeyWordsTableViewController ()
 
@@ -23,7 +24,7 @@
     self.keywords = [NSMutableArray array];
     
     for (int i = 0; i < 5; i++) {
-        [self.keywords addObject:[ECKeywords randomKeyword]];
+        [self.keywords addObject:[ECFakeRepository getRandomKeyword]];
     }
     
     [self.tableView reloadData];
