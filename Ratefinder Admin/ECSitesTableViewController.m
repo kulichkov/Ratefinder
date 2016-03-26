@@ -41,7 +41,27 @@
     
 }
 
-#pragma mark - Table view data source
+#pragma mark - Actions
+
+- (IBAction)actionEdit:(id)sender {
+    
+    BOOL isEditing = self.tableView.editing;
+    
+    [self.tableView setEditing:!isEditing animated:YES];
+    
+    UIBarButtonSystemItem item = UIBarButtonSystemItemEdit;
+    
+    if (self.tableView.editing) {
+        item = UIBarButtonSystemItemDone;
+    }
+    
+    UIBarButtonItem *itemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:item target:self action:@selector(actionEdit:)];
+    
+    [self.navigationItem setLeftBarButtonItem:itemButton animated:YES];
+}
+
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.sites count];
@@ -92,6 +112,20 @@
     [self.navigationController pushViewController:detailTableView animated:YES];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        ECSite *site = [self.sites objectAtIndex:indexPath.row];
+        
+        [self.sites removeObject:site];
+        
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+        
+    }
+}
 
 #pragma mark - ECPassDetailSite
 
