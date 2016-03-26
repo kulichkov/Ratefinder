@@ -155,11 +155,6 @@
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
             }
         });
-    } else {
-        
-        ECKeywordsTableViewController *keywordTableViewController = [[ECKeywordsTableViewController alloc] init];
-        
-//        [self.navigationController pushViewController:keywordTableViewController animated:YES];
     }
 }
 
