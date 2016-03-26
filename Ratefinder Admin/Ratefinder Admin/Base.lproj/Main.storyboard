@@ -77,7 +77,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="CellName" textLabel="RDJ-ut-z1a" style="IBUITableViewCellStyleDefault" id="HM8-eI-cvg">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newPersonCell" textLabel="RDJ-ut-z1a" style="IBUITableViewCellStyleDefault" id="HM8-eI-cvg">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HM8-eI-cvg" id="U7M-pa-MhB">
@@ -96,8 +96,28 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="personCell" textLabel="fL6-Cn-U99" style="IBUITableViewCellStyleDefault" id="epa-So-am5">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="epa-So-am5" id="4cw-65-Ngf">
+                                    <rect key="frame" x="0.0" y="0.0" width="533" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fL6-Cn-U99">
+                                            <rect key="frame" x="15" y="0.0" width="518" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="3xv-BV-qFe" kind="show" id="ipC-fX-KQQ"/>
+                                    <segue destination="3xv-BV-qFe" kind="show" id="RtZ-3r-9wV"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -107,7 +127,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Имена" id="I6H-SS-K2O">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3Fh-Vo-x5y"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="3Fh-Vo-x5y">
+                            <connections>
+                                <action selector="actionEdit:" destination="lew-zr-Min" id="rHq-9R-RqW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o7w-Ml-zie" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -176,6 +200,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpG-6L-n5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
