@@ -44,13 +44,15 @@
     
     [self.tableView setEditing:!isEditing animated:YES];
     
-    UIBarButtonSystemItem item = UIBarButtonSystemItemEdit;
+    UIBarButtonItem *itemButton = nil;
+    
+    UIBarButtonItemStyle item = UIBarButtonItemStylePlain;
     
     if (self.tableView.editing) {
-        item = UIBarButtonSystemItemDone;
+        itemButton = [[UIBarButtonItem alloc] initWithTitle:@"Готово" style:item target:self action:@selector(actionEdit:)];
+    } else {
+        itemButton = [[UIBarButtonItem alloc] initWithTitle:@"Изменить" style:item target:self action:@selector(actionEdit:)];
     }
-    
-    UIBarButtonItem *itemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:item target:self action:@selector(actionEdit:)];
     
     [self.navigationItem setRightBarButtonItem:itemButton animated:YES];
 }

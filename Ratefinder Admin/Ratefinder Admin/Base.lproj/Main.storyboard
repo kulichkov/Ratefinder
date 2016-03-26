@@ -56,7 +56,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Сайты" id="LQh-qt-34R">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="xZ5-NN-Rqt">
+                        <barButtonItem key="leftBarButtonItem" title="Изменить" id="xZ5-NN-Rqt">
                             <connections>
                                 <action selector="actionEdit:" destination="e3l-IH-1cO" id="KDq-aH-4n8"/>
                             </connections>
@@ -132,7 +132,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Имена" id="I6H-SS-K2O">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="3Fh-Vo-x5y">
+                        <barButtonItem key="rightBarButtonItem" title="Изменить" style="plain" id="3Fh-Vo-x5y">
                             <connections>
                                 <action selector="actionEdit:" destination="lew-zr-Min" id="rHq-9R-RqW"/>
                             </connections>
@@ -199,7 +199,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Ключевые слова" id="2HU-Kx-6nI">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="dK5-mw-ANy">
+                        <barButtonItem key="rightBarButtonItem" title="Изменить" style="plain" id="dK5-mw-ANy">
                             <connections>
                                 <action selector="actionEdit:" destination="3xv-BV-qFe" id="z6K-Bo-8Ru"/>
                             </connections>
