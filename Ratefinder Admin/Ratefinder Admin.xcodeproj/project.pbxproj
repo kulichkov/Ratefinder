@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		111BEE901CA3DF0000975D8B /* ECNamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE8F1CA3DF0000975D8B /* ECNamesTableViewController.m */; };
-		111BEE931CA3DF2900975D8B /* ECKeyWordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE921CA3DF2900975D8B /* ECKeyWordsTableViewController.m */; };
+		111BEE901CA3DF0000975D8B /* ECPersonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE8F1CA3DF0000975D8B /* ECPersonsTableViewController.m */; };
+		111BEE931CA3DF2900975D8B /* ECKeywordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE921CA3DF2900975D8B /* ECKeywordsTableViewController.m */; };
 		111BEE971CA3F4E800975D8B /* ECSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE961CA3F4E800975D8B /* ECSite.m */; };
 		111BEE9A1CA3F51900975D8B /* ECPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE991CA3F51900975D8B /* ECPerson.m */; };
 		111BEE9D1CA3F59300975D8B /* ECKeywords.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEE9C1CA3F59300975D8B /* ECKeywords.m */; };
@@ -24,10 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		111BEE8E1CA3DF0000975D8B /* ECNamesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNamesTableViewController.h; sourceTree = "<group>"; };
-		111BEE8F1CA3DF0000975D8B /* ECNamesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNamesTableViewController.m; sourceTree = "<group>"; };
-		111BEE911CA3DF2900975D8B /* ECKeyWordsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECKeyWordsTableViewController.h; sourceTree = "<group>"; };
-		111BEE921CA3DF2900975D8B /* ECKeyWordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECKeyWordsTableViewController.m; sourceTree = "<group>"; };
+		111BEE8E1CA3DF0000975D8B /* ECPersonsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPersonsTableViewController.h; sourceTree = "<group>"; };
+		111BEE8F1CA3DF0000975D8B /* ECPersonsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPersonsTableViewController.m; sourceTree = "<group>"; };
+		111BEE911CA3DF2900975D8B /* ECKeywordsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECKeywordsTableViewController.h; sourceTree = "<group>"; };
+		111BEE921CA3DF2900975D8B /* ECKeywordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECKeywordsTableViewController.m; sourceTree = "<group>"; };
 		111BEE951CA3F4E800975D8B /* ECSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSite.h; sourceTree = "<group>"; };
 		111BEE961CA3F4E800975D8B /* ECSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSite.m; sourceTree = "<group>"; };
 		111BEE981CA3F51900975D8B /* ECPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPerson.h; sourceTree = "<group>"; };
@@ -109,10 +109,10 @@
 				118B09A11C9C0B2D00A26FF7 /* Supporting Files */,
 				118B09BB1C9C28BB00A26FF7 /* ECDetailTableViewController.h */,
 				118B09BC1C9C28BB00A26FF7 /* ECDetailTableViewController.m */,
-				111BEE8E1CA3DF0000975D8B /* ECNamesTableViewController.h */,
-				111BEE8F1CA3DF0000975D8B /* ECNamesTableViewController.m */,
-				111BEE911CA3DF2900975D8B /* ECKeyWordsTableViewController.h */,
-				111BEE921CA3DF2900975D8B /* ECKeyWordsTableViewController.m */,
+				111BEE8E1CA3DF0000975D8B /* ECPersonsTableViewController.h */,
+				111BEE8F1CA3DF0000975D8B /* ECPersonsTableViewController.m */,
+				111BEE911CA3DF2900975D8B /* ECKeywordsTableViewController.h */,
+				111BEE921CA3DF2900975D8B /* ECKeywordsTableViewController.m */,
 				118B09B81C9C0ED600A26FF7 /* ECSitesTableViewController.h */,
 				118B09B91C9C0ED600A26FF7 /* ECSitesTableViewController.m */,
 			);
@@ -200,9 +200,9 @@
 			files = (
 				111BEE971CA3F4E800975D8B /* ECSite.m in Sources */,
 				118B09A91C9C0B2D00A26FF7 /* ViewController.m in Sources */,
-				111BEE931CA3DF2900975D8B /* ECKeyWordsTableViewController.m in Sources */,
+				111BEE931CA3DF2900975D8B /* ECKeywordsTableViewController.m in Sources */,
 				118B09A61C9C0B2D00A26FF7 /* AppDelegate.m in Sources */,
-				111BEE901CA3DF0000975D8B /* ECNamesTableViewController.m in Sources */,
+				111BEE901CA3DF0000975D8B /* ECPersonsTableViewController.m in Sources */,
 				118B09BA1C9C0ED600A26FF7 /* ECSitesTableViewController.m in Sources */,
 				111BEE9A1CA3F51900975D8B /* ECPerson.m in Sources */,
 				111BEEA01CA410CB00975D8B /* ECFakeRepository.m in Sources */,

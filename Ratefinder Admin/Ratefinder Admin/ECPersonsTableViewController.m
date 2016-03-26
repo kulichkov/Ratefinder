@@ -1,30 +1,30 @@
 //
-//  ECKeyWordsTableViewController.m
+//  ECNamesTableViewController.m
 //  Ratefinder Admin
 //
 //  Created by Александр on 24.03.16.
 //  Copyright © 2016 Epic-Creators. All rights reserved.
 //
 
-#import "ECKeyWordsTableViewController.h"
-#import "ECKeywords.h"
+#import "ECPersonsTableViewController.h"
+#import "ECPerson.h"
 #import "ECFakeRepository.h"
 
-@interface ECKeyWordsTableViewController ()
+@interface ECPersonsTableViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSMutableArray *keywords;
+@property (strong, nonatomic) NSMutableArray *persons;
 
 @end
 
-@implementation ECKeyWordsTableViewController
+@implementation ECPersonsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.keywords = [NSMutableArray array];
+    self.persons = [NSMutableArray array];
     
     for (int i = 0; i < 5; i++) {
-        [self.keywords addObject:[ECFakeRepository getRandomKeyword]];
+        [self.persons addObject:[ECFakeRepository getRandomPerson]];
     }
     
     [self.tableView reloadData];
@@ -39,13 +39,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.keywords count];
+    return [self.persons count];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellID = @"CellKeyWord";
+    static NSString *CellID = @"CellName";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
     
@@ -53,9 +52,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellID];
     }
     
-    ECKeywords *keywords = [self.keywords objectAtIndex:indexPath.row];
+    ECPerson *person = [self.persons objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = keywords.name;
+    cell.textLabel.text = person.name;
     return cell;
 }
 

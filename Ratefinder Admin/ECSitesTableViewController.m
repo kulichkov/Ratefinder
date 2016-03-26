@@ -49,7 +49,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellID = @"CellSite";
+    static NSString *CellID = @"siteCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
     
@@ -64,16 +64,6 @@
     
     return cell;
 }
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    
-//    ECPersonsTableViewController *personsTableView = [self.storyboard instantiateViewControllerWithIdentifier:@"personsView"];
-//    
-//    [self.navigationController pushViewController:personsTableView animated:YES];
-//    
-//}
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     

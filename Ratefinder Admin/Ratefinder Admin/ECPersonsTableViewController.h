@@ -1,5 +1,5 @@
 //
-//  ECKeyWordsTableViewController.h
+//  ECNamesTableViewController.h
 //  Ratefinder Admin
 //
 //  Created by Александр on 24.03.16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECKeyWordsTableViewController : UITableViewController
+@interface ECPersonsTableViewController : UITableViewController
 
 @end
