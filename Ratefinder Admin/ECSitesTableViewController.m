@@ -127,6 +127,12 @@
     }
 }
 
+#pragma mark - UITableViewDelegate
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"Удалить";
+}
+
 #pragma mark - ECPassDetailSite
 
 -(void)addSiteName:(NSString *)name url:(NSString *)url {
