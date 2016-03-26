@@ -11,20 +11,26 @@
 """
 
 from requests_sql import Mysql
+from log import logging, benchmark
 
 
 __version__ = 'v1.0'
-
+__author__ = 'Developer'
 
 # Главная функция
+@benchmark
 def main():
-    quest_1 = '''SELECT `ID`, `Name` FROM `Sites` WHERE `ID` not in (SELECT DISTINCT(`SiteID`) FROM `Pages`);'''
+    # Запросы
+    quest_1 = '''SELECT `ID`, `Name` FROM `Sites`''' \
+                '''WHERE `ID` not in (SELECT DISTINCT(`SiteID`) ''' \
+                '''FROM `Pages`);'''
     quest_2 = '''INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s);'''
 
-    #
+    # Создаем объект для Mysql
     workMysql = Mysql()
     workMysql.connect()
-    listSites = workMysql.execute_select(quest_1)
+    # Выполняем запрос
+    listSites = workMysql.execute(quest_1)
 
     # Добовляем новые ссылки на Robots.txt
     for site in listSites:
@@ -35,6 +41,9 @@ def main():
     # Комитим
     workMysql.commit()
 
-#
+    #
+    workMysql.connect_close()
+
+# Проверка
 if __name__ == '__main__':
     main()
