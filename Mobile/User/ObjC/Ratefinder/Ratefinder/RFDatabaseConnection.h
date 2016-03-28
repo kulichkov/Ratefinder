@@ -9,5 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface RFDatabaseConnection : NSObject
-
+-(NSArray *) getSites;
+-(NSArray *) getPersons;
+-(NSArray *) getPersonsWithRatesOnSite: (int) siteID;
+-(NSArray *) getRatesOfPerson: (int) personID
+                       onSite: (int) siteID
+                         from: (NSDate *) startDate
+                           to: (NSDate *) finishDate;
 @end
