@@ -27,6 +27,7 @@
 		69DA29751CA97035008751C2 /* Sites.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29741CA97035008751C2 /* Sites.json */; };
 		69DA29771CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */; };
 		69DA29791CA97481008751C2 /* ratesOfCurrentPersonWithDatesOnCurrentSite.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29781CA97481008751C2 /* ratesOfCurrentPersonWithDatesOnCurrentSite.json */; };
+		69DA297C1CA976A1008751C2 /* RFDatabaseConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 69DA297B1CA976A1008751C2 /* RFDatabaseConnection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		69DA29741CA97035008751C2 /* Sites.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sites.json; sourceTree = "<group>"; };
 		69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PersonsWithRatesOnCurrentSite.json; sourceTree = "<group>"; };
 		69DA29781CA97481008751C2 /* ratesOfCurrentPersonWithDatesOnCurrentSite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ratesOfCurrentPersonWithDatesOnCurrentSite.json; sourceTree = "<group>"; };
+		69DA297A1CA976A1008751C2 /* RFDatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFDatabaseConnection.h; sourceTree = "<group>"; };
+		69DA297B1CA976A1008751C2 /* RFDatabaseConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFDatabaseConnection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +204,7 @@
 				691072B51CA12C3C008070B5 /* RFSite */,
 				691072AE1CA05A29008070B5 /* RFPerson */,
 				6976B5FF1CA3D8CE00EA5BC7 /* RFRepository */,
+				69DA297D1CA976A6008751C2 /* RFDatabaseConnection */,
 				69DA29721CA96E60008751C2 /* Persons.json */,
 				69DA29741CA97035008751C2 /* Sites.json */,
 				69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */,
@@ -272,6 +276,16 @@
 				697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */,
 			);
 			name = RFPersonWithRate;
+			sourceTree = "<group>";
+		};
+		69DA297D1CA976A6008751C2 /* RFDatabaseConnection */ = {
+			isa = PBXGroup;
+			children = (
+				69DA297A1CA976A1008751C2 /* RFDatabaseConnection.h */,
+				69DA297B1CA976A1008751C2 /* RFDatabaseConnection.m */,
+			);
+			name = RFDatabaseConnection;
+			path = Ratefinder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,6 +427,7 @@
 			files = (
 				691072B11CA12B63008070B5 /* RFPerson.m in Sources */,
 				691072A01C9C851C008070B5 /* RFSitesViewController.m in Sources */,
+				69DA297C1CA976A1008751C2 /* RFDatabaseConnection.m in Sources */,
 				691072A41C9C8D9A008070B5 /* RFPersonsViewController.m in Sources */,
 				6976B5F51CA2D90100EA5BC7 /* RFDateViewController.m in Sources */,
 				691072AC1CA05602008070B5 /* RFRepository.m in Sources */,
