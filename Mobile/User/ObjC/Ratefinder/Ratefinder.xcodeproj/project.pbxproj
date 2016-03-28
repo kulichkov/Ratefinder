@@ -26,6 +26,7 @@
 		69DA29731CA96E60008751C2 /* Persons.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29721CA96E60008751C2 /* Persons.json */; };
 		69DA29751CA97035008751C2 /* Sites.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29741CA97035008751C2 /* Sites.json */; };
 		69DA29771CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */; };
+		69DA29791CA97481008751C2 /* ratesOfCurrentPersonWithDatesOnCurrentSite.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29781CA97481008751C2 /* ratesOfCurrentPersonWithDatesOnCurrentSite.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		69DA29721CA96E60008751C2 /* Persons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Persons.json; sourceTree = "<group>"; };
 		69DA29741CA97035008751C2 /* Sites.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sites.json; sourceTree = "<group>"; };
 		69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PersonsWithRatesOnCurrentSite.json; sourceTree = "<group>"; };
+		69DA29781CA97481008751C2 /* ratesOfCurrentPersonWithDatesOnCurrentSite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ratesOfCurrentPersonWithDatesOnCurrentSite.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 				69DA29721CA96E60008751C2 /* Persons.json */,
 				69DA29741CA97035008751C2 /* Sites.json */,
 				69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */,
+				69DA29781CA97481008751C2 /* ratesOfCurrentPersonWithDatesOnCurrentSite.json */,
 			);
 			name = RFRepository;
 			path = ..;
@@ -381,6 +384,7 @@
 				69DA29751CA97035008751C2 /* Sites.json in Resources */,
 				691072781C9C8032008070B5 /* Assets.xcassets in Resources */,
 				69DA29731CA96E60008751C2 /* Persons.json in Resources */,
+				69DA29791CA97481008751C2 /* ratesOfCurrentPersonWithDatesOnCurrentSite.json in Resources */,
 				69DA29771CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json in Resources */,
 				691072761C9C8032008070B5 /* Main.storyboard in Resources */,
 			);
