@@ -25,6 +25,7 @@
 		697F4D5F1CA163DB000189D9 /* RFPersonWithRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */; };
 		69DA29731CA96E60008751C2 /* Persons.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29721CA96E60008751C2 /* Persons.json */; };
 		69DA29751CA97035008751C2 /* Sites.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29741CA97035008751C2 /* Sites.json */; };
+		69DA29771CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFPersonWithRate.m; sourceTree = "<group>"; };
 		69DA29721CA96E60008751C2 /* Persons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Persons.json; sourceTree = "<group>"; };
 		69DA29741CA97035008751C2 /* Sites.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sites.json; sourceTree = "<group>"; };
+		69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PersonsWithRatesOnCurrentSite.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				6976B5FF1CA3D8CE00EA5BC7 /* RFRepository */,
 				69DA29721CA96E60008751C2 /* Persons.json */,
 				69DA29741CA97035008751C2 /* Sites.json */,
+				69DA29761CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json */,
 			);
 			name = RFRepository;
 			path = ..;
@@ -378,6 +381,7 @@
 				69DA29751CA97035008751C2 /* Sites.json in Resources */,
 				691072781C9C8032008070B5 /* Assets.xcassets in Resources */,
 				69DA29731CA96E60008751C2 /* Persons.json in Resources */,
+				69DA29771CA972EE008751C2 /* PersonsWithRatesOnCurrentSite.json in Resources */,
 				691072761C9C8032008070B5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
