@@ -23,8 +23,8 @@
 		6976B5F91CA3185A00EA5BC7 /* RFRateWithDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976B5F81CA3185A00EA5BC7 /* RFRateWithDate.m */; };
 		6976B5FD1CA31B2A00EA5BC7 /* RFRatesWithDatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976B5FC1CA31B2A00EA5BC7 /* RFRatesWithDatesViewController.m */; };
 		697F4D5F1CA163DB000189D9 /* RFPersonWithRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */; };
-		69DA29731CA96E60008751C2 /* AllPersons.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29721CA96E60008751C2 /* AllPersons.json */; };
-		69DA29751CA97035008751C2 /* AllSites.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29741CA97035008751C2 /* AllSites.json */; };
+		69DA29731CA96E60008751C2 /* Persons.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29721CA96E60008751C2 /* Persons.json */; };
+		69DA29751CA97035008751C2 /* Sites.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29741CA97035008751C2 /* Sites.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +77,8 @@
 		6976B5FC1CA31B2A00EA5BC7 /* RFRatesWithDatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFRatesWithDatesViewController.m; sourceTree = "<group>"; };
 		697F4D5D1CA163DB000189D9 /* RFPersonWithRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFPersonWithRate.h; sourceTree = "<group>"; };
 		697F4D5E1CA163DB000189D9 /* RFPersonWithRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFPersonWithRate.m; sourceTree = "<group>"; };
-		69DA29721CA96E60008751C2 /* AllPersons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllPersons.json; sourceTree = "<group>"; };
-		69DA29741CA97035008751C2 /* AllSites.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllSites.json; sourceTree = "<group>"; };
+		69DA29721CA96E60008751C2 /* Persons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Persons.json; sourceTree = "<group>"; };
+		69DA29741CA97035008751C2 /* Sites.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sites.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,8 +197,8 @@
 				691072B51CA12C3C008070B5 /* RFSite */,
 				691072AE1CA05A29008070B5 /* RFPerson */,
 				6976B5FF1CA3D8CE00EA5BC7 /* RFRepository */,
-				69DA29721CA96E60008751C2 /* AllPersons.json */,
-				69DA29741CA97035008751C2 /* AllSites.json */,
+				69DA29721CA96E60008751C2 /* Persons.json */,
+				69DA29741CA97035008751C2 /* Sites.json */,
 			);
 			name = RFRepository;
 			path = ..;
@@ -375,9 +375,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6910727B1C9C8032008070B5 /* LaunchScreen.storyboard in Resources */,
-				69DA29751CA97035008751C2 /* AllSites.json in Resources */,
+				69DA29751CA97035008751C2 /* Sites.json in Resources */,
 				691072781C9C8032008070B5 /* Assets.xcassets in Resources */,
-				69DA29731CA96E60008751C2 /* AllPersons.json in Resources */,
+				69DA29731CA96E60008751C2 /* Persons.json in Resources */,
 				691072761C9C8032008070B5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
