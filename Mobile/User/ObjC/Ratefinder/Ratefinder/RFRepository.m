@@ -7,10 +7,12 @@
 //
 
 #import "RFRepository.h"
+#import "RFDatabaseConnection.h"
 
 static RFRepository *singleRepository = nil;
 
 @interface RFRepository()
+
 @property NSArray *persons;
 @property NSArray *sites;
 @property NSArray *personsWithRatesOnCurrentSite;
@@ -55,23 +57,18 @@ static RFRepository *singleRepository = nil;
     
     if (!singleRepository) {
         singleRepository = [[RFRepository alloc] init];
-        RFPerson *person1 = [[RFPerson alloc] init];
-        person1.identificator = 1;
-        person1.name = @"Путин Владимир Владимирович";
         
-        RFPerson *person2 = [[RFPerson alloc] init];
-        person2.identificator = 2;
-        person2.name = @"Медведев Дмитрий Анатольевич";
+        NSArray *personDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
+        NSMutableArray *personsMutable = [NSMutableArray array];
+        for (NSDictionary *person in personDictionaries) {
+            RFPerson *newPerson = [[RFPerson alloc] init];
+            newPerson.name = [NSString stringWithFormat:@"%@", person[@"name"]];
+            NSNumber *numberIdentificator = [person objectForKey:@"id"];
+            newPerson.identificator = [numberIdentificator integerValue];
+            [personsMutable addObject:newPerson];
+        }
+        singleRepository.persons = personsMutable;
         
-        RFPerson *person3 = [[RFPerson alloc] init];
-        person3.identificator = 3;
-        person3.name = @"Навальный Алексей Анатольевич";
-        
-        RFPerson *person4 = [[RFPerson alloc] init];
-        person4.identificator = 4;
-        person4.name = @"Жириновский Владимир Вольфович";
-        
-        singleRepository.persons = [NSArray arrayWithObjects: person1, person2, person3, person4, nil];
         
         RFSite *site1 = [[RFSite alloc] init];
         site1.identificator = 1;

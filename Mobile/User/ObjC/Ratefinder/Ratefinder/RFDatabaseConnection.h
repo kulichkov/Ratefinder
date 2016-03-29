@@ -16,4 +16,5 @@
                        onSite: (int) siteID
                          from: (NSDate *) startDate
                            to: (NSDate *) finishDate;
++(RFDatabaseConnection *) defaultDatabaseConnection;
 @end
