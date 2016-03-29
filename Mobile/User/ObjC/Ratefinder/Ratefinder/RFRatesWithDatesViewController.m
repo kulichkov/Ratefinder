@@ -36,8 +36,9 @@
     }
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    //dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     
     cell.detailTextLabel.text = [dateFormatter stringFromDate: [[repository.ratesOfCurrentPersonWithDatesOnCurrentSite objectAtIndex:indexPath.row] date]];
     

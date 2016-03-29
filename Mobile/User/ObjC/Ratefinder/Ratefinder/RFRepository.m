@@ -25,31 +25,51 @@ static RFRepository *singleRepository = nil;
 {
     NSMutableArray *ratesOnCurrentSite = [NSMutableArray array];
     
-    for (RFPerson *person in self.persons) {
-        RFPersonWithRate *personWithRate = [[RFPersonWithRate alloc] init];
-        personWithRate.person = person;
-        personWithRate.rate = arc4random_uniform(100500);
-        [ratesOnCurrentSite addObject:personWithRate];
-    }
+    NSArray *ratesOnCurrentSiteDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getPersonsWithRatesOnSite: self.currentSite.identificator];
     
+    for (NSDictionary *ratesOnSite in ratesOnCurrentSiteDictionaries) {
+        RFPersonWithRate *personWithRate = [[RFPersonWithRate alloc] init];
+        for (RFPerson *person in self.persons) {
+            NSNumber *numberIdentificator = ratesOnSite[@"personsID"];
+            if (person.identificator == [numberIdentificator integerValue]) {
+                personWithRate.person = person;
+                NSNumber *numberRate = ratesOnSite[@"rank"];
+                personWithRate.rate = [numberRate integerValue];
+                [ratesOnCurrentSite addObject:personWithRate];
+                break;
+            }
+        }
+    }
     return ratesOnCurrentSite;
 }
 
 -(NSArray *)ratesOfCurrentPersonWithDatesOnCurrentSite
 {
     
-    NSMutableArray *ratesOfCurrentPersonOnCurrentSite = [NSMutableArray array];
-    NSDate *iDate = self.startDateForRates;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+//    NSDate *iDate = self.startDateForRates;
+//    NSCalendar *calendar = [NSCalendar currentCalendar];
+//    
+//    while ([calendar compareDate:iDate toDate:self.finishDateForRates toUnitGranularity:NSCalendarUnitDay] == NSOrderedAscending) {
+//        RFRateWithDate *rateWithDate = [[RFRateWithDate alloc] init];
+//        rateWithDate.date = iDate;
+//        rateWithDate.rate = arc4random_uniform(100);
+//        [ratesOfCurrentPersonOnCurrentSite addObject:rateWithDate];
+//        iDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:iDate options:0];
+//    }
     
-    while ([calendar compareDate:iDate toDate:self.finishDateForRates toUnitGranularity:NSCalendarUnitDay] == NSOrderedAscending) {
-        RFRateWithDate *rateWithDate = [[RFRateWithDate alloc] init];
-        rateWithDate.date = iDate;
-        rateWithDate.rate = arc4random_uniform(100);
-        [ratesOfCurrentPersonOnCurrentSite addObject:rateWithDate];
-        iDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:iDate options:0];
+    NSArray *ratesOfCurrentPersonOnCurrentSite = [[RFDatabaseConnection defaultDatabaseConnection] getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
+    NSMutableArray *personsRateMutable = [NSMutableArray array];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    for (NSDictionary *personRates in ratesOfCurrentPersonOnCurrentSite) {
+        RFRateWithDate *theRateWithDate = [[RFRateWithDate alloc] init];
+        theRateWithDate.date = [dateFormatter dateFromString: personRates[@"date"]];
+        NSNumber *numberRate = personRates[@"rank"];
+        theRateWithDate.rate = [numberRate integerValue];
+        [personsRateMutable addObject:theRateWithDate];
     }
-    return ratesOfCurrentPersonOnCurrentSite;
+    
+    return personsRateMutable;
 }
 
 

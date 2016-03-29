@@ -36,6 +36,24 @@ static RFDatabaseConnection *singleDatabaseConnection;
     return jsonArray;
 }
 
+-(NSArray *) getPersonsWithRatesOnSite:(int)siteID
+{
+    NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"PersonsWithRatesOnCurrentSite" ofType:@"json"];
+    NSData *fileData = [NSData dataWithContentsOfFile:jsonFilePath];
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:fileData options:kNilOptions error:nil];
+    return jsonArray;
+}
+
+-(NSArray *)getRatesOfPerson:(int)personID onSite:(int)siteID from:(NSDate *)startDate to:(NSDate *)finishDate
+{
+    NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"RatesOfCurrentPersonWithDatesOnCurrentSite" ofType:@"json"];
+    NSData *fileData = [NSData dataWithContentsOfFile:jsonFilePath];
+    NSError *jsonError;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:fileData options:kNilOptions error:&jsonError];
+    return jsonArray;
+}
+
+
 -(NSArray *) getDataFromURL: (NSURL *) theURL
 {
     return nil;
