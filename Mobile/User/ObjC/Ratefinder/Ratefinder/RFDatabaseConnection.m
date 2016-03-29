@@ -28,6 +28,14 @@ static RFDatabaseConnection *singleDatabaseConnection;
     return jsonArray;
 }
 
+-(NSArray *) getSites
+{
+    NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"Sites" ofType:@"json"];
+    NSData *fileData = [NSData dataWithContentsOfFile:jsonFilePath];
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:fileData options:kNilOptions error:nil];
+    return jsonArray;
+}
+
 -(NSArray *) getDataFromURL: (NSURL *) theURL
 {
     return nil;

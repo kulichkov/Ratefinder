@@ -55,8 +55,11 @@ static RFRepository *singleRepository = nil;
 
 +(RFRepository *)sharedRepository {
     
+    
     if (!singleRepository) {
         singleRepository = [[RFRepository alloc] init];
+        
+        // Плохой код, повторения, надо избавиться!
         
         NSArray *personDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
         NSMutableArray *personsMutable = [NSMutableArray array];
@@ -70,23 +73,16 @@ static RFRepository *singleRepository = nil;
         singleRepository.persons = personsMutable;
         
         
-        RFSite *site1 = [[RFSite alloc] init];
-        site1.identificator = 1;
-        site1.name = @"lenta.ru";
-        
-        RFSite *site2 = [[RFSite alloc] init];
-        site2.identificator = 2;
-        site2.name = @"gazeta.ru";
-        
-        RFSite *site3 = [[RFSite alloc] init];
-        site3.identificator = 3;
-        site3.name = @"vesti.ru";
-        
-        RFSite *site4 = [[RFSite alloc] init];
-        site4.identificator = 4;
-        site4.name = @"ria.ru";
-        
-        singleRepository.sites = [NSArray arrayWithObjects: site1, site2, site3, site4, nil];
+        NSArray *sitesDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getSites];
+        NSMutableArray *sitesMutable = [NSMutableArray array];
+        for (NSDictionary *site in sitesDictionaries) {
+            RFSite *newSite = [[RFSite alloc] init];
+            newSite.name = [NSString stringWithFormat:@"%@", site[@"name"]];
+            NSNumber *numberIdentificator = site[@"id"];
+            newSite.identificator = [numberIdentificator integerValue];
+            [sitesMutable addObject:newSite];
+        }
+        singleRepository.sites = sitesMutable;
     }
     
     return singleRepository;
