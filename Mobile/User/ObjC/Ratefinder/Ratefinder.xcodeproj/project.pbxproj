@@ -27,6 +27,7 @@
 		69DA29751CA97035008751C2 /* Sites.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29741CA97035008751C2 /* Sites.json */; };
 		69DA297C1CA976A1008751C2 /* RFDatabaseConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 69DA297B1CA976A1008751C2 /* RFDatabaseConnection.m */; };
 		69DA29811CAAE709008751C2 /* PersonsWithRatesOnCurrentSite.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29801CAAE709008751C2 /* PersonsWithRatesOnCurrentSite.json */; };
+		69DA29831CAAE7BA008751C2 /* RatesOfCurrentPersonWithDatesOnCurrentSite.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DA29821CAAE7BA008751C2 /* RatesOfCurrentPersonWithDatesOnCurrentSite.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		69DA297A1CA976A1008751C2 /* RFDatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFDatabaseConnection.h; sourceTree = "<group>"; };
 		69DA297B1CA976A1008751C2 /* RFDatabaseConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFDatabaseConnection.m; sourceTree = "<group>"; };
 		69DA29801CAAE709008751C2 /* PersonsWithRatesOnCurrentSite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PersonsWithRatesOnCurrentSite.json; sourceTree = "<group>"; };
+		69DA29821CAAE7BA008751C2 /* RatesOfCurrentPersonWithDatesOnCurrentSite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RatesOfCurrentPersonWithDatesOnCurrentSite.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				69DA29721CA96E60008751C2 /* Persons.json */,
 				69DA29741CA97035008751C2 /* Sites.json */,
 				69DA29801CAAE709008751C2 /* PersonsWithRatesOnCurrentSite.json */,
+				69DA29821CAAE7BA008751C2 /* RatesOfCurrentPersonWithDatesOnCurrentSite.json */,
 			);
 			name = RFRepository;
 			path = ..;
@@ -396,6 +399,7 @@
 				691072781C9C8032008070B5 /* Assets.xcassets in Resources */,
 				69DA29731CA96E60008751C2 /* Persons.json in Resources */,
 				69DA29811CAAE709008751C2 /* PersonsWithRatesOnCurrentSite.json in Resources */,
+				69DA29831CAAE7BA008751C2 /* RatesOfCurrentPersonWithDatesOnCurrentSite.json in Resources */,
 				691072761C9C8032008070B5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
