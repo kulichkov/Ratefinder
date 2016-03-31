@@ -46,17 +46,20 @@ def main_find_info():
 
     # Запросы
     quest_3 = 'SELECT `PersonID`, `Name` FROM `Keywords`;'
+    quest_3_0 = 'SELECT COUNT(`ID`) FROM `Keywords`;'
     quest_4 = 'SELECT `SiteID`, `Url`, `ID` FROM `Pages`' \
                 'WHERE `LastScanDate` is Null;'
     quest_4_0 = 'SELECT `SiteID`, `Url`, `ID` FROM `Pages` ' \
                 'WHERE ((`Url` LIKE "%/%.xml") ' \
                 'OR (`Url` LIKE "%/%.xml.gz")) ' \
                 'ORDER BY `LastScanDate` LIMIT 10;'
-    quest_5 = 'INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s)'
-    quest_5_0 = 'UPDATE `Pages` SET `LastScanDate` = %s WHERE `ID` = %s;'
+    quest_4_1 = 'INSERT INTO `Pages` (`Url`, `SiteID`) VALUES(%s, %s)'
+    quest_4_2 = 'UPDATE `Pages` SET `LastScanDate` = %s WHERE `ID` = %s;'
     quest_6 = 'INSERT INTO `PersonPageRank` (`PersonID`,`PageID`, `Rank`)' \
                 'VALUES(%s, %s, %s)'
-    quest_7 = 'SELECT COUNT(`ID`) FROM `Keywords`;'
+    quest_6_0 = 'DELETE FROM `PersonPageRank`;'
+    #quest_7 = 'SELECT COUNT(`ID`) FROM `Keywords`;'
+
 
     # Создаем для работы с Mysql
     workMysql = Mysql()
@@ -65,12 +68,12 @@ def main_find_info():
     # Обновляем столбец "LastScanDate" в таблице "Pages"
     def lastScanDate(PageID):
         timeStamp = datetime.strftime(datetime.now(), "%Y.%m.%d %H:%M:%S")
-        workMysql.execute(quest_5_0, timeStamp, PageID)
+        workMysql.execute(quest_4_2, timeStamp, PageID)
 
     # Внесение данных в таблицу "Pages"
     def pages(listTemp, SiteID, PageID):
         for x in listTemp:
-            workMysql.execute(quest_5, x, int(SiteID))
+            workMysql.execute(quest_4_1, x, int(SiteID))
 
     # Внесение данных в таблицу "PersonPageRank"
     def personPageRank(dictTemp, PageID):
@@ -98,9 +101,14 @@ def main_find_info():
             if oneStart:
                 oneStart = False
                 # Выборка количество строк в таблице keywords
-                newKeywords = workMysql.execute(quest_7)[0]
+                newKeywords = workMysql.execute(quest_3_0)[0]
                 # Были ли изменение в таблице keywords
                 dayAll = read_temp_ini(fileTempCountKeyWords, newKeywords[0])
+                #
+                if dayAll:
+                    print('Delete all string')
+                    #workMysql.execute(quest_6_0)
+                    #workMysql.commit()
 
             xmlGzUrl = Xml(link[1], dayAll)
             for x in xmlGzUrl.gz():
