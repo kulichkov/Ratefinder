@@ -58,8 +58,6 @@ def main_find_info():
     quest_6 = 'INSERT INTO `PersonPageRank` (`PersonID`,`PageID`, `Rank`)' \
                 'VALUES(%s, %s, %s)'
     quest_6_0 = 'DELETE FROM `PersonPageRank`;'
-    #quest_7 = 'SELECT COUNT(`ID`) FROM `Keywords`;'
-
 
     # Создаем для работы с Mysql
     workMysql = Mysql()
@@ -107,8 +105,8 @@ def main_find_info():
                 #
                 if dayAll:
                     print('Delete all string')
-                    #workMysql.execute(quest_6_0)
-                    #workMysql.commit()
+                    workMysql.execute(quest_6_0)
+                    workMysql.commit()
 
             xmlGzUrl = Xml(link[1], dayAll)
             for x in xmlGzUrl.gz():
@@ -174,6 +172,7 @@ def main_find_info():
         # Если сегодня не было повторного прохода по ссылкам
         if toDayTrue:
             logging('Second pass', 'Second passage links *.xml.')
+            print('Second passage links')
             # Выборка старых ссылоко
             oldUrlXmllast = workMysql.execute(quest_4_0)
             if oldUrlXmllast:
