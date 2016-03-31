@@ -4,3 +4,4 @@
 *Sql
 /test.py
 *.log
+*.ini~
