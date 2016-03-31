@@ -74,7 +74,7 @@ def main_find_info():
             workMysql.execute(quest_4_1, x, int(SiteID))
 
     # Внесение данных в таблицу "PersonPageRank"
-    def personPageRank(dictTemp, PageID):
+    def write_page_rank(dictTemp, PageID):
         for x in dictTemp.items():
             print(x[0], x[1])
             workMysql.execute(quest_6, int(x[0]), int(PageID), int(x[1]))
@@ -118,7 +118,9 @@ def main_find_info():
                 pages(robotsUrl, link[0], link[2])
         else:                           # Все остальное обыскиваем=)
             parserHtml = Html(link[1], dictKeywords)
-            personPageRank(parserHtml.parser(), link[2])
+            dictIdRank = parserHtml.parser()
+            if dictIdRank:
+                write_page_rank(dictIdRank, link[2])
 
         # Вносим датту сканирование
         lastScanDate(link[2])
