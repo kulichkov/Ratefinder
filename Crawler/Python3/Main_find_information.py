@@ -189,6 +189,6 @@ def main_find_info():
 psAu = int(os.popen('ps ax | grep Main_find_information.py | wc -l').read())
 print(psAu)
 
-# Проверка
+# Проверка перед началом работы
 if psAu < 4 and __name__ == '__main__':
     main_find_info()
