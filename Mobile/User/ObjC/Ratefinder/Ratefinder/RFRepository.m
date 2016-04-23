@@ -85,8 +85,8 @@ static RFRepository *singleRepository = nil;
         NSMutableArray *personsMutable = [NSMutableArray array];
         for (NSDictionary *person in personDictionaries) {
             RFPerson *newPerson = [[RFPerson alloc] init];
-            newPerson.name = [NSString stringWithFormat:@"%@", person[@"name"]];
-            NSNumber *numberIdentificator = [person objectForKey:@"id"];
+            newPerson.name = [NSString stringWithFormat:@"%@", person[@"Name"]];
+            NSNumber *numberIdentificator = [person objectForKey:@"ID"];
             newPerson.identificator = [numberIdentificator integerValue];
             [personsMutable addObject:newPerson];
         }
@@ -97,8 +97,8 @@ static RFRepository *singleRepository = nil;
         NSMutableArray *sitesMutable = [NSMutableArray array];
         for (NSDictionary *site in sitesDictionaries) {
             RFSite *newSite = [[RFSite alloc] init];
-            newSite.name = [NSString stringWithFormat:@"%@", site[@"name"]];
-            NSNumber *numberIdentificator = site[@"id"];
+            newSite.name = [NSString stringWithFormat:@"%@", site[@"Name"]];
+            NSNumber *numberIdentificator = site[@"ID"];
             newSite.identificator = [numberIdentificator integerValue];
             [sitesMutable addObject:newSite];
         }
