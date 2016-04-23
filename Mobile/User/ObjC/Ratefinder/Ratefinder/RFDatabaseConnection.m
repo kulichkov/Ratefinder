@@ -12,7 +12,7 @@ static RFDatabaseConnection *singleDatabaseConnection;
 
 @implementation RFDatabaseConnection
 {
-    id parsedJSONArray;
+    NSArray *parsedJSONArray;
 }
 +(RFDatabaseConnection *) defaultDatabaseConnection
 {
@@ -45,29 +45,29 @@ static RFDatabaseConnection *singleDatabaseConnection;
 
     NSData *jsonData = [stringJSON dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *parsedObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-    //NSLog(@"%@", error);
     parsedJSONArray = parsedObject;
-    //NSLog(@"\n%@", parsedObject);
     
 }
 
-
--(NSArray *) getSites
-{
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURL *sitesURL = [NSURL URLWithString: @"http://kulichkov.netne.net/sites.php"];
+-(void)getAndParseDataFromNSURL: (NSURL *)theNSURL {
     
+    NSURLSession *session = [NSURLSession sharedSession];
     
     dispatch_semaphore_t sem = dispatch_semaphore_create(0);
-    
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:sitesURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theNSURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [self parseJSONData:data];
         dispatch_semaphore_signal(sem);
     }];
     [dataTask resume];
     dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
-    NSArray *sites = (NSArray *)parsedJSONArray;
-    return sites;
+}
+
+
+-(NSArray *) getSites
+{
+    NSURL *sitesURL = [NSURL URLWithString: @"http://kulichkov.netne.net/sites.php"];
+    [self getAndParseDataFromNSURL:sitesURL];
+    return parsedJSONArray;
 }
 
 -(NSArray *) getPersonsWithRatesOnSite:(int)siteID
