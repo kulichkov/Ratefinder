@@ -30,10 +30,10 @@ static RFRepository *singleRepository = nil;
     for (NSDictionary *ratesOnSite in ratesOnCurrentSiteDictionaries) {
         RFPersonWithRate *personWithRate = [[RFPersonWithRate alloc] init];
         for (RFPerson *person in self.persons) {
-            NSNumber *numberIdentificator = ratesOnSite[@"personsID"];
+            NSNumber *numberIdentificator = ratesOnSite[@"PersonID"];
             if (person.identificator == [numberIdentificator integerValue]) {
                 personWithRate.person = person;
-                NSNumber *numberRate = ratesOnSite[@"rank"];
+                NSNumber *numberRate = ratesOnSite[@"Rank"];
                 personWithRate.rate = [numberRate integerValue];
                 [ratesOnCurrentSite addObject:personWithRate];
                 break;

@@ -25,7 +25,9 @@ static RFDatabaseConnection *singleDatabaseConnection;
 
 -(NSArray *) getPersons
 {
-    return nil;
+    NSURL *sitesURL = [NSURL URLWithString: @"http://kulichkov.netne.net/persons.php"];
+    [self getAndParseDataFromNSURL:sitesURL];
+    return parsedJSONArray;
 }
 
 - (void) parseJSONData: (NSData *)data {
@@ -44,9 +46,7 @@ static RFDatabaseConnection *singleDatabaseConnection;
     }
 
     NSData *jsonData = [stringJSON dataUsingEncoding:NSUTF8StringEncoding];
-    NSArray *parsedObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-    parsedJSONArray = parsedObject;
-    
+    parsedJSONArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
 }
 
 -(void)getAndParseDataFromNSURL: (NSURL *)theNSURL {
@@ -72,12 +72,24 @@ static RFDatabaseConnection *singleDatabaseConnection;
 
 -(NSArray *) getPersonsWithRatesOnSite:(int)siteID
 {
-    return nil;
+    NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rates.php?siteID=%d",siteID];
+    NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
+    [self getAndParseDataFromNSURL:PersonsWithRatesOnSiteURL];
+    //NSLog(@"%@", parsedJSONArray);
+    return parsedJSONArray;
 }
 
 -(NSArray *)getRatesOfPerson:(int)personID onSite:(int)siteID from:(NSDate *)startDate to:(NSDate *)finishDate
 {
-    return nil;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSString *stringStartDate = [dateFormatter stringFromDate:startDate];
+    NSString *stringFinishDate = [dateFormatter stringFromDate:finishDate];
+    NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rateswithdates.php?siteID=%d&personID=%d&startDate=%@&finishDate=%@", siteID, personID, stringStartDate, stringFinishDate];
+    NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
+    [self getAndParseDataFromNSURL:PersonsWithRatesOnSiteURL];
+    //NSLog(@"%@", parsedJSONArray);
+    return parsedJSONArray;
 }
 
 
