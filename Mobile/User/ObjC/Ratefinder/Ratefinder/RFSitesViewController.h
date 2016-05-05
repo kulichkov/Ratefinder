@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RFRepository.h"
 
-
-@interface RFSitesViewController : UITableViewController 
+@interface RFSitesViewController : UITableViewController <RFRepositoryDelegate>
 
 @end

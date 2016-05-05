@@ -7,7 +7,6 @@
 //
 
 #import "RFSitesViewController.h"
-#import "RFRepository.h"
 
 @implementation RFSitesViewController
 {
@@ -18,10 +17,14 @@
 {
     [super viewDidLoad];
     repository = [RFRepository sharedRepository];
-    
+    repository.delegate = self;
     self.navigationItem.title = @"Сайты";
 }
 
+-(void)DataDidUpdated
+{
+    [self.tableView reloadData];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -36,7 +39,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sitesTableIdentifier];
     }
-    cell.textLabel.text = [[repository.sites objectAtIndex:indexPath.row] name];
+    cell.textLabel.text = [[repository.sites objectAtIndex:indexPath.row] valueForKey:@"Name"];
     return cell;
 }
 

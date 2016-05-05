@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol RFDatabaseConnectionDelegate <NSObject>
+-(void)responseDidRecievedWithObject:(id)object;
+@end
 
 @interface RFDatabaseConnection : NSObject
--(NSArray *) getSites;
+@property id <RFDatabaseConnectionDelegate> delegate;
+
+-(void) getSites;
 -(NSArray *) getPersons;
 -(NSArray *) getPersonsWithRatesOnSite: (int) siteID;
 -(NSArray *) getRatesOfPerson: (int) personID

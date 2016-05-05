@@ -8,10 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #include "RFPersonWithRate.h"
+#include "RFDatabaseConnection.h"
 #include "RFRateWithDate.h"
 #include "RFSite.h"
 
-@interface RFRepository : NSObject
+@protocol RFRepositoryDelegate <NSObject>
+-(void)DataDidUpdated;
+@end
+
+@interface RFRepository : NSObject <RFDatabaseConnectionDelegate>
+@property id <RFRepositoryDelegate> delegate;
 @property (readonly, nonatomic) NSArray *persons;
 @property (readonly, nonatomic) NSArray *sites;
 @property (readonly, nonatomic) NSArray *personsWithRatesOnCurrentSite;

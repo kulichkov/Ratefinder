@@ -7,7 +7,6 @@
 //
 
 #import "RFRepository.h"
-#import "RFDatabaseConnection.h"
 
 static RFRepository *singleRepository = nil;
 
@@ -20,6 +19,12 @@ static RFRepository *singleRepository = nil;
 @end
 
 @implementation RFRepository
+
+-(void)responseDidRecievedWithObject:(id)object
+{
+    self.sites = object;
+    [self.delegate DataDidUpdated];
+}
 
 -(NSArray *)personsWithRatesOnCurrentSite
 {
@@ -81,28 +86,29 @@ static RFRepository *singleRepository = nil;
         
         // Плохой код, повторения, надо избавиться!
         
-        NSArray *personDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
-        NSMutableArray *personsMutable = [NSMutableArray array];
-        for (NSDictionary *person in personDictionaries) {
-            RFPerson *newPerson = [[RFPerson alloc] init];
-            newPerson.name = [NSString stringWithFormat:@"%@", person[@"Name"]];
-            NSNumber *numberIdentificator = [person objectForKey:@"ID"];
-            newPerson.identificator = [numberIdentificator integerValue];
-            [personsMutable addObject:newPerson];
-        }
-        singleRepository.persons = personsMutable;
+//        NSArray *personDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
+//        NSMutableArray *personsMutable = [NSMutableArray array];
+//        for (NSDictionary *person in personDictionaries) {
+//            RFPerson *newPerson = [[RFPerson alloc] init];
+//            newPerson.name = [NSString stringWithFormat:@"%@", person[@"Name"]];
+//            NSNumber *numberIdentificator = [person objectForKey:@"ID"];
+//            newPerson.identificator = [numberIdentificator integerValue];
+//            [personsMutable addObject:newPerson];
+//        }
+//        singleRepository.persons = personsMutable;
+//        
         
-        
-        NSArray *sitesDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getSites];
-        NSMutableArray *sitesMutable = [NSMutableArray array];
-        for (NSDictionary *site in sitesDictionaries) {
-            RFSite *newSite = [[RFSite alloc] init];
-            newSite.name = [NSString stringWithFormat:@"%@", site[@"Name"]];
-            NSNumber *numberIdentificator = site[@"ID"];
-            newSite.identificator = [numberIdentificator integerValue];
-            [sitesMutable addObject:newSite];
-        }
-        singleRepository.sites = sitesMutable;
+        [[RFDatabaseConnection defaultDatabaseConnection] getSites];
+        [RFDatabaseConnection defaultDatabaseConnection].delegate = singleRepository;
+//        NSMutableArray *sitesMutable = [NSMutableArray array];
+//        for (NSDictionary *site in sitesDictionaries) {
+//            RFSite *newSite = [[RFSite alloc] init];
+//            newSite.name = [NSString stringWithFormat:@"%@", site[@"Name"]];
+//            NSNumber *numberIdentificator = site[@"ID"];
+//            newSite.identificator = [numberIdentificator integerValue];
+//            [sitesMutable addObject:newSite];
+//        }
+//        singleRepository.sites = sitesMutable;
     }
     
     return singleRepository;

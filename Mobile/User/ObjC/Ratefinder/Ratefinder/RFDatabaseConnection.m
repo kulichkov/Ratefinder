@@ -26,8 +26,8 @@ static RFDatabaseConnection *singleDatabaseConnection;
 -(NSArray *) getPersons
 {
     NSURL *sitesURL = [NSURL URLWithString: @"http://kulichkov.netne.net/persons.php"];
-    [self getAndParseDataFromNSURL:sitesURL];
-    return parsedJSONArray;
+    [self getDataFromURL:sitesURL];
+    return nil;
 }
 
 - (void) parseJSONData: (NSData *)data {
@@ -45,57 +45,53 @@ static RFDatabaseConnection *singleDatabaseConnection;
         NSLog(@"json: %@", stringJSON);
     }
 
-    NSData *jsonData = [stringJSON dataUsingEncoding:NSUTF8StringEncoding];
-    parsedJSONArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSData *jsonData = [stringJSON dataUsingEncoding:NSUTF8StringEncoding];
+        parsedJSONArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        [self.delegate responseDidRecievedWithObject:parsedJSONArray];
+    });
+    
 }
 
--(void)getAndParseDataFromNSURL: (NSURL *)theNSURL {
-    
+-(void)getDataFromURL: (NSURL *)theURL
+{
     NSURLSession *session = [NSURLSession sharedSession];
-    
-    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theNSURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [self parseJSONData:data];
-        dispatch_semaphore_signal(sem);
     }];
     [dataTask resume];
-    dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
 }
 
-
--(NSArray *) getSites
+-(void) getSites
 {
     NSURL *sitesURL = [NSURL URLWithString: @"http://kulichkov.netne.net/sites.php"];
-    [self getAndParseDataFromNSURL:sitesURL];
-    return parsedJSONArray;
+    [self getDataFromURL:sitesURL];
+    //return parsedJSONArray;
 }
 
 -(NSArray *) getPersonsWithRatesOnSite:(int)siteID
 {
-    NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rates.php?siteID=%d",siteID];
-    NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
-    [self getAndParseDataFromNSURL:PersonsWithRatesOnSiteURL];
+    //NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rates.php?siteID=%d",siteID];
+    //NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
+    //[self getAndParseDataFromNSURL:PersonsWithRatesOnSiteURL];
     //NSLog(@"%@", parsedJSONArray);
     return parsedJSONArray;
 }
 
 -(NSArray *)getRatesOfPerson:(int)personID onSite:(int)siteID from:(NSDate *)startDate to:(NSDate *)finishDate
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd";
-    NSString *stringStartDate = [dateFormatter stringFromDate:startDate];
-    NSString *stringFinishDate = [dateFormatter stringFromDate:finishDate];
-    NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rateswithdates.php?siteID=%d&personID=%d&startDate=%@&finishDate=%@", siteID, personID, stringStartDate, stringFinishDate];
-    NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
-    [self getAndParseDataFromNSURL:PersonsWithRatesOnSiteURL];
-    //NSLog(@"%@", parsedJSONArray);
-    return parsedJSONArray;
-}
-
-
--(NSArray *) getDataFromURL: (NSURL *) theURL
-{
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    dateFormatter.dateFormat = @"yyyy-MM-dd";
+//    NSString *stringStartDate = [dateFormatter stringFromDate:startDate];
+//    NSString *stringFinishDate = [dateFormatter stringFromDate:finishDate];
+//    NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rateswithdates.php?siteID=%d&personID=%d&startDate=%@&finishDate=%@", siteID, personID, stringStartDate, stringFinishDate];
+//    NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
+//    [self getAndParseDataFromNSURL:PersonsWithRatesOnSiteURL];
+//    return parsedJSONArray;
     return nil;
 }
+
+
+
 
 @end

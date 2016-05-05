@@ -9,7 +9,7 @@
 #import "RFDateViewController.h"
 #import "RFRepository.h"
 
-@implementation RFDateViewController
+@implementation RFDateViewController 
 {
     NSDate *startDate;
     NSDate *finishDate;
