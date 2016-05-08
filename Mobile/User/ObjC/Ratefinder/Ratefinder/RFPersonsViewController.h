@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RFRepository.h"
 
-@interface RFPersonsViewController : UITableViewController
+@interface RFPersonsViewController : UITableViewController <RFRepositoryDelegate>
 
 @end

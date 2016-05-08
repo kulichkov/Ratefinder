@@ -10,27 +10,25 @@
 
 static RFDatabaseConnection *singleDatabaseConnection;
 
+
 @implementation RFDatabaseConnection
 {
     NSArray *parsedJSONArray;
 }
+
 +(RFDatabaseConnection *) defaultDatabaseConnection
 {
     if (!singleDatabaseConnection) {
         singleDatabaseConnection = [[RFDatabaseConnection alloc] init];
         singleDatabaseConnection->parsedJSONArray = nil;
     }
+    
     return singleDatabaseConnection;
 }
 
--(NSArray *) getPersons
-{
-    NSURL *sitesURL = [NSURL URLWithString: @"http://kulichkov.netne.net/persons.php"];
-    [self getDataFromURL:sitesURL];
-    return nil;
-}
 
-- (void) parseJSONData: (NSData *)data {
+- (void) parseJSONData: (NSData *)data andSelector:(SEL)theSelector
+{
     
     NSString *stringJSON = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\s+<!--.*$"
@@ -48,47 +46,60 @@ static RFDatabaseConnection *singleDatabaseConnection;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSData *jsonData = [stringJSON dataUsingEncoding:NSUTF8StringEncoding];
         parsedJSONArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        [self.delegate responseDidRecievedWithObject:parsedJSONArray];
+        
+        // Selector is one but data is another
+                
+        if (theSelector == @selector(getSites)) {
+            [self.delegate sitesDidRecieveWithObject:parsedJSONArray];
+        } else if (theSelector == @selector(getPersons)) {
+            [self.delegate personsDidRecieveWithObject:parsedJSONArray];
+        } else if (theSelector == @selector(getPersonsWithRatesOnSite:)) {
+            [self.delegate personsWithRatesDidRecieveWithObject:parsedJSONArray];
+        } else if (theSelector == @selector(getRatesOfPerson:onSite:from:to:)) {
+            [self.delegate ratesWithDatesDidRecieveWithObject:parsedJSONArray];
+        }
     });
     
 }
 
--(void)getDataFromURL: (NSURL *)theURL
+-(void)getDataFromURL: (NSURL *)theURL andSelector:(SEL)theSelector
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        [self parseJSONData:data];
+        [self parseJSONData:data andSelector:theSelector];
     }];
     [dataTask resume];
 }
 
--(void) getSites
+-(void)getSites
 {
     NSURL *sitesURL = [NSURL URLWithString: @"http://kulichkov.netne.net/sites.php"];
-    [self getDataFromURL:sitesURL];
-    //return parsedJSONArray;
+    [self getDataFromURL:sitesURL andSelector:@selector(getSites)];
 }
 
--(NSArray *) getPersonsWithRatesOnSite:(int)siteID
+-(void)getPersons
 {
-    //NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rates.php?siteID=%d",siteID];
-    //NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
-    //[self getAndParseDataFromNSURL:PersonsWithRatesOnSiteURL];
+    NSURL *personsURL = [NSURL URLWithString: @"http://kulichkov.netne.net/persons.php"];
+    [self getDataFromURL:personsURL andSelector:@selector(getPersons)];
+}
+
+-(void)getPersonsWithRatesOnSite: (int)siteID
+{
+    NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rates.php?siteID=%d", siteID];
+    NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
+    [self getDataFromURL:PersonsWithRatesOnSiteURL andSelector:@selector(getPersonsWithRatesOnSite:)] ;
     //NSLog(@"%@", parsedJSONArray);
-    return parsedJSONArray;
 }
 
--(NSArray *)getRatesOfPerson:(int)personID onSite:(int)siteID from:(NSDate *)startDate to:(NSDate *)finishDate
+-(void)getRatesOfPerson:(int)personID onSite:(int)siteID from:(NSDate *)startDate to:(NSDate *)finishDate
 {
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    dateFormatter.dateFormat = @"yyyy-MM-dd";
-//    NSString *stringStartDate = [dateFormatter stringFromDate:startDate];
-//    NSString *stringFinishDate = [dateFormatter stringFromDate:finishDate];
-//    NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rateswithdates.php?siteID=%d&personID=%d&startDate=%@&finishDate=%@", siteID, personID, stringStartDate, stringFinishDate];
-//    NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
-//    [self getAndParseDataFromNSURL:PersonsWithRatesOnSiteURL];
-//    return parsedJSONArray;
-    return nil;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSString *stringStartDate = [dateFormatter stringFromDate:startDate];
+    NSString *stringFinishDate = [dateFormatter stringFromDate:finishDate];
+    NSString *stringURL = [NSString stringWithFormat:@"http://kulichkov.netne.net/rateswithdates.php?siteID=%d&personID=%d&startDate=%@&finishDate=%@", siteID, personID, stringStartDate, stringFinishDate];
+    NSURL *PersonsWithRatesOnSiteURL = [NSURL URLWithString: stringURL];
+    [self getDataFromURL:PersonsWithRatesOnSiteURL andSelector:@selector(getRatesOfPerson:onSite:from:to:)];
 }
 
 

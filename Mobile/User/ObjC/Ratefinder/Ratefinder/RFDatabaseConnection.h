@@ -8,18 +8,22 @@
 
 #import <Foundation/Foundation.h>
 @protocol RFDatabaseConnectionDelegate <NSObject>
--(void)responseDidRecievedWithObject:(id)object;
+-(void)sitesDidRecieveWithObject: (id)object;
+-(void)personsDidRecieveWithObject: (id)object;
+-(void)personsWithRatesDidRecieveWithObject: (id)object;
+-(void)ratesWithDatesDidRecieveWithObject: (id)object;
+
 @end
 
-@interface RFDatabaseConnection : NSObject
+@interface RFDatabaseConnection: NSObject
 @property id <RFDatabaseConnectionDelegate> delegate;
 
--(void) getSites;
--(NSArray *) getPersons;
--(NSArray *) getPersonsWithRatesOnSite: (int) siteID;
--(NSArray *) getRatesOfPerson: (int) personID
-                       onSite: (int) siteID
-                         from: (NSDate *) startDate
-                           to: (NSDate *) finishDate;
+-(void)getSites;
+-(void)getPersons;
+-(void)getPersonsWithRatesOnSite: (int)siteID;
+-(void)getRatesOfPerson: (int)personID
+                       onSite: (int)siteID
+                         from: (NSDate *)startDate
+                           to: (NSDate *)finishDate;
 +(RFDatabaseConnection *) defaultDatabaseConnection;
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RFRepository.h"
 
-@interface RFRatesWithDatesViewController : UITableViewController
+@interface RFRatesWithDatesViewController : UITableViewController <RFRepositoryDelegate>
 
 @end

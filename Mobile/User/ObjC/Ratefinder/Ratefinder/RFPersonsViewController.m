@@ -8,17 +8,22 @@
 
 #import "RFPersonsViewController.h"
 #import "RFDateViewController.h"
-#import "RFRepository.h"
 
 @implementation RFPersonsViewController
 {
     RFRepository *repository;
 }
 
+-(void)personsDidUpdate{}
+-(void)sitesDidUpdate{}
+
+// MARK: нет запроса на personsWithRates
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     repository = [RFRepository sharedRepository];
+    repository.delegate = self;
     self.navigationItem.title = repository.currentSite.name;
 }
 
@@ -27,13 +32,17 @@
     return [repository.persons count];
 }
 
+-(void)personsWithRatesDidUpdate
+{
+    [self.tableView reloadData];
+}
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
-    NSString *sitesTableIdentifier = @"PersonsTableItem";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: sitesTableIdentifier];
+    NSString *personsTableIdentifier = @"PersonsTableItem";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: personsTableIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier: sitesTableIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier: personsTableIdentifier];
     }
     
     cell.textLabel.text = [[[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] person] name];

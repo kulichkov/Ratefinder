@@ -7,17 +7,23 @@
 //
 
 #import "RFRatesWithDatesViewController.h"
-#import "RFRepository.h"
 
 @implementation RFRatesWithDatesViewController
 {
     RFRepository *repository;
 }
 
+-(void)RatesWithDatesDidUpdate
+{
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     repository = [RFRepository sharedRepository];
+    repository.delegate = self;
+    [repository updateRatesOfCurrentPersonOnCurrentSite];
     self.navigationItem.title = repository.currentPerson.name;
 }
 
@@ -25,7 +31,6 @@
 {
     return [repository.ratesOfCurrentPersonWithDatesOnCurrentSite count];
 }
-
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {

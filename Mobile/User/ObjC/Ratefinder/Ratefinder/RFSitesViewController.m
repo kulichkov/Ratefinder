@@ -21,7 +21,10 @@
     self.navigationItem.title = @"Сайты";
 }
 
--(void)DataDidUpdated
+-(void)personsDidUpdate{}
+-(void)personsWithRatesDidUpdate{}
+
+-(void)sitesDidUpdate
 {
     [self.tableView reloadData];
 }
@@ -39,13 +42,14 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sitesTableIdentifier];
     }
-    cell.textLabel.text = [[repository.sites objectAtIndex:indexPath.row] valueForKey:@"Name"];
+    cell.textLabel.text = [[repository.sites objectAtIndex:indexPath.row] name];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     repository.currentSite = [repository.sites objectAtIndex: indexPath.row];
+    [repository updatePersonsWithRatesOnCurrentSite];
     [self performSegueWithIdentifier:@"ShowPersons" sender:self];
 }
  

@@ -20,17 +20,59 @@ static RFRepository *singleRepository = nil;
 
 @implementation RFRepository
 
--(void)responseDidRecievedWithObject:(id)object
+-(void)sitesDidRecieveWithObject:(id)object
 {
-    self.sites = object;
-    [self.delegate DataDidUpdated];
+    NSArray *sitesDictionaries = object;
+    NSMutableArray *sitesMutable = [NSMutableArray array];
+    for (NSDictionary *site in sitesDictionaries) {
+        RFSite *newSite = [[RFSite alloc] init];
+        newSite.name = [NSString stringWithFormat:@"%@", site[@"Name"]];
+        NSNumber *numberIdentificator = [site objectForKey:@"ID"];
+        newSite.identificator = [numberIdentificator integerValue];
+        [sitesMutable addObject:newSite];
+    }
+
+    self.sites = sitesMutable;
+    [self.delegate sitesDidUpdate];
 }
 
--(NSArray *)personsWithRatesOnCurrentSite
+-(void)personsDidRecieveWithObject:(id)object
+{
+    NSArray *personsDictionaries = object;
+    NSMutableArray *personsMutable = [NSMutableArray array];
+    for (NSDictionary *person in personsDictionaries) {
+        RFSite *newPerson = [[RFSite alloc] init];
+        newPerson.name = [NSString stringWithFormat:@"%@", person[@"Name"]];
+        NSNumber *numberIdentificator = [person objectForKey:@"ID"];
+        newPerson.identificator = [numberIdentificator integerValue];
+        [personsMutable addObject:newPerson];
+    }
+    
+    self.persons = personsMutable;
+    [self.delegate personsDidUpdate];
+}
+
+-(void)ratesWithDatesDidRecieveWithObject:(id)object
+{
+    NSArray *ratesOfCurrentPersonOnCurrentSite = object;
+    NSMutableArray *personsRatesMutable = [NSMutableArray array];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    for (NSDictionary *personRates in ratesOfCurrentPersonOnCurrentSite) {
+        RFRateWithDate *theRateWithDate = [[RFRateWithDate alloc] init];
+        theRateWithDate.date = [dateFormatter dateFromString: personRates[@"Date"]];
+        NSNumber *numberRate = personRates[@"Rank"];
+        theRateWithDate.rate = [numberRate integerValue];
+        [personsRatesMutable addObject:theRateWithDate];
+    }
+    self.ratesOfCurrentPersonWithDatesOnCurrentSite = personsRatesMutable;
+    [self.delegate RatesWithDatesDidUpdate];
+}
+
+-(void)personsWithRatesDidRecieveWithObject:(id)object
 {
     NSMutableArray *ratesOnCurrentSite = [NSMutableArray array];
-    
-    NSArray *ratesOnCurrentSiteDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getPersonsWithRatesOnSite: self.currentSite.identificator];
+    NSArray *ratesOnCurrentSiteDictionaries = object;
     
     for (NSDictionary *ratesOnSite in ratesOnCurrentSiteDictionaries) {
         RFPersonWithRate *personWithRate = [[RFPersonWithRate alloc] init];
@@ -45,9 +87,23 @@ static RFRepository *singleRepository = nil;
             }
         }
     }
-    return ratesOnCurrentSite;
+    
+    self.personsWithRatesOnCurrentSite = ratesOnCurrentSite;
+    [self.delegate personsWithRatesDidUpdate];
 }
 
+-(void)updatePersonsWithRatesOnCurrentSite
+{
+    [[RFDatabaseConnection defaultDatabaseConnection] getPersonsWithRatesOnSite:self.currentSite.identificator];
+}
+
+-(void)updateRatesOfCurrentPersonOnCurrentSite
+{
+    [[RFDatabaseConnection defaultDatabaseConnection] getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
+}
+
+
+/*
 -(NSArray *)ratesOfCurrentPersonWithDatesOnCurrentSite
 {
     
@@ -76,7 +132,7 @@ static RFRepository *singleRepository = nil;
     
     return personsRateMutable;
 }
-
+*/
 
 +(RFRepository *)sharedRepository {
     
@@ -96,19 +152,12 @@ static RFRepository *singleRepository = nil;
 //            [personsMutable addObject:newPerson];
 //        }
 //        singleRepository.persons = personsMutable;
-//        
+//
         
-        [[RFDatabaseConnection defaultDatabaseConnection] getSites];
         [RFDatabaseConnection defaultDatabaseConnection].delegate = singleRepository;
-//        NSMutableArray *sitesMutable = [NSMutableArray array];
-//        for (NSDictionary *site in sitesDictionaries) {
-//            RFSite *newSite = [[RFSite alloc] init];
-//            newSite.name = [NSString stringWithFormat:@"%@", site[@"Name"]];
-//            NSNumber *numberIdentificator = site[@"ID"];
-//            newSite.identificator = [numberIdentificator integerValue];
-//            [sitesMutable addObject:newSite];
-//        }
-//        singleRepository.sites = sitesMutable;
+        [[RFDatabaseConnection defaultDatabaseConnection] getSites];
+        [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
+       // NSLog(@"persons = %@", singleRepository.persons);
     }
     
     return singleRepository;
