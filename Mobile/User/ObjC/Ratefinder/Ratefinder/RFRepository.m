@@ -66,7 +66,7 @@ static RFRepository *singleRepository = nil;
         [personsRatesMutable addObject:theRateWithDate];
     }
     self.ratesOfCurrentPersonWithDatesOnCurrentSite = personsRatesMutable;
-    [self.delegate RatesWithDatesDidUpdate];
+    [self.delegate ratesWithDatesDidUpdate];
 }
 
 -(void)personsWithRatesDidRecieveWithObject:(id)object

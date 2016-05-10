@@ -21,6 +21,11 @@
     self.navigationItem.title = @"Сайты";
 }
 
+- (void)personsDidUpdate{};
+- (void)personsWithRatesDidUpdate{};
+- (void)ratesWithDatesDidUpdate{};
+
+
 - (void)sitesDidUpdate
 {
     [self.tableView reloadData];

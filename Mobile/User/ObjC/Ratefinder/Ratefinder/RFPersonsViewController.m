@@ -28,7 +28,10 @@
     return [repository.persons count];
 }
 
--(void)personsWithRatesDidUpdate
+- (void)personsDidUpdate{};
+- (void)ratesWithDatesDidUpdate{};
+- (void)sitesDidUpdate{};
+- (void)personsWithRatesDidUpdate
 {
     [self.tableView reloadData];
 }

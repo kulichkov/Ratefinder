@@ -13,7 +13,11 @@
     RFRepository *repository;
 }
 
--(void)RatesWithDatesDidUpdate
+- (void)personsDidUpdate{};
+- (void)personsWithRatesDidUpdate{};
+- (void)sitesDidUpdate{};
+
+-(void)ratesWithDatesDidUpdate
 {
     [self.tableView reloadData];
 }
