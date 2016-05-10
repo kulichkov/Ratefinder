@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D2R-VN-zxS">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sites View Controller-->
+        <scene sceneID="7p7-q0-kaq">
+            <objects>
+                <tableViewController id="Ruk-He-MGU" customClass="RFSitesViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HMA-gB-mLZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Ruk-He-MGU" id="KxM-am-Pct"/>
+                            <outlet property="delegate" destination="Ruk-He-MGU" id="reE-Kb-5wS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="0lt-kb-73n"/>
+                    <connections>
+                        <segue destination="3AQ-Vu-dxe" kind="show" identifier="ShowPersons" id="dGx-Ic-mSL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aQl-tQ-Wgr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1105" y="332"/>
+        </scene>
+        <!--Persons View Controller-->
+        <scene sceneID="yMO-CU-NlR">
+            <objects>
+                <tableViewController id="3AQ-Vu-dxe" customClass="RFPersonsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="E2j-tw-AGj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="3AQ-Vu-dxe" id="msi-DB-Ud9"/>
+                            <outlet property="delegate" destination="3AQ-Vu-dxe" id="czQ-rT-kv4"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="MGk-Z7-hIz" kind="show" identifier="ShowRatesPerDay" id="fvl-y0-54q"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LLd-sj-vmQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1795" y="332"/>
+        </scene>
+        <!--Date View Controller-->
+        <scene sceneID="Qwr-NQ-awT">
+            <objects>
+                <viewController id="MGk-Z7-hIz" customClass="RFDateViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9D7-Pu-wqj"/>
+                        <viewControllerLayoutGuide type="bottom" id="L2Z-Hr-bue"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EGE-nM-0Fl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Начальная дата:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJH-rC-VH7">
+                                <rect key="frame" x="20" y="129" width="131" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kEA-bW-RqS">
+                                <rect key="frame" x="20" y="158" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8t-l1-wIj">
+                                <rect key="frame" x="20" y="225" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jK-RA-C8m">
+                                <rect key="frame" x="178" y="550" width="244" height="30"/>
+                                <state key="normal" title="Показать ежедневную статистику"/>
+                                <connections>
+                                    <segue destination="BeE-5Q-DYN" kind="show" id="SZ5-mz-Jui"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ежедневная статистика" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvO-S6-FBl">
+                                <rect key="frame" x="20" y="72" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Конечная дата:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJj-sj-4c4">
+                                <rect key="frame" x="20" y="196" width="122" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="V8t-l1-wIj" firstAttribute="top" secondItem="eJj-sj-4c4" secondAttribute="bottom" constant="8" id="06G-EJ-gVe"/>
+                            <constraint firstAttribute="trailing" secondItem="IvO-S6-FBl" secondAttribute="trailing" constant="20" id="4NU-Dt-DS1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="4jK-RA-C8m" secondAttribute="bottom" constant="20" id="FWv-RT-QM2"/>
+                            <constraint firstAttribute="trailing" secondItem="kEA-bW-RqS" secondAttribute="trailing" constant="20" id="JJl-dV-a8E"/>
+                            <constraint firstItem="eJj-sj-4c4" firstAttribute="leading" secondItem="EGE-nM-0Fl" secondAttribute="leading" constant="20" id="Lha-tv-a42"/>
+                            <constraint firstItem="UJH-rC-VH7" firstAttribute="leading" secondItem="EGE-nM-0Fl" secondAttribute="leading" constant="20" id="Pmv-3T-SPd"/>
+                            <constraint firstItem="V8t-l1-wIj" firstAttribute="leading" secondItem="EGE-nM-0Fl" secondAttribute="leading" constant="20" id="SBP-qp-5Wz"/>
+                            <constraint firstItem="4jK-RA-C8m" firstAttribute="centerX" secondItem="EGE-nM-0Fl" secondAttribute="centerX" id="WKE-Ds-MQt"/>
+                            <constraint firstItem="eJj-sj-4c4" firstAttribute="top" secondItem="kEA-bW-RqS" secondAttribute="bottom" constant="8" id="Y5v-yD-iSG"/>
+                            <constraint firstItem="kEA-bW-RqS" firstAttribute="top" secondItem="UJH-rC-VH7" secondAttribute="bottom" constant="8" id="e5X-vR-ZpT"/>
+                            <constraint firstItem="IvO-S6-FBl" firstAttribute="leading" secondItem="EGE-nM-0Fl" secondAttribute="leading" constant="20" id="irE-W3-gsY"/>
+                            <constraint firstItem="IvO-S6-FBl" firstAttribute="top" secondItem="9D7-Pu-wqj" secondAttribute="bottom" constant="8" id="mxn-bo-DLG"/>
+                            <constraint firstItem="kEA-bW-RqS" firstAttribute="leading" secondItem="EGE-nM-0Fl" secondAttribute="leading" constant="20" id="qK8-og-vd7"/>
+                            <constraint firstItem="UJH-rC-VH7" firstAttribute="top" secondItem="IvO-S6-FBl" secondAttribute="bottom" constant="36" id="rrF-FT-CDB"/>
+                            <constraint firstAttribute="trailing" secondItem="V8t-l1-wIj" secondAttribute="trailing" constant="20" id="zVg-EO-O2l"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="finishDateTextField" destination="V8t-l1-wIj" id="nu5-EQ-1HV"/>
+                        <outlet property="startDateTextField" destination="kEA-bW-RqS" id="p3e-TB-LXb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ct-Kq-bNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2563" y="332"/>
+        </scene>
+        <!--Rates With Dates View Controller-->
+        <scene sceneID="7sG-4X-00I">
+            <objects>
+                <tableViewController id="BeE-5Q-DYN" customClass="RFRatesWithDatesViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tXx-SP-Lx7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="BeE-5Q-DYN" id="COI-Vh-UqG"/>
+                            <outlet property="delegate" destination="BeE-5Q-DYN" id="yIS-SB-Zuw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tBD-oN-oVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3344" y="332"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qwt-Q4-Fct">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D2R-VN-zxS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WAh-ED-EeU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ruk-He-MGU" kind="relationship" relationship="rootViewController" id="fzY-pI-luB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1GD-Re-0bi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="293" y="332"/>
+        </scene>
+    </scenes>
+</document>
