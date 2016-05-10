@@ -14,10 +14,6 @@
     RFRepository *repository;
 }
 
--(void)personsDidUpdate{}
--(void)sitesDidUpdate{}
-
-// MARK: нет запроса на personsWithRates
 
 - (void)viewDidLoad
 {

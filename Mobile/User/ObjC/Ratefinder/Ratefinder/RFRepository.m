@@ -102,62 +102,15 @@ static RFRepository *singleRepository = nil;
     [[RFDatabaseConnection defaultDatabaseConnection] getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
 }
 
-
-/*
--(NSArray *)ratesOfCurrentPersonWithDatesOnCurrentSite
-{
-    
-//    NSDate *iDate = self.startDateForRates;
-//    NSCalendar *calendar = [NSCalendar currentCalendar];
-//    
-//    while ([calendar compareDate:iDate toDate:self.finishDateForRates toUnitGranularity:NSCalendarUnitDay] == NSOrderedAscending) {
-//        RFRateWithDate *rateWithDate = [[RFRateWithDate alloc] init];
-//        rateWithDate.date = iDate;
-//        rateWithDate.rate = arc4random_uniform(100);
-//        [ratesOfCurrentPersonOnCurrentSite addObject:rateWithDate];
-//        iDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:iDate options:0];
-//    }
-    
-    NSArray *ratesOfCurrentPersonOnCurrentSite = [[RFDatabaseConnection defaultDatabaseConnection] getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
-    NSMutableArray *personsRateMutable = [NSMutableArray array];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    for (NSDictionary *personRates in ratesOfCurrentPersonOnCurrentSite) {
-        RFRateWithDate *theRateWithDate = [[RFRateWithDate alloc] init];
-        theRateWithDate.date = [dateFormatter dateFromString: personRates[@"date"]];
-        NSNumber *numberRate = personRates[@"rank"];
-        theRateWithDate.rate = [numberRate integerValue];
-        [personsRateMutable addObject:theRateWithDate];
-    }
-    
-    return personsRateMutable;
-}
-*/
-
 +(RFRepository *)sharedRepository {
     
     
     if (!singleRepository) {
         singleRepository = [[RFRepository alloc] init];
         
-        // Плохой код, повторения, надо избавиться!
-        
-//        NSArray *personDictionaries = [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
-//        NSMutableArray *personsMutable = [NSMutableArray array];
-//        for (NSDictionary *person in personDictionaries) {
-//            RFPerson *newPerson = [[RFPerson alloc] init];
-//            newPerson.name = [NSString stringWithFormat:@"%@", person[@"Name"]];
-//            NSNumber *numberIdentificator = [person objectForKey:@"ID"];
-//            newPerson.identificator = [numberIdentificator integerValue];
-//            [personsMutable addObject:newPerson];
-//        }
-//        singleRepository.persons = personsMutable;
-//
-        
         [RFDatabaseConnection defaultDatabaseConnection].delegate = singleRepository;
         [[RFDatabaseConnection defaultDatabaseConnection] getSites];
         [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
-       // NSLog(@"persons = %@", singleRepository.persons);
     }
     
     return singleRepository;

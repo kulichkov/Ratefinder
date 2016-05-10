@@ -14,13 +14,13 @@
 
 @protocol RFRepositoryDelegate <NSObject>
 @optional
--(void)sitesDidUpdate;
--(void)personsDidUpdate;
+-(void) sitesDidUpdate;
+-(void) personsDidUpdate;
 -(void)personsWithRatesDidUpdate;
 -(void)RatesWithDatesDidUpdate;
 @end
 
-@interface RFRepository : NSObject <RFDatabaseConnectionDelegate>
+@interface RFRepository: NSObject <RFDatabaseConnectionDelegate>
 @property id <RFRepositoryDelegate> delegate;
 @property (readonly, nonatomic) NSArray *persons;
 @property (readonly, nonatomic) NSArray *sites;

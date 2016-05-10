@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RFRepository.h"
 
-@interface RFSitesViewController : UITableViewController <RFRepositoryDelegate>
+@interface RFSitesViewController: UITableViewController <RFRepositoryDelegate>
 
 @end

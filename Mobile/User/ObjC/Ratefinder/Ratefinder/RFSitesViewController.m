@@ -21,10 +21,7 @@
     self.navigationItem.title = @"Сайты";
 }
 
--(void)personsDidUpdate{}
--(void)personsWithRatesDidUpdate{}
-
--(void)sitesDidUpdate
+- (void)sitesDidUpdate
 {
     [self.tableView reloadData];
 }
@@ -48,7 +45,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    repository.currentSite = [repository.sites objectAtIndex: indexPath.row];
+    repository.currentSite = [repository.sites objectAtIndex:indexPath.row];
     [repository updatePersonsWithRatesOnCurrentSite];
     [self performSegueWithIdentifier:@"ShowPersons" sender:self];
 }

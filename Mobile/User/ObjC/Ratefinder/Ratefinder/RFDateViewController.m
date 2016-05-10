@@ -24,7 +24,7 @@
     repository = [RFRepository sharedRepository];
     self.navigationItem.title = repository.currentPerson.name;
     
-    //установка вместо клавиатуры спиннера выбора даты
+    // Setting the spinner instead of keyboard
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeDate;
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
@@ -32,14 +32,14 @@
     [self.startDateTextField setInputView:datePicker];
 }
 
-//скрытие спиннера при тапе вне его
+// hiding the spinner by tapping outside
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];
 }
 
-//передаем значение в поля и переменные
+
 -(void)updateTextField:(UIDatePicker *)sender
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

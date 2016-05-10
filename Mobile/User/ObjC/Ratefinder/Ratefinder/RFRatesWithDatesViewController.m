@@ -27,6 +27,7 @@
     self.navigationItem.title = repository.currentPerson.name;
 }
 
+
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section
 {
     return [repository.ratesOfCurrentPersonWithDatesOnCurrentSite count];
