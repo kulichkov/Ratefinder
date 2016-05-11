@@ -45,7 +45,8 @@
     }
     
     cell.textLabel.text = [[[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] person] name];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] rate]];
+    NSInteger rate = [[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] rate];
+    cell.detailTextLabel.text = rate ? [NSString stringWithFormat:@"%d", rate] : @"";
     return cell;
 }
 
