@@ -20,36 +20,30 @@ static RFRepository *singleRepository = nil;
 
 @implementation RFRepository
 
--(void)sitesDidRecieveWithObject:(id)object
+-(void)itemsDidRecieveWithObject:(id)object ofType:(RFItemType)itemType
 {
-    NSArray *sitesDictionaries = object;
-    NSMutableArray *sitesMutable = [NSMutableArray array];
-    for (NSDictionary *site in sitesDictionaries) {
-        RFSite *newSite = [[RFSite alloc] init];
-        newSite.name = [NSString stringWithFormat:@"%@", site[@"Name"]];
-        NSNumber *numberIdentificator = [site objectForKey:@"ID"];
-        newSite.identificator = [numberIdentificator integerValue];
-        [sitesMutable addObject:newSite];
-    }
-
-    self.sites = sitesMutable;
-    [self.delegate sitesDidUpdate];
-}
-
--(void)personsDidRecieveWithObject:(id)object
-{
-    NSArray *personsDictionaries = object;
-    NSMutableArray *personsMutable = [NSMutableArray array];
-    for (NSDictionary *person in personsDictionaries) {
-        RFSite *newPerson = [[RFSite alloc] init];
-        newPerson.name = [NSString stringWithFormat:@"%@", person[@"Name"]];
-        NSNumber *numberIdentificator = [person objectForKey:@"ID"];
-        newPerson.identificator = [numberIdentificator integerValue];
-        [personsMutable addObject:newPerson];
+    NSArray *itemsDictionaries = object;
+    NSMutableArray *itemsMutable = [NSMutableArray array];
+    for (NSDictionary *item in itemsDictionaries) {
+        RFItem *newItem = [[RFItem alloc] init];
+        newItem.name = [NSString stringWithFormat:@"%@", item[@"Name"]];
+        NSNumber *numberIdentificator = [item objectForKey:@"ID"];
+        newItem.identificator = [numberIdentificator integerValue];
+        [itemsMutable addObject:newItem];
     }
     
-    self.persons = personsMutable;
-    [self.delegate personsDidUpdate];
+    switch (itemType) {
+        case RFSiteItem:
+            self.sites = itemsMutable;
+            [self.delegate sitesDidUpdate];
+            break;
+        case RFPersonItem:
+            self.persons = itemsMutable;
+            [self.delegate personsDidUpdate];
+        default:
+            break;
+    }
+    
 }
 
 -(void)ratesWithDatesDidRecieveWithObject:(id)object

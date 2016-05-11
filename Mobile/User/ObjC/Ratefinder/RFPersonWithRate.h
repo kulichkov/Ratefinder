@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "RFPerson.h"
+#include "RFItem.h"
 
 @interface RFPersonWithRate : NSObject
 @property RFPerson *person;

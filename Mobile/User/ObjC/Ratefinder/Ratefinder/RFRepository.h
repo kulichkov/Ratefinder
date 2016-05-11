@@ -10,7 +10,6 @@
 #include "RFPersonWithRate.h"
 #include "RFDatabaseConnection.h"
 #include "RFRateWithDate.h"
-#include "RFSite.h"
 
 @protocol RFRepositoryDelegate <NSObject>
 @optional

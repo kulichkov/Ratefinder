@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RFItem.h"
+
 @protocol RFDatabaseConnectionDelegate <NSObject>
--(void)sitesDidRecieveWithObject: (id)object;
--(void)personsDidRecieveWithObject: (id)object;
+-(void)itemsDidRecieveWithObject:(id)object ofType:(RFItemType)itemType;
 -(void)personsWithRatesDidRecieveWithObject: (id)object;
 -(void)ratesWithDatesDidRecieveWithObject: (id)object;
 

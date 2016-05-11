@@ -57,9 +57,9 @@ static RFDatabaseConnection *singleDatabaseConnection;
         parsedJSONArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         
         if (theSelector == @selector(getSites)) {
-            [self.delegate sitesDidRecieveWithObject:parsedJSONArray];
+            [self.delegate itemsDidRecieveWithObject:parsedJSONArray ofType:RFSiteItem];
         } else if (theSelector == @selector(getPersons)) {
-            [self.delegate personsDidRecieveWithObject:parsedJSONArray];
+            [self.delegate itemsDidRecieveWithObject:parsedJSONArray ofType:RFPersonItem];
         } else if (theSelector == @selector(getPersonsWithRatesOnSite:)) {
             [self.delegate personsWithRatesDidRecieveWithObject:parsedJSONArray];
         } else if (theSelector == @selector(getRatesOfPerson:onSite:from:to:)) {

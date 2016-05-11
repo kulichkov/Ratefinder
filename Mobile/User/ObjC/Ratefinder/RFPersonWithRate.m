@@ -9,5 +9,4 @@
 #import "RFPersonWithRate.h"
 
 @implementation RFPersonWithRate
-
 @end
