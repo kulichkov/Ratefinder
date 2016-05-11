@@ -88,11 +88,13 @@ static RFRepository *singleRepository = nil;
 
 -(void)updatePersonsWithRatesOnCurrentSite
 {
+    self.personsWithRatesOnCurrentSite = nil;
     [[RFDatabaseConnection defaultDatabaseConnection] getPersonsWithRatesOnSite:self.currentSite.identificator];
 }
 
 -(void)updateRatesOfCurrentPersonOnCurrentSite
 {
+    self.ratesOfCurrentPersonWithDatesOnCurrentSite = nil;
     [[RFDatabaseConnection defaultDatabaseConnection] getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
 }
 
