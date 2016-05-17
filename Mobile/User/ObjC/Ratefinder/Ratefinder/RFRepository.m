@@ -106,10 +106,12 @@ static RFRepository *singleRepository = nil;
     
     if (!singleRepository) {
         singleRepository = [[RFRepository alloc] init];
-        RFDatabaseConnection *dbConnection = [[RFDatabaseConnection alloc] init];
-        dbConnection.delegate = singleRepository;
-        [dbConnection getSites];
-        [dbConnection getPersons];
+        RFDatabaseConnection *dbConnection1 = [[RFDatabaseConnection alloc] init];
+        RFDatabaseConnection *dbConnection2 = [[RFDatabaseConnection alloc] init];
+        dbConnection1.delegate = singleRepository;
+        dbConnection2.delegate = singleRepository;
+        [dbConnection1 getSites];
+        [dbConnection2 getPersons];
     }
     
     return singleRepository;

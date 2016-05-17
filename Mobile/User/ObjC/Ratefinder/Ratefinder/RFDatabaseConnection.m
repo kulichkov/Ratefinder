@@ -21,6 +21,8 @@ static RFDatabaseConnection *singleDatabaseConnection;
 @implementation RFDatabaseConnection
 {
     NSArray *parsedJSONArray;
+    SEL requestSelector;
+    NSMutableData *responseData;
 }
 
 - (void) parseJSONData: (NSData *)data andSelector:(SEL)theSelector
@@ -58,25 +60,30 @@ static RFDatabaseConnection *singleDatabaseConnection;
     
 }
 
+//-(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
+//{
+//    NSLog(@"didReceiveResponse");
+//    //responseData = [NSMutableData data];
+//}
+
+-(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    [responseData appendData:data];
+}
 
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-    NSLog(@"URLSessionDataTask \"%@\" didCompleteWithError:", task.taskDescription);
+    [self parseJSONData:responseData andSelector:requestSelector];
+    [session finishTasksAndInvalidate];
 }
 
 -(void)getDataFromURL: (NSURL *)theURL andSelector:(SEL)theSelector
 {
-//    NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    
-    NSURLSessionDataTask *dataTask1 = [session dataTaskWithURL:theURL];
-    dataTask1.taskDescription = @"Test URLSessionTask";
-    [dataTask1 resume];
-    
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        [self parseJSONData:data andSelector:theSelector];
-    }];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theURL];
+    requestSelector = theSelector;
+    responseData = [NSMutableData data];
     [dataTask resume];
 }
 

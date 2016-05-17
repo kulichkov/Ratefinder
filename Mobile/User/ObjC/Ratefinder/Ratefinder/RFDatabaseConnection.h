@@ -16,7 +16,7 @@
 
 @end
 
-@interface RFDatabaseConnection: NSObject <NSURLSessionDataDelegate>
+@interface RFDatabaseConnection: NSObject <NSURLSessionDelegate, NSURLSessionDataDelegate>
 @property id <RFDatabaseConnectionDelegate> delegate;
 
 -(void)getSites;
