@@ -16,7 +16,7 @@
 
 @end
 
-@interface RFDatabaseConnection: NSObject
+@interface RFDatabaseConnection: NSObject <NSURLSessionDataDelegate>
 @property id <RFDatabaseConnectionDelegate> delegate;
 
 -(void)getSites;
@@ -26,5 +26,4 @@
                        onSite: (int)siteID
                          from: (NSDate *)startDate
                            to: (NSDate *)finishDate;
-+(RFDatabaseConnection *) defaultDatabaseConnection;
 @end

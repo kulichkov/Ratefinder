@@ -89,28 +89,30 @@ static RFRepository *singleRepository = nil;
 -(void)updatePersonsWithRatesOnCurrentSite
 {
     self.personsWithRatesOnCurrentSite = nil;
-    [[RFDatabaseConnection defaultDatabaseConnection] getPersonsWithRatesOnSite:self.currentSite.identificator];
+    RFDatabaseConnection *dbConnection = [[RFDatabaseConnection alloc] init];
+    dbConnection.delegate = self;
+    [dbConnection getPersonsWithRatesOnSite:self.currentSite.identificator];
 }
 
 -(void)updateRatesOfCurrentPersonOnCurrentSite
 {
     self.ratesOfCurrentPersonWithDatesOnCurrentSite = nil;
-    [[RFDatabaseConnection defaultDatabaseConnection] getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
+    RFDatabaseConnection *dbConnection = [[RFDatabaseConnection alloc] init];
+    dbConnection.delegate = self;
+    [dbConnection getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
 }
 
 +(RFRepository *)sharedRepository {
     
-    
     if (!singleRepository) {
         singleRepository = [[RFRepository alloc] init];
-        
-        [RFDatabaseConnection defaultDatabaseConnection].delegate = singleRepository;
-        [[RFDatabaseConnection defaultDatabaseConnection] getSites];
-        [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
+        RFDatabaseConnection *dbConnection = [[RFDatabaseConnection alloc] init];
+        dbConnection.delegate = singleRepository;
+        [dbConnection getSites];
+        [dbConnection getPersons];
     }
     
     return singleRepository;
 }
-
 
 @end

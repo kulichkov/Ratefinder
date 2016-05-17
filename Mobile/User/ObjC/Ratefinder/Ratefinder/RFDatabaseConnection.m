@@ -23,17 +23,6 @@ static RFDatabaseConnection *singleDatabaseConnection;
     NSArray *parsedJSONArray;
 }
 
-+(RFDatabaseConnection *) defaultDatabaseConnection
-{
-    if (!singleDatabaseConnection) {
-        singleDatabaseConnection = [[RFDatabaseConnection alloc] init];
-        singleDatabaseConnection->parsedJSONArray = nil;
-    }
-    
-    return singleDatabaseConnection;
-}
-
-
 - (void) parseJSONData: (NSData *)data andSelector:(SEL)theSelector
 {
  
@@ -69,9 +58,22 @@ static RFDatabaseConnection *singleDatabaseConnection;
     
 }
 
+
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    NSLog(@"URLSessionDataTask \"%@\" didCompleteWithError:", task.taskDescription);
+}
+
 -(void)getDataFromURL: (NSURL *)theURL andSelector:(SEL)theSelector
 {
-    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    
+    NSURLSessionDataTask *dataTask1 = [session dataTaskWithURL:theURL];
+    dataTask1.taskDescription = @"Test URLSessionTask";
+    [dataTask1 resume];
+    
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [self parseJSONData:data andSelector:theSelector];
     }];
