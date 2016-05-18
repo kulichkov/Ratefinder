@@ -29,6 +29,8 @@
     repository = [RFRepository sharedRepository];
     repository.delegate = self;
     self.navigationItem.title = @"Сайты";
+    [repository updateSites];
+    [repository updatePersons];
 }
 
 - (void)personsDidUpdate{};

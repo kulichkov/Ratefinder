@@ -31,6 +31,8 @@
 @property RFSite *currentSite;
 @property NSDate *startDateForRates;
 @property NSDate *finishDateForRates;
+-(void)updateSites;
+-(void)updatePersons;
 -(void)updatePersonsWithRatesOnCurrentSite;
 -(void)updateRatesOfCurrentPersonOnCurrentSite;
 +(RFRepository *)sharedRepository;
