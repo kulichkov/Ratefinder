@@ -13,6 +13,16 @@
     RFRepository *repository;
 }
 
+-(void)updateDidStart
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+-(void)updateDidFinish
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -30,6 +40,8 @@
 {
     [self.tableView reloadData];
 }
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -51,7 +63,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     repository.currentSite = [repository.sites objectAtIndex:indexPath.row];
-    [repository updatePersonsWithRatesOnCurrentSite];
     [self performSegueWithIdentifier:@"ShowPersons" sender:self];
 }
  

@@ -75,6 +75,7 @@ static RFDatabaseConnection *singleDatabaseConnection;
 {
     [self parseJSONData:responseData andSelector:requestSelector];
     [session finishTasksAndInvalidate];
+    [self.delegate dbDidDisconnect];
 }
 
 -(void)getDataFromURL: (NSURL *)theURL andSelector:(SEL)theSelector
@@ -84,6 +85,7 @@ static RFDatabaseConnection *singleDatabaseConnection;
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theURL];
     requestSelector = theSelector;
     responseData = [NSMutableData data];
+    [self.delegate dbDidConnect];
     [dataTask resume];
 }
 

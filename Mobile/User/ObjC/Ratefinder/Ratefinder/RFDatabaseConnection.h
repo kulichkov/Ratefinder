@@ -13,7 +13,8 @@
 -(void)itemsDidRecieveWithObject:(id)object ofType:(RFItemType)itemType;
 -(void)personsWithRatesDidRecieveWithObject: (id)object;
 -(void)ratesWithDatesDidRecieveWithObject: (id)object;
-
+-(void)dbDidConnect;
+-(void)dbDidDisconnect;
 @end
 
 @interface RFDatabaseConnection: NSObject <NSURLSessionDelegate, NSURLSessionDataDelegate>

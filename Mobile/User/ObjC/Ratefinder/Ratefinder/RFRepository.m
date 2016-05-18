@@ -20,6 +20,16 @@ static RFRepository *singleRepository = nil;
 
 @implementation RFRepository
 
+-(void)dbDidDisconnect
+{
+    [self.delegate updateDidFinish];
+}
+
+-(void)dbDidConnect
+{
+    [self.delegate updateDidStart];
+}
+
 -(void)itemsDidRecieveWithObject:(id)object ofType:(RFItemType)itemType
 {
     NSArray *itemsDictionaries = object;

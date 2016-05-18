@@ -12,11 +12,13 @@
 #include "RFRateWithDate.h"
 
 @protocol RFRepositoryDelegate <NSObject>
-@optional
+
 -(void)sitesDidUpdate;
 -(void)personsDidUpdate;
 -(void)personsWithRatesDidUpdate;
 -(void)ratesWithDatesDidUpdate;
+-(void)updateDidFinish;
+-(void)updateDidStart;
 @end
 
 @interface RFRepository: NSObject <RFDatabaseConnectionDelegate>

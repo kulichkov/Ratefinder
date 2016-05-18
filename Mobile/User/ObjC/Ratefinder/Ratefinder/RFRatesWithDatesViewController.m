@@ -22,6 +22,16 @@
     [self.tableView reloadData];
 }
 
+-(void)updateDidStart
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+-(void)updateDidFinish
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

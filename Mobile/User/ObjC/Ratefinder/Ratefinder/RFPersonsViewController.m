@@ -14,6 +14,15 @@
     RFRepository *repository;
 }
 
+-(void)updateDidStart
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+-(void)updateDidFinish
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
 
 - (void)viewDidLoad
 {
@@ -21,6 +30,8 @@
     repository = [RFRepository sharedRepository];
     repository.delegate = self;
     self.navigationItem.title = repository.currentSite.name;
+    [repository updatePersonsWithRatesOnCurrentSite];
+
 }
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section
