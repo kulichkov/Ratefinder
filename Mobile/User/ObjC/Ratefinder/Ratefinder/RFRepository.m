@@ -11,7 +11,6 @@
 static RFRepository *singleRepository = nil;
 
 @interface RFRepository()
-
 @property NSArray *persons;
 @property NSArray *sites;
 @property NSArray *personsWithRatesOnCurrentSite;
@@ -53,7 +52,6 @@ static RFRepository *singleRepository = nil;
         default:
             break;
     }
-    
 }
 
 -(void)ratesWithDatesDidRecieveWithObject:(id)object
@@ -91,7 +89,6 @@ static RFRepository *singleRepository = nil;
             }
         }
     }
-    
     self.personsWithRatesOnCurrentSite = ratesOnCurrentSite;
     [self.delegate personsWithRatesDidUpdate];
 }
@@ -129,12 +126,9 @@ static RFRepository *singleRepository = nil;
 }
 
 +(RFRepository *)sharedRepository {
-    
     if (!singleRepository) {
         singleRepository = [[RFRepository alloc] init];
     }
-    
     return singleRepository;
 }
-
 @end
