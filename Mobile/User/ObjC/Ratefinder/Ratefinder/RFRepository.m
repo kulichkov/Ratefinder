@@ -11,7 +11,6 @@
 static RFRepository *singleRepository = nil;
 
 @interface RFRepository()
-
 @property NSArray *persons;
 @property NSArray *sites;
 @property NSArray *personsWithRatesOnCurrentSite;
@@ -20,36 +19,39 @@ static RFRepository *singleRepository = nil;
 
 @implementation RFRepository
 
--(void)sitesDidRecieveWithObject:(id)object
+-(void)dbDidDisconnect
 {
-    NSArray *sitesDictionaries = object;
-    NSMutableArray *sitesMutable = [NSMutableArray array];
-    for (NSDictionary *site in sitesDictionaries) {
-        RFSite *newSite = [[RFSite alloc] init];
-        newSite.name = [NSString stringWithFormat:@"%@", site[@"Name"]];
-        NSNumber *numberIdentificator = [site objectForKey:@"ID"];
-        newSite.identificator = [numberIdentificator integerValue];
-        [sitesMutable addObject:newSite];
-    }
-
-    self.sites = sitesMutable;
-    [self.delegate sitesDidUpdate];
+    [self.delegate updateDidFinish];
 }
 
--(void)personsDidRecieveWithObject:(id)object
+-(void)dbDidConnect
 {
-    NSArray *personsDictionaries = object;
-    NSMutableArray *personsMutable = [NSMutableArray array];
-    for (NSDictionary *person in personsDictionaries) {
-        RFSite *newPerson = [[RFSite alloc] init];
-        newPerson.name = [NSString stringWithFormat:@"%@", person[@"Name"]];
-        NSNumber *numberIdentificator = [person objectForKey:@"ID"];
-        newPerson.identificator = [numberIdentificator integerValue];
-        [personsMutable addObject:newPerson];
+    [self.delegate updateDidStart];
+}
+
+-(void)itemsDidRecieveWithObject:(id)object ofType:(RFItemType)itemType
+{
+    NSArray *itemsDictionaries = object;
+    NSMutableArray *itemsMutable = [NSMutableArray array];
+    for (NSDictionary *item in itemsDictionaries) {
+        RFItem *newItem = [[RFItem alloc] init];
+        newItem.name = [NSString stringWithFormat:@"%@", item[@"Name"]];
+        NSNumber *numberIdentificator = [item objectForKey:@"ID"];
+        newItem.identificator = [numberIdentificator integerValue];
+        [itemsMutable addObject:newItem];
     }
     
-    self.persons = personsMutable;
-    [self.delegate personsDidUpdate];
+    switch (itemType) {
+        case RFSiteItem:
+            self.sites = itemsMutable;
+            [self.delegate sitesDidUpdate];
+            break;
+        case RFPersonItem:
+            self.persons = itemsMutable;
+            [self.delegate personsDidUpdate];
+        default:
+            break;
+    }
 }
 
 -(void)ratesWithDatesDidRecieveWithObject:(id)object
@@ -87,34 +89,46 @@ static RFRepository *singleRepository = nil;
             }
         }
     }
-    
     self.personsWithRatesOnCurrentSite = ratesOnCurrentSite;
     [self.delegate personsWithRatesDidUpdate];
 }
 
 -(void)updatePersonsWithRatesOnCurrentSite
 {
-    [[RFDatabaseConnection defaultDatabaseConnection] getPersonsWithRatesOnSite:self.currentSite.identificator];
+    self.personsWithRatesOnCurrentSite = nil;
+    RFDatabaseConnection *dbConnection = [[RFDatabaseConnection alloc] init];
+    dbConnection.delegate = self;
+    [dbConnection getPersonsWithRatesOnSite:self.currentSite.identificator];
 }
 
 -(void)updateRatesOfCurrentPersonOnCurrentSite
 {
-    [[RFDatabaseConnection defaultDatabaseConnection] getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
+    self.ratesOfCurrentPersonWithDatesOnCurrentSite = nil;
+    RFDatabaseConnection *dbConnection = [[RFDatabaseConnection alloc] init];
+    dbConnection.delegate = self;
+    [dbConnection getRatesOfPerson:self.currentPerson.identificator onSite:self.currentSite.identificator from:self.startDateForRates to:self.finishDateForRates];
+}
+
+-(void)updateSites
+{
+    self.sites = nil;
+    RFDatabaseConnection *dbConnection = [[RFDatabaseConnection alloc] init];
+    dbConnection.delegate = self;
+    [dbConnection getSites];
+}
+
+-(void)updatePersons
+{
+    self.persons = nil;
+    RFDatabaseConnection *dbConnection = [[RFDatabaseConnection alloc] init];
+    dbConnection.delegate = self;
+    [dbConnection getPersons];
 }
 
 +(RFRepository *)sharedRepository {
-    
-    
     if (!singleRepository) {
         singleRepository = [[RFRepository alloc] init];
-        
-        [RFDatabaseConnection defaultDatabaseConnection].delegate = singleRepository;
-        [[RFDatabaseConnection defaultDatabaseConnection] getSites];
-        [[RFDatabaseConnection defaultDatabaseConnection] getPersons];
     }
-    
     return singleRepository;
 }
-
-
 @end

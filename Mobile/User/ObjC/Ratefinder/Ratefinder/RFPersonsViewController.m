@@ -14,6 +14,15 @@
     RFRepository *repository;
 }
 
+-(void)updateDidStart
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+-(void)updateDidFinish
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
 
 - (void)viewDidLoad
 {
@@ -21,6 +30,8 @@
     repository = [RFRepository sharedRepository];
     repository.delegate = self;
     self.navigationItem.title = repository.currentSite.name;
+    [repository updatePersonsWithRatesOnCurrentSite];
+
 }
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section
@@ -45,7 +56,8 @@
     }
     
     cell.textLabel.text = [[[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] person] name];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] rate]];
+    NSInteger rate = [[repository.personsWithRatesOnCurrentSite objectAtIndex:indexPath.row] rate];
+    cell.detailTextLabel.text = rate ? [NSString stringWithFormat:@"%d", rate] : @"";
     return cell;
 }
 

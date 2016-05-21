@@ -21,18 +21,9 @@ static RFDatabaseConnection *singleDatabaseConnection;
 @implementation RFDatabaseConnection
 {
     NSArray *parsedJSONArray;
+    SEL requestSelector;
+    NSMutableData *responseData;
 }
-
-+(RFDatabaseConnection *) defaultDatabaseConnection
-{
-    if (!singleDatabaseConnection) {
-        singleDatabaseConnection = [[RFDatabaseConnection alloc] init];
-        singleDatabaseConnection->parsedJSONArray = nil;
-    }
-    
-    return singleDatabaseConnection;
-}
-
 
 - (void) parseJSONData: (NSData *)data andSelector:(SEL)theSelector
 {
@@ -57,9 +48,9 @@ static RFDatabaseConnection *singleDatabaseConnection;
         parsedJSONArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         
         if (theSelector == @selector(getSites)) {
-            [self.delegate sitesDidRecieveWithObject:parsedJSONArray];
+            [self.delegate itemsDidRecieveWithObject:parsedJSONArray ofType:RFSiteItem];
         } else if (theSelector == @selector(getPersons)) {
-            [self.delegate personsDidRecieveWithObject:parsedJSONArray];
+            [self.delegate itemsDidRecieveWithObject:parsedJSONArray ofType:RFPersonItem];
         } else if (theSelector == @selector(getPersonsWithRatesOnSite:)) {
             [self.delegate personsWithRatesDidRecieveWithObject:parsedJSONArray];
         } else if (theSelector == @selector(getRatesOfPerson:onSite:from:to:)) {
@@ -69,12 +60,32 @@ static RFDatabaseConnection *singleDatabaseConnection;
     
 }
 
+//-(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
+//{
+//    NSLog(@"didReceiveResponse");
+//    //responseData = [NSMutableData data];
+//}
+
+-(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    [responseData appendData:data];
+}
+
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    [self parseJSONData:responseData andSelector:requestSelector];
+    [session finishTasksAndInvalidate];
+    [self.delegate dbDidDisconnect];
+}
+
 -(void)getDataFromURL: (NSURL *)theURL andSelector:(SEL)theSelector
 {
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        [self parseJSONData:data andSelector:theSelector];
-    }];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:theURL];
+    requestSelector = theSelector;
+    responseData = [NSMutableData data];
+    [self.delegate dbDidConnect];
     [dataTask resume];
 }
 

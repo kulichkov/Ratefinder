@@ -13,12 +13,24 @@
     RFRepository *repository;
 }
 
+-(void)updateDidStart
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+-(void)updateDidFinish
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     repository = [RFRepository sharedRepository];
     repository.delegate = self;
     self.navigationItem.title = @"Сайты";
+    [repository updateSites];
+    [repository updatePersons];
 }
 
 - (void)personsDidUpdate{};
@@ -30,6 +42,8 @@
 {
     [self.tableView reloadData];
 }
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -51,7 +65,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     repository.currentSite = [repository.sites objectAtIndex:indexPath.row];
-    [repository updatePersonsWithRatesOnCurrentSite];
     [self performSegueWithIdentifier:@"ShowPersons" sender:self];
 }
  

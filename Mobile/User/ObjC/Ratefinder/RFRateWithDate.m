@@ -9,5 +9,4 @@
 #import "RFRateWithDate.h"
 
 @implementation RFRateWithDate
-
 @end

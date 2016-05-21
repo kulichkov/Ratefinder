@@ -10,14 +10,15 @@
 #include "RFPersonWithRate.h"
 #include "RFDatabaseConnection.h"
 #include "RFRateWithDate.h"
-#include "RFSite.h"
 
 @protocol RFRepositoryDelegate <NSObject>
-@optional
+
 -(void)sitesDidUpdate;
 -(void)personsDidUpdate;
 -(void)personsWithRatesDidUpdate;
 -(void)ratesWithDatesDidUpdate;
+-(void)updateDidFinish;
+-(void)updateDidStart;
 @end
 
 @interface RFRepository: NSObject <RFDatabaseConnectionDelegate>
@@ -30,6 +31,8 @@
 @property RFSite *currentSite;
 @property NSDate *startDateForRates;
 @property NSDate *finishDateForRates;
+-(void)updateSites;
+-(void)updatePersons;
 -(void)updatePersonsWithRatesOnCurrentSite;
 -(void)updateRatesOfCurrentPersonOnCurrentSite;
 +(RFRepository *)sharedRepository;
